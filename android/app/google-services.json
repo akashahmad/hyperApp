@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "292266379540",
+    "firebase_url": "https://hyper-7dc73.firebaseio.com",
+    "project_id": "hyper-7dc73",
+    "storage_bucket": "hyper-7dc73.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:292266379540:android:e2619f51371a4f24755a01",
+        "android_client_info": {
+          "package_name": "com.hyperapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "292266379540-8pjlrq1bkt3os0tvs396ii2qjkl60i9t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4tKRtBjwAXxzVmV93wciO2Ccmd0JRS8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "292266379540-8pjlrq1bkt3os0tvs396ii2qjkl60i9t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "292266379540-io182eqmrnrjp3s5nhoslctkavbf4hip.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hyperapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
