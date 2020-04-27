@@ -6,17 +6,20 @@ import AuthHandler from './authHandler'
 
 const App: () => React$Node = () => {
     return (
-        <View style={{flex: 1}}>
-            <GlobalProvider>
-                <AuthHandler/>
-            </GlobalProvider>
-            <FlashMessage
-                position="top"
-                autoHide={true}
-                hideOnPress={true}
-                duration={5000}
-            />
-        </View>
+        <>
+           <View style={{flex: 1}}>
+                <GlobalProvider>
+                    <AuthHandler/>
+                </GlobalProvider>
+                <FlashMessage
+                    position="top"
+                    autoHide={true}
+                    hideOnPress={true}
+                    duration={5000}
+                />
+            </View>  
+
+        </>
     );
 };
 
