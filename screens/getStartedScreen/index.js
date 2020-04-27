@@ -103,12 +103,12 @@ const getStartedScreen = (props) => {
             <TouchableOpacity style={ styles.facebookButton }
                               onPress={() => {
                                   setLoader(true);
-                                  setMainScreen("login");
+                                  setMainScreen("signup");
                                   setMessage('Signing in...');
                                   onFacebookButtonPress()
                                       .then(() => {
                                           console.log('Signed in with Facebook!')
-                                          setShow("logInSuccess")
+                                          setShow("signUpSuccess")
                                           setLoader(false);
                                           setMessage(null);
                                       })
