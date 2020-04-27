@@ -37,6 +37,8 @@ const App: () => React$Node = () => {
                 return <AddNameScreen
                     setShow={setShow}
                     email={email}
+                    setEmail={setEmail}
+                    setPassword={setPassword}
                     password={password}
                 />;
 

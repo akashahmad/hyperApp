@@ -1,10 +1,76 @@
 import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput} from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
+import {GlobalContext} from '../../context/GlobalState';
 import Line from '../../assets/images/line.png';
 import Back from '../../assets/images/back.png';
+import auth from '@react-native-firebase/auth';
+import {validateEmail} from '../../utils/functions'
+import {LoginManager, AccessToken} from 'react-native-fbsdk';
 
 const logInScreen = (props) => {
     let {setShow} = props;
+    const {setLoader, setMainScreen} = useContext(GlobalContext);
+    const [email, setEmail] = useState(null);
+    const [emailEmpty, setEmailEmp] = useState(false);
+    const [password, setPass] = useState(null);
+    const [passwordEmpty, setPassEmp] = useState(null);
+    const [message, setMessage] = useState(null);
+
+    const signIn = () => {
+        setEmailEmp(!email);
+        setPassEmp(!password);
+        if (!email || (email && !validateEmail(email)) || !password) {
+            if (!validateEmail(email)) {
+                setEmailEmp(true)
+            }
+            return;
+        } else {
+            setLoader(true);
+            setMainScreen("login");
+            setMessage('Signing in...');
+            auth().signInWithEmailAndPassword(email, password)
+                .then(confirmResult => {
+                    setShow("logInSuccess")
+                    setLoader(false);
+                    setMessage(null);
+                })
+                .catch(error => {
+                    setLoader(false)
+                    setMessage(`Something went wrong please try again!`);
+                });
+        }
+    };
+    const setEmailVal = (value) => {
+        setEmail(value);
+        setEmailEmp(!value);
+    };
+    const setPassVal = (value) => {
+        setPass(value);
+        setPassEmp(!value);
+    };
+
+    async function onFacebookButtonPress() {
+        // Attempt login with permissions
+        const result = await LoginManager.logInWithPermissions(['public_profile', 'email']);
+
+        if (result.isCancelled) {
+            throw 'User cancelled the login process';
+        }
+
+        // Once signed in, get the users AccesToken
+        const data = await AccessToken.getCurrentAccessToken();
+
+        if (!data) {
+            throw 'Something went wrong obtaining access token';
+        }
+
+        // Create a Firebase credential with the AccessToken
+        const facebookCredential = auth.FacebookAuthProvider.credential(data.accessToken);
+
+        // Sign-in the user with the credential
+        return auth().signInWithCredential(facebookCredential);
+    }
+
     return (
         <View style={ styles.fullScreenView }>
             <StatusBar backgroundColor="black" barStyle="light-content"/>
@@ -17,15 +83,30 @@ const logInScreen = (props) => {
             <TextInput
                 style={ styles.inputFieldEmail }
                 placeholder='Email address'
+                autoFocus
+                onChangeText={value => setEmailVal(value.replace(/\s/g, ''))}
+                autoCorrect={false}
+                autoCapitalize='none'
             >
             </TextInput>
+            {
+                emailEmpty &&
+                <Text style={{color: "red"}}>{email ? "Email is invalid" : "Email field is required"}</Text>
+            }
             <TextInput
                 style={ styles.inputFieldPassword }
                 placeholder='Password'
+                onChangeText={value => setPassVal(value)}
+                autoCorrect={false}
+                secureTextEntry={true}
             >
             </TextInput>
+            {
+                passwordEmpty &&
+                <Text style={{color: "red"}}>Password field is required</Text>
+            }
             <Text style={ styles.forgotPasswordText }>Forgot password?</Text>
-            <TouchableOpacity style={ styles.signUpButton }>
+            <TouchableOpacity style={ styles.signUpButton } onPress={() => signIn()}>
                 <Text style={ styles.signUpButtonText }>LOG IN</Text>
             </TouchableOpacity>
             <View style={ styles.breakLinesContainer }>
@@ -33,10 +114,30 @@ const logInScreen = (props) => {
                 <Text style={ styles.orText }>OR</Text>
                 <Image source={ Line } style={ styles.lineImage }></Image>
             </View>
-            <TouchableOpacity style={ styles.facebookButton }>
+            <TouchableOpacity style={ styles.facebookButton }
+                              onPress={() => {
+                                  setLoader(true);
+                                  setMainScreen("login");
+                                  setMessage('Signing in...');
+                                  onFacebookButtonPress()
+                                      .then(() => {
+                                          console.log('Signed in with Facebook!')
+                                          setShow("logInSuccess")
+                                          setLoader(false);
+                                          setMessage(null);
+                                      })
+                                      .catch(error => {
+                                          setLoader(false);
+                                          setMessage(`Something went wrong please try again!`);
+                                      })
+                              }
+                              }
+            >
                 <Text style={ styles.facebookText }>CONTINUE WITH FACEBOOK</Text>
             </TouchableOpacity>
             <Text style={ styles.alreadyHaveAccountText }>Don't have an account yet? Sign up</Text>
+            <Text style={message === 'Signing in...' ? {color: "white"} : {color: "red"}}>{message}</Text>
+
         </View>
     )
 };

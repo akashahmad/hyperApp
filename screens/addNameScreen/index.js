@@ -7,7 +7,7 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 
 const addNameScreen = (props) => {
-    let {setShow, email, password} = props;
+    let {setShow, email, setEmail, password, setPassword} = props;
     const {setMainScreen, setLoader} = useContext(GlobalContext);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -16,9 +16,9 @@ const addNameScreen = (props) => {
         if (!firstName) {
             setFirstNameValidator(true)
         }
-        {
+        else {
             setLoader(true);
-            setMainScreen("signup")
+            setMainScreen("signup");
             auth().createUserWithEmailAndPassword(email, password).then(data => {
                 let uid = data.user.uid;
                 let userObj = {
@@ -32,6 +32,8 @@ const addNameScreen = (props) => {
                     .doc(uid)
                     .set(userObj).then(res => {
                     setLoader(false)
+                    setEmail("");
+                    setPassword("");
                     setShow("signUpSuccess")
                 })
                     .catch(err => {

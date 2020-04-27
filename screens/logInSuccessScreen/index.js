@@ -1,14 +1,25 @@
-import { View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput} from 'react-native';
+import React, {useState, useEffect, useContext} from 'react';
+import {GlobalContext} from '../../context/GlobalState';
+import auth from '@react-native-firebase/auth';
 
-const logInSuccessScreen = () => {
+const logInSuccessScreen = (props) => {
+    let {setShow} = props;
+    const {setUser, setId, setLoggedIn} = useContext(GlobalContext);
+    const signOut = () => {
+        auth().signOut();
+        setUser(null);
+        setId(null);
+        setLoggedIn(false);
+        setShow("")
+    };
     return (
         <View style={ styles.fullScreenView }>
-            <StatusBar backgroundColor="black" barStyle="light-content" />
+            <StatusBar backgroundColor="black" barStyle="light-content"/>
             <Text style={ styles.getStartedText }>
                 I'M ALL LOGGED IN!
             </Text>
-            <TouchableOpacity style={ styles.loginButton }>
+            <TouchableOpacity style={ styles.loginButton } onPress={() =>signOut()}>
                 <Text style={ styles.loginButtonText }>LOGOUT</Text>
             </TouchableOpacity>
         </View>

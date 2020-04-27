@@ -14,7 +14,7 @@ const App: () => React$Node = () => {
                 position="top"
                 autoHide={true}
                 hideOnPress={true}
-                duration={20000}
+                duration={5000}
             />
         </View>
     );
