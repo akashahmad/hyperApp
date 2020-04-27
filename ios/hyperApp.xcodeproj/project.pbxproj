@@ -21,6 +21,13 @@
 		41F145632456720B00643A39 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41F145622456720B00643A39 /* GoogleService-Info.plist */; };
 		5FFCFDD15F3556DFDFB02FCD /* libPods-hyperApp-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B9EAC6914C593A9B14B3F2 /* libPods-hyperApp-tvOS.a */; };
 		9177F2E992A5EC329BF35E3B /* libPods-hyperApp-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E6C674284E0826ED50F20BF /* libPods-hyperApp-tvOSTests.a */; };
+		2AB3F0F5B1E6402DACE88411 /* Biryani-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58F16992A168424A970ACE8E /* Biryani-Black.ttf */; };
+		EFB48C5B51CC493AB58B2DCB /* Biryani-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2084433D935D475EB133AC5B /* Biryani-Bold.ttf */; };
+		D76296F900E8499EA18F058F /* Biryani-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9453F16559D94FC5BA84C0E2 /* Biryani-ExtraBold.ttf */; };
+		86286F4DBC8A43E6A6321368 /* Biryani-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F37AB7FEE78B4C5CAA4F71EE /* Biryani-ExtraLight.ttf */; };
+		EA75762B503C4E448388FB8D /* Biryani-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84C8FE62ACA3476BBD1010D0 /* Biryani-Light.ttf */; };
+		581211BCD0E9415D897E63FF /* Biryani-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 910753DC73394FB98065EA7A /* Biryani-Regular.ttf */; };
+		8F57493B7F9C49AFB812DC21 /* Biryani-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F8E4F4866AE430E91AC4A2C /* Biryani-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +76,13 @@
 		E2517B68B82ABE42E8E887D8 /* Pods-hyperApp-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hyperApp-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-hyperApp-tvOSTests/Pods-hyperApp-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		58F16992A168424A970ACE8E /* Biryani-Black.ttf */ = {isa = PBXFileReference; name = "Biryani-Black.ttf"; path = "../assets/fonts/Biryani-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2084433D935D475EB133AC5B /* Biryani-Bold.ttf */ = {isa = PBXFileReference; name = "Biryani-Bold.ttf"; path = "../assets/fonts/Biryani-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9453F16559D94FC5BA84C0E2 /* Biryani-ExtraBold.ttf */ = {isa = PBXFileReference; name = "Biryani-ExtraBold.ttf"; path = "../assets/fonts/Biryani-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F37AB7FEE78B4C5CAA4F71EE /* Biryani-ExtraLight.ttf */ = {isa = PBXFileReference; name = "Biryani-ExtraLight.ttf"; path = "../assets/fonts/Biryani-ExtraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		84C8FE62ACA3476BBD1010D0 /* Biryani-Light.ttf */ = {isa = PBXFileReference; name = "Biryani-Light.ttf"; path = "../assets/fonts/Biryani-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		910753DC73394FB98065EA7A /* Biryani-Regular.ttf */ = {isa = PBXFileReference; name = "Biryani-Regular.ttf"; path = "../assets/fonts/Biryani-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3F8E4F4866AE430E91AC4A2C /* Biryani-SemiBold.ttf */ = {isa = PBXFileReference; name = "Biryani-SemiBold.ttf"; path = "../assets/fonts/Biryani-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +182,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				F4EF221CEBE08B3C3E9FE2B0 /* Pods */,
+				DA474FE0955E4B0E927AC07A /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -199,6 +214,21 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		DA474FE0955E4B0E927AC07A /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				58F16992A168424A970ACE8E /* Biryani-Black.ttf */,
+				2084433D935D475EB133AC5B /* Biryani-Bold.ttf */,
+				9453F16559D94FC5BA84C0E2 /* Biryani-ExtraBold.ttf */,
+				F37AB7FEE78B4C5CAA4F71EE /* Biryani-ExtraLight.ttf */,
+				84C8FE62ACA3476BBD1010D0 /* Biryani-Light.ttf */,
+				910753DC73394FB98065EA7A /* Biryani-Regular.ttf */,
+				3F8E4F4866AE430E91AC4A2C /* Biryani-SemiBold.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -289,7 +319,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 940;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -343,7 +373,17 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+
 				41F145632456720B00643A39 /* GoogleService-Info.plist in Resources */,
+
+				2AB3F0F5B1E6402DACE88411 /* Biryani-Black.ttf in Resources */,
+				EFB48C5B51CC493AB58B2DCB /* Biryani-Bold.ttf in Resources */,
+				D76296F900E8499EA18F058F /* Biryani-ExtraBold.ttf in Resources */,
+				86286F4DBC8A43E6A6321368 /* Biryani-ExtraLight.ttf in Resources */,
+				EA75762B503C4E448388FB8D /* Biryani-Light.ttf in Resources */,
+				581211BCD0E9415D897E63FF /* Biryani-Regular.ttf in Resources */,
+				8F57493B7F9C49AFB812DC21 /* Biryani-SemiBold.ttf in Resources */,
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
