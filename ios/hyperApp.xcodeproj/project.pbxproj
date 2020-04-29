@@ -373,9 +373,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-
 				41F145632456720B00643A39 /* GoogleService-Info.plist in Resources */,
-
 				2AB3F0F5B1E6402DACE88411 /* Biryani-Black.ttf in Resources */,
 				EFB48C5B51CC493AB58B2DCB /* Biryani-Bold.ttf in Resources */,
 				D76296F900E8499EA18F058F /* Biryani-ExtraBold.ttf in Resources */,
@@ -383,7 +381,6 @@
 				EA75762B503C4E448388FB8D /* Biryani-Light.ttf in Resources */,
 				581211BCD0E9415D897E63FF /* Biryani-Regular.ttf in Resources */,
 				8F57493B7F9C49AFB812DC21 /* Biryani-SemiBold.ttf in Resources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

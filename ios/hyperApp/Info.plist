@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleURLTypes</key>
-		<array>
+	<array>
 		<dict>
-		<key>CFBundleURLSchemes</key>
-		<array>
-			<string>fb520133751965220</string>
-		</array>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb520133751965220</string>
+			</array>
 		</dict>
-		</array>
-		<key>FacebookAppID</key>
-		<string>520133751965220</string>
-		<key>FacebookDisplayName</key>
-		<string>hyperApp</string>
-			<key>LSApplicationQueriesSchemes</key>
-		<array>
-  		<string>fbapi</string>
+	</array>
+	<key>FacebookAppID</key>
+	<string>520133751965220</string>
+	<key>FacebookDisplayName</key>
+	<string>hyperApp</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
 		<string>fbapi20130214</string>
 		<string>fbapi20130410</string>
 		<string>fbapi20130702</string>
@@ -33,8 +33,6 @@
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
 	</array>
-	<key>FacebookAppID</key>
-	<string>520133751965220</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
