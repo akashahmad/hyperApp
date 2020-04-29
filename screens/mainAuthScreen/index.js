@@ -1,15 +1,23 @@
 import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar} from 'react-native';
 import React, {useState, useEffect} from 'react';
+import LinearGradient from 'react-native-linear-gradient';
 import Logo from '../../assets/images/hyper-logo-one.png';
+import LogoTwo from '../../assets/images/hyper-am-logo-rn-test.png';
 
 const mainAuthScreen = (props) => {
     let {setShow} = props;
     return (
         <View style={ styles.fullScreenView }>
             <StatusBar backgroundColor="black" barStyle="light-content"/>
-            <Image source={ Logo } style={ styles.logoImage }/>
+            <Image source={ LogoTwo } style={ styles.logoImageTwo }/>
             <TouchableOpacity style={ styles.signUpButton } onPress={() => setShow("signup")}>
+            <LinearGradient 
+                colors={['#55CBFF', '#63FFCF']} 
+                style={ styles.gradient }
+                start={{x: 0, y: 0}} end={{x: 1, y: 0}}
+            >
                 <Text style={ styles.signUpButtonText }>SIGN UP</Text>
+            </LinearGradient>
             </TouchableOpacity>
             <TouchableOpacity style={ styles.loginButton } onPress={() => setShow("login")}>
                 <Text style={ styles.loginButtonText }>LOG IN</Text>
@@ -31,36 +39,54 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
 
-    logoImage: {
-        width: 220,
+    // logoImage: {
+    //     width: 220,
+    //     height: 60,
+    //     marginBottom: 130
+    // },
+
+    logoImageTwo: {
+        width: 320,
         height: 60,
         marginBottom: 130
     },
 
-    signUpButton: {
-        backgroundColor: '#63FFCF',
-        paddingTop: 20,
-        // paddingRight: 130,
-        paddingBottom: 20,
-        // paddingLeft: 130,
-        borderRadius: 8,
-        width: '84%',
+    gradient: {
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        borderRadius: 8,
+        paddingTop: 15,
+        paddingBottom: 15
     },
+
+    signUpButton: {
+        width: '84%',
+    },
+
+    // signUpButton: {
+    //     backgroundColor: '#63FFCF',
+    //     paddingTop: 20,
+    //     paddingBottom: 20,
+    //     borderRadius: 8,
+    //     width: '84%',
+    //     display: 'flex',
+    //     justifyContent: 'center',
+    //     alignItems: 'center'
+    // },
 
     signUpButtonText: {
         color: 'white',
-        fontWeight: '700',
-        fontSize: 14
+        // fontWeight: '700',
+        fontSize: 14,
+        fontFamily: 'Biryani-ExtraBold'
     },
 
     loginButton: {
         backgroundColor: 'white',
-        paddingTop: 20,
+        paddingTop: 15,
         // paddingRight: 130,
-        paddingBottom: 20,
+        paddingBottom: 15,
         // paddingLeft: 130,
         borderRadius: 8,
         width: '84%',
@@ -72,23 +98,25 @@ const styles = StyleSheet.create({
 
     loginButtonText: {
         color: 'black',
-        fontWeight: '700',
-        fontSize: 14
+        // fontWeight: '700',
+        fontSize: 14,
+        fontFamily: 'Biryani-ExtraBold'
     },
 
     legalText: {
         color: '#FFFFFF',
-        fontWeight: '500',
-        fontSize: 12,
+        // fontWeight: '500',
+        fontSize: 10,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         textAlign: 'center',
-        bottom: 0,
+        // bottom: 0,
         width: '84%',
         lineHeight: 20,
         position: 'absolute',
-        bottom: 40
+        bottom: 40,
+        fontFamily: 'Biryani-Bold'
     }
 
 });

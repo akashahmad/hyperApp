@@ -2662,6 +2662,16 @@ expect@^24.9.0:
     jest-message-util "^24.9.0"
     jest-regex-util "^24.9.0"
 
+expo-haptics@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/expo-haptics/-/expo-haptics-6.0.0.tgz#dd0b8390564b3ba398a3f6d726ce5ad99a892ddc"
+  integrity sha512-Xn+u5Gqp0/aLipKUMhPgZrccTO9uSV5FSM9u6bkMhV/zfjZqQMWpm0NqL24OBBXy5wPmF3g6Hev5YyDUd0Jj9Q==
+
+expo-linear-gradient@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/expo-linear-gradient/-/expo-linear-gradient-6.0.0.tgz#5fb0fb955dd22ef4ab032e543cb1c249885bf0b5"
+  integrity sha512-TGHSK7MsoU1wZXx9uEivMggAR/KT4wTSE0xBfhB8qsziGXoHZdoT79/tZ3HyWtCG7+JVUEFXfUOBxtOlZOu5tg==
+
 extend-shallow@^1.1.2:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/extend-shallow/-/extend-shallow-1.1.4.tgz#19d6bf94dfc09d76ba711f39b872d21ff4dd9071"
@@ -5602,10 +5612,23 @@ react-native-gesture-handler@^1.6.1:
     invariant "^2.2.4"
     prop-types "^15.7.2"
 
+react-native-gradient-buttons@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-gradient-buttons/-/react-native-gradient-buttons-2.0.1.tgz#d45347d5dffb673defdd27ef12e295758dc2a4e5"
+  integrity sha512-AIl/sTda8ulheoJMr5WWsRc1lJe/KDswqkOH+DRvyMa/G3gkhUoqE7dorPx1KBmVPS6+ks32MUZU9dO6YvNLVQ==
+  dependencies:
+    expo-haptics "^6.0.0"
+    expo-linear-gradient "^6.0.0"
+
 react-native-iphone-x-helper@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.2.1.tgz#645e2ffbbb49e80844bb4cbbe34a126fda1e6772"
   integrity sha512-/VbpIEp8tSNNHIvstuA3Swx610whci1Zpc9mqNkqn14DkMbw+ORviln2u0XyHG1kPvvwTNGZY6QpeFwxYaSdbQ==
+
+react-native-linear-gradient@^2.5.6:
+  version "2.5.6"
+  resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.5.6.tgz#96215cbc5ec7a01247a20890888aa75b834d44a0"
+  integrity sha512-HDwEaXcQIuXXCV70O+bK1rizFong3wj+5Q/jSyifKFLg0VWF95xh8XQgfzXwtq0NggL9vNjPKXa016KuFu+VFg==
 
 react-native-reanimated@^1.8.0:
   version "1.8.0"
