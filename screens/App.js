@@ -1,8 +1,12 @@
 import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput} from 'react-native';
 import React, {useState} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-import Menu from '../assets/images/menu.png';
-import ProfileAvatar from '../assets/images/profile-avatar.png';
+import Close from '../assets/images/close.png';
+import Bar from '../assets/images/bar.png';
+import Clock from '../assets/images/white-clock.png';
+import Heart from '../assets/images/white-heart.png';
+import Fire from '../assets/images/white-fire.png';
+import Share from '../assets/images/share.png';
 import FlashMessage  from "react-native-flash-message";
 import {GlobalProvider} from '../context/GlobalState';
 import AuthHandler from './authHandler'
@@ -24,95 +28,93 @@ const App: () => React$Node = () => {
             <View style={ styles.fullScreenView }>
                 <StatusBar backgroundColor="black" barStyle="light-content"/>
                 <View style={ styles.viewContainer }>
-                    <Image source={ Menu } style={ styles.menuImage }/>
+                    <Image source={ Close } style={ styles.closeImage }/>
                     <View style={ styles.liveStatsTitleSection }>
                         <Text style={ styles.liveStatsText }>
-                            LEADERBOARD
+                            WORKOUT SUMMARY
                         </Text>
                     </View>
-                    <View style={ styles.searchFilterButtonsSection }>
-                        <TouchableOpacity style={ styles.spaceAround }>
-                            <LinearGradient 
-                                colors={['#55CBFF', '#63FFCF']} 
-                                style={ styles.gradient }
-                                start={{x: 0.0, y: 0.5}} end={{x: 1.0, y: 0.5}}
-                            >
-                                <View style={ styles.searchButton }>
-                                    <Text style={ styles.searchText }>SEARCH</Text>
-                                </View>
-                            </LinearGradient>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={ styles.spaceAround }>
-                            <LinearGradient 
-                                colors={['#55CBFF', '#63FFCF']} 
-                                style={ styles.gradient }
-                                start={{x: 0.0, y: 0.5}} end={{x: 1.0, y: 0.5}}
-                            >
-                                <View style={ styles.searchButton }>
-                                    <Text style={ styles.searchText }>FILTER</Text>
-                                </View>
-                            </LinearGradient>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={ styles.dateAndLabelSection }>
-                        <Text style={ styles.dateTitle }>
-                            1/1/20
+                    <View style={ styles.zoneSummarySection }>
+                        <Text style={ styles.zoneText }>
+                            WARM UP ZONE
                         </Text>
-                        <Text style={ styles.labelTitle }>
-                            INTENSITY LEVEL
-                        </Text>
-                    </View>
-                    <View style={ styles.oLineSection }>
-                        <View style={ styles.oLine }></View>
-                    </View>
-                    <View style={ styles.leaderboardRowInfo }>
-                        <View style={ styles.firstArea }>
-                            <Text style={ styles.rankingText }>
-                                1
-                            </Text>
-                            <View style={ styles.imageNameContainer }>
-                                <Image source={ ProfileAvatar } style={ styles.avatarImage }/>
-                                <View style={ styles.nameCityContainer }>
-                                    <Text style={ styles.userNameText }>
-                                        DANNY M.
-                                    </Text>
-                                    <Text style={ styles.userCityText }>
-                                        SAN DIEGO, CA
-                                    </Text>
-                                </View>
-                            </View>
-                        </View>
-                        <Text style={ styles.categoryText }>
-                            550
+                        <Image source={ Bar } style={ styles.barImage }/>
+                        <Text style={ styles.timeText }>
+                            5 MINS
                         </Text>
                     </View> 
-                    <View style={ styles.oLineSectionTwo }>
-                        <View style={ styles.oLineTwo }></View>
-                    </View>    
-                    <View style={ styles.leaderboardRowInfo }>
-                        <View style={ styles.firstArea }>
-                            <Text style={ styles.rankingText }>
-                                1
-                            </Text>
-                            <View style={ styles.imageNameContainer }>
-                                <Image source={ ProfileAvatar } style={ styles.avatarImage }/>
-                                <View style={ styles.nameCityContainer }>
-                                    <Text style={ styles.userNameText }>
-                                        DANNY M.
-                                    </Text>
-                                    <Text style={ styles.userCityText }>
-                                        SAN DIEGO, CA
-                                    </Text>
-                                </View>
-                            </View>
-                        </View>
-                        <Text style={ styles.categoryText }>
-                            550
+                    <View style={ styles.zoneSummarySectionHigher }>
+                        <Text style={ styles.zoneText }>
+                            FAT BURNING ZONE
+                        </Text>
+                        <Image source={ Bar } style={ styles.barImage }/>
+                        <Text style={ styles.timeText }>
+                            10 MINS
+                        </Text>
+                    </View>
+                    <View style={ styles.zoneSummarySectionHigher }>
+                        <Text style={ styles.zoneText }>
+                            PRO ATHLETE ZONE
+                        </Text>
+                        <Image source={ Bar } style={ styles.barImage }/>
+                        <Text style={ styles.timeText }>
+                            15 MINS
+                        </Text>
+                    </View>
+                    <View style={ styles.zoneSummarySectionHigher }>
+                        <Text style={ styles.zoneText }>
+                            BEAST MODE
+                        </Text>
+                        <Image source={ Bar } style={ styles.barImage }/>
+                        <Text style={ styles.timeText }>
+                            2 MINS
                         </Text>
                     </View> 
-                    <View style={ styles.oLineSectionTwo }>
-                        <View style={ styles.oLineTwo }></View>
-                    </View>        
+                    <View style={ styles.statsRowContainer }>
+                        <View style={ styles.individualStatContainer }>
+                            <Image source={ Fire } style={ styles.fireImage }/>
+                            <Text style={ styles.iconTitle }>
+                                CALORIES {"\n"}BURNED
+                            </Text>
+                            <Text style={ styles.iconStat }>
+                                72
+                            </Text>
+                        </View>
+                        <View style={ styles.individualStatContainer }>
+                            <Image source={ Clock } style={ styles.fireImage }/>
+                            <Text style={ styles.iconTitle }>
+                                WORKOUT {"\n"}DURATION
+                            </Text>
+                            <Text style={ styles.iconStat }>
+                                5:04
+                            </Text>
+                        </View>
+                        <View style={ styles.individualStatContainer }>
+                            <Image source={ Heart } style={ styles.fireImage }/>
+                            <Text style={ styles.iconTitle }>
+                                AVERAGE {"\n"}BPM
+                            </Text>
+                            <Text style={ styles.iconStat }>
+                                85
+                            </Text>
+                        </View>
+                    </View> 
+                    <View style={ styles.streakShareContainer }>
+                        <View style={ styles.streakContainer }>
+                            <Text style={ styles.messageText }>
+                                YOUR ROCK!
+                            </Text>
+                            <Text style={ styles.streakText }>
+                                WORKOUT STREAK 3
+                            </Text>
+                        </View>
+                        <View style={ styles.shareContainer }>
+                            <Text style={ styles.shareText }>
+                                SHARE
+                            </Text>
+                            <Image source={ Share } style={ styles.shareImage }/>
+                        </View>
+                    </View> 
                 </View>
             </View>
         </>
@@ -134,15 +136,15 @@ const styles = StyleSheet.create({
         height: '90%'
     },
 
-    menuImage: {
-        width: 19,
-        height: 17,
+    closeImage: {
+        width: 14,
+        height: 14,
         resizeMode: 'contain',
         marginTop: 20
     },
 
     liveStatsTitleSection: {
-        marginTop: 20,
+        marginTop: 19,
         marginLeft: 2,
     },
 
@@ -152,136 +154,126 @@ const styles = StyleSheet.create({
         fontFamily: 'Biryani-Black'
     },
 
-    searchFilterButtonsSection: {
+    zoneSummarySection: {
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'row',
-        marginTop: 3
+        marginTop: 25,
+        marginLeft: 4
     },
 
-    searchButton: {
-        backgroundColor: 'black',
-        borderRadius: 5,
-        margin: 1
-    },
-
-    searchText: {
-        color: 'white',
-        fontSize: 8,
-        fontFamily: 'Biryani-Bold',
-        margin: 4,
-        paddingHorizontal: 7,
-        textAlign: 'center',
-    },
-
-    gradient: {
-        borderRadius: 5
-    },
-
-    spaceAround: {
-        marginLeft: 3,
-        marginRight: 3
-    },
-
-    dateAndLabelSection: {
+    zoneSummarySectionHigher: {
         display: 'flex',
-        justifyContent: 'space-between',
         alignItems: 'center',
         flexDirection: 'row',
-        marginTop: 20
+        marginTop: 15,
+        marginLeft: 4
     },
 
-    dateTitle: {
+    barImage: {
+        width: '60%',
+        height: 40,
+        resizeMode: 'contain',
+        marginLeft: 10
+    },
+
+    zoneText: {
         color: 'white',
         fontSize: 10,
         fontFamily: 'Biryani-Bold',
-        marginLeft: 5
+        width: '24%'
     },
 
-    labelTitle: {
+    timeText: {
         color: 'white',
-        fontSize: 10,
-        fontFamily: 'Biryani-Bold',
+        fontSize: 9,
+        fontFamily: 'Biryani-Regular',
+        marginLeft: 11
     },
 
-    oLineSection: {
-        marginTop: 10
-    },
-
-    oLine: {
-        borderBottomColor: '#979797',
-        borderBottomWidth: 1,
-        opacity: .35
-    },
-
-    leaderboardRowInfo: {
+    statsRowContainer: {
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
         alignItems: 'center',
         flexDirection: 'row',
-        marginTop: 15
+        marginTop: 40
     },
 
-    firstArea: {
+    individualStatContainer: {
         display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
+    fireImage: {
+        width: 22,
+        height: 22,
+        resizeMode: 'contain'
+    },
+
+    iconTitle: {
+        color: 'white',
+        fontSize: 9,
+        fontFamily: 'Biryani-Bold',
+        marginTop: 8,
+        opacity: .42,
+        lineHeight: 15,
+        textAlign: 'center'
+    },
+
+    iconStat: {
+        color: 'white',
+        fontSize: 22,
+        fontFamily: 'Biryani-Bold',
+        marginTop: 1
+    },
+
+    streakShareContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        bottom: 0,
+        width: '100%'
+    },
+
+    streakContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
+    shareContainer: {
+        display: 'flex',
+        justifyContent: 'space-around',
         alignItems: 'center',
         flexDirection: 'row'
     },
 
-    rankingText: {
+    messageText: {
         color: 'white',
-        fontSize: 22,
+        fontSize: 14,
         fontFamily: 'Biryani-ExtraBold',
     },
 
-    imageNameContainer: {
-        display: 'flex',
-        // justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'row',
-        marginLeft: 45
-    },
-
-    nameCityContainer: {
-        marginLeft: 12,
-        marginTop: 3
-    },
-
-    userNameText: {
+    streakText: {
         color: 'white',
-        fontSize: 9,
-        fontFamily: 'Biryani-ExtraBold',
+        fontSize: 14,
+        fontFamily: 'Biryani-Regular',
+        opacity: .53
     },
 
-    userCityText: {
+    shareText: {
         color: 'white',
-        fontSize: 9,
-        fontFamily: 'Biryani-ExtraBold',
-        opacity: .55
+        fontSize: 8,
+        fontFamily: 'Biryani-Bold',
     },
 
-    categoryText: {
-        color: 'white',
-        fontSize: 12,
-        fontFamily: 'Biryani-ExtraBold'
-    },
-    
-    avatarImage: {
-        width: 40,
-        height: 40,
-        resizeMode: 'contain',
-        opacity: .30
-    },
-
-    oLineSectionTwo: {
-        marginTop: 20
-    },
-
-    oLineTwo: {
-        borderBottomColor: '#979797',
-        borderBottomWidth: 1,
-        opacity: .15
-    },
+    shareImage: {
+        width: 15,
+        height: 15,
+        resizeMode: 'contain'
+    }
 
 });
 
