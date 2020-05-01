@@ -29,11 +29,9 @@ const logInScreen = (props) => {
             return;
         } else {
             setLoader(true);
-            setMainScreen("login");
             setMessage('Signing in...');
             auth().signInWithEmailAndPassword(email, password)
                 .then(confirmResult => {
-                    setShow("logInSuccess")
                     setLoader(false);
                     setMessage(null);
                 })
