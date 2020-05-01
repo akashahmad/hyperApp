@@ -1,5 +1,5 @@
 import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState,useEffect, useContext} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import Menu from '../../assets/images/menu.png';
 import SwitchToStats from '../../assets/images/switch-to-stats.png';
@@ -10,8 +10,24 @@ import CircleOne from '../../assets/images/zone-circle.png';
 import FlashMessage  from "react-native-flash-message";
 import {GlobalProvider} from '../../context/GlobalState';
 import AuthHandler from '../authHandler'
-
-const Homescreen: () => React$Node = () => {
+import {GlobalContext} from '../../context/GlobalState';
+const Homescreen =()=> {
+    const {user} = useContext(GlobalContext);
+    const[heartrate,setHeartrate]=useState('')
+    useEffect(() => {
+       let year=new Date().getFullYear()
+       let dob = user.DOB;
+       var dobyear = dob.substring(0, 4);
+       let age=year-dobyear;
+       if(user.gender==="male"){
+       let heartrat= 208 - (0.7 * age)
+       setHeartrate(heartrat)
+       }
+       else if(user.gender==="female"){
+        let heartrat= 206 - (0.88 * age)
+        setHeartrate(heartrat)
+       }
+      },[]);
     return (
         <View style={ styles.fullScreenView }>
             <StatusBar backgroundColor="black" barStyle="light-content"/>
@@ -42,7 +58,7 @@ const Homescreen: () => React$Node = () => {
                         60%
                     </Text>
                     <Text style={ styles.bpmSubtitle }>
-                        120 BPM
+                        {heartrate}
                     </Text>
                 </View>
                 <View style={ styles.bigZoneTitleSection }>

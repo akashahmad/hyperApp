@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View } from "react-native";
 import MainAuthScreen from '../mainAuthScreen';
 import GetStartedScreen from '../getStartedScreen';
@@ -11,7 +11,7 @@ import OnBoardingTwo from '../onboardingTwoScreen';
 import OnBoardingThree from '../onboardingThreeScreen';
 
 
-const App=() => {
+const App = () => {
     const [show, setShow] = useState(null);
     const [email, setEmail] = useState("");
     const [emailValidator, setEmailValidator] = useState(false);
@@ -21,6 +21,9 @@ const App=() => {
     const [lastName, setLastName] = useState("");
     const [dob, setdob] = useState("");
     const [gender, setGender] = useState("");
+    const [genderValidator, setGenderValidator] = useState(false)
+    const [dobValidator, setdobValidator] = useState(false)
+
     const showComponent = () => {
         switch (show) {
             case "login":
@@ -58,6 +61,10 @@ const App=() => {
                     setGender={setGender}
                     dob={dob}
                     setdob={setdob}
+                    genderValidator={genderValidator}
+                    setGenderValidator={setGenderValidator}
+                    dobValidator={dobValidator}
+                    setdobValidator={setdobValidator}
                 />;
             case "onBoardingThree":
                 return <OnBoardingThree

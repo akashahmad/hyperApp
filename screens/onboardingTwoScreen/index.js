@@ -1,47 +1,69 @@
-import {View,Picker, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput,MenuOption} from 'react-native';
-import React, {useState} from 'react';
+import { View, Picker, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput, MenuOption } from 'react-native';
+import React, { useState } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import BackTwo from '../../assets/images/back-two.png';
-import FlashMessage  from "react-native-flash-message";
-import {GlobalProvider} from '../../context/GlobalState';
+import FlashMessage from "react-native-flash-message";
+import { GlobalProvider } from '../../context/GlobalState';
 import AuthHandler from '../authHandler'
 import Calender from '../../assets/images/calendar.png'
 import DatePicker from 'react-native-datepicker'
 const OnboardingTwoScreen = (props) => {
-    let {setShow,setGender,gender,setdob,dob} = props
+    let { setShow, setGender, gender, setdob, dob, genderValidator, setGenderValidator, dobValidator, setdobValidator } = props
+    const showNext = () => {
+        if (!dob || !gender) {
+            if (!dob) {
+                setdobValidator(true)
+                setGenderValidator(false)
+               
+            }
+            else if (!gender) {
+                setGenderValidator(true)
+                setdobValidator(false)
+            }
+        }
+
+        else {
+            setShow("onBoardingThree")
+        }
+    }
     return (
-        <View style={ styles.fullScreenView }>
-            <StatusBar backgroundColor="black" barStyle="light-content"/>
-            <View style={ styles.viewContainer }>
+        <View style={styles.fullScreenView}>
+            <StatusBar backgroundColor="black" barStyle="light-content" />
+            <View style={styles.viewContainer}>
                 <TouchableOpacity onPress={() => setShow("onBoardingOne")}>
-                    <Image source={ BackTwo } style={ styles.backImage }/>
+                    <Image source={BackTwo} style={styles.backImage} />
                 </TouchableOpacity>
-                <View style={ styles.inputTextSection }>
-                    <Text style={ styles.inputTextTitle }>
-                        To get started, we need to calculate your maximum heart rate using your age and gender. 
+                <View style={styles.inputTextSection}>
+                    <Text style={styles.inputTextTitle}>
+                        To get started, we need to calculate your maximum heart rate using your age and gender.
                     </Text>
                 </View>
-                <View style={ styles.inputSection }>
-                <DatePicker
-      // style={{width: 500}}
-       
-        // mode="date"
-        placeholder="MM / DD / YYYY"
-        // format="YYYY-MM-DD"
-        date={dob}
-        // minDate="2016-05-01"
-        // maxDate="2016-06-01"
-        // confirmBtnText="Confirm"
-        // cancelBtnText="Cancel"
-        iconSource={Calender}
-        customStyles={{
-            dateInput: styles.whenDateInput,
-            dateIcon: styles.dateIcon
-        }}
-        style={{width: "100%", marginTop: 20}}
-        onDateChange={(date) => {setdob(date)}}
+                <View style={styles.inputSection}>
+                    <DatePicker
+                        // style={{width: 500}}
 
-      />
+                        // mode="date"
+                        placeholder="MM / DD / YYYY"
+                        // format="YYYY-MM-DD"
+                        date={dob}
+                        // minDate="2016-05-01"
+                        // maxDate="2016-06-01"
+                        // confirmBtnText="Confirm"
+                        // cancelBtnText="Cancel"
+                        iconSource={Calender}
+                        customStyles={{
+                            dateInput: styles.whenDateInput,
+                            dateIcon: styles.dateIcon
+                        }}
+                        style={{ width: "100%", marginTop: 20 }}
+                        onDateChange={(date) => { setdob(date) }}
+
+                    />
+                    {
+                        dobValidator &&
+                        <Text
+                            style={{ color: "red" }}>{"date of birth is required"}</Text>
+                    }
                     {/* <TextInput
                         style={ styles.inputFieldBirthday }
                         placeholder='MM / DD / YYYY'
@@ -53,34 +75,37 @@ const OnboardingTwoScreen = (props) => {
                     >
                     </TextInput> */}
                     <Picker
-    selectedValue={gender?gender:''}
-    onValueChange={(itemValue, itemPosition) =>
-        setGender(itemValue)}
-    style={{backgroundColor:"white",marginTop:30}}>
-    <Picker.Item value="" label="Select Gender"/>
-    <Picker.Item value="male" label="Male" />
-    <Picker.Item value="female" label="Female" />
-</Picker>
+                        selectedValue={gender ? gender : ''}
+                        onValueChange={(itemValue, itemPosition) =>
+                            setGender(itemValue)}
+                        style={{ backgroundColor: "white", marginTop: 30 }}>
+                        <Picker.Item value="" label="Select Gender" />
+                        <Picker.Item value="male" label="Male" />
+                        <Picker.Item value="female" label="Female" />
+                    </Picker>
+                    {
+                        genderValidator &&
+                        <Text
+                            style={{ color: "red" }}>{"gender is required"}</Text>
+                    }
                 </View>
-                <View style={ styles.circlePlusButtonSection }>
-                    <View style={ styles.circleContainer }>
-                        <View style={ styles.circleDark }></View>
-                        <View style={ styles.circleLight }></View>
-                        <View style={ styles.circleDark }></View>
+                <View style={styles.circlePlusButtonSection}>
+                    <View style={styles.circleContainer}>
+                        <View style={styles.circleDark}></View>
+                        <View style={styles.circleLight}></View>
+                        <View style={styles.circleDark}></View>
                     </View>
-                    <View style={ styles.buttonContainer }>
-                        <TouchableOpacity style={ styles.signUpButton }
-                                          onPress={() => {
-                                              setShow("onBoardingThree")
-                                          }}
+                    <View style={styles.buttonContainer}>
+                        <TouchableOpacity style={styles.signUpButton}
+                            onPress={() => showNext()}
                         >
-                        <LinearGradient 
-                            colors={['#55CBFF', '#63FFCF']} 
-                            style={ styles.gradient }
-                            start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-                        >
-                            <Text style={ styles.signUpButtonText }>NEXT</Text>
-                        </LinearGradient>
+                            <LinearGradient
+                                colors={['#55CBFF', '#63FFCF']}
+                                style={styles.gradient}
+                                start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
+                            >
+                                <Text style={styles.signUpButtonText}>NEXT</Text>
+                            </LinearGradient>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -160,7 +185,7 @@ const styles = StyleSheet.create({
     circleLight: {
         width: 7,
         height: 7,
-        borderRadius: 44/2,
+        borderRadius: 44 / 2,
         backgroundColor: 'white',
         marginLeft: 4,
         marginRight: 4
@@ -169,7 +194,7 @@ const styles = StyleSheet.create({
     circleDark: {
         width: 7,
         height: 7,
-        borderRadius: 44/2,
+        borderRadius: 44 / 2,
         backgroundColor: '#686868',
         marginLeft: 4,
         marginRight: 4
@@ -205,14 +230,14 @@ const styles = StyleSheet.create({
         paddingRight: 20,
         color: "rgb(109, 114, 120)",
         fontSize: 16,
-        alignItems:"flex-start",
+        alignItems: "flex-start",
         borderRadius: 4,
         borderWidth: 1,
         borderColor: "rgb(220, 221, 223)",
         borderStyle: "solid",
-        backgroundColor:"white",
+        backgroundColor: "white",
         height: 56
-       
+
     },
     dateIcon: {
         position: 'absolute',
@@ -220,8 +245,8 @@ const styles = StyleSheet.create({
         top: 4,
         marginLeft: 0
     },
-    
-    
+
+
 });
 
 export default OnboardingTwoScreen;
