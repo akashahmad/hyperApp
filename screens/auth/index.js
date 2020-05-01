@@ -6,6 +6,9 @@ import AddNameScreen from '../addNameScreen';
 import SignUpSuccessScreen from '../signUpSuccessScreen';
 import LogInScreen from '../logInScreen';
 import LogInSuccessScreen from '../logInSuccessScreen';
+import OnBoardingOne from '../onboardingOneScreen';
+import OnBoardingTwo from '../onboardingTwoScreen';
+import OnBoardingThree from '../onboardingThreeScreen';
 
 
 const App: () => React$Node = () => {
@@ -48,6 +51,19 @@ const App: () => React$Node = () => {
                 />;
             case "signUpSuccess":
                 return <SignUpSuccessScreen
+                    setShow={setShow}
+                />;
+
+            case "onBoardingOne":
+                return <OnBoardingOne
+                    setShow={setShow}
+                />;
+            case "onBoardingTwo":
+                return <OnBoardingTwo
+                    setShow={setShow}
+                />;
+            case "onBoardingThree":
+                return <OnBoardingThree
                     setShow={setShow}
                 />;
             default:

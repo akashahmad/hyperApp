@@ -8,50 +8,46 @@ import Calories from '../../assets/images/calories.png';
 import Muscle from '../../assets/images/muscle.png';
 import CircleOne from '../../assets/images/zone-circle.png';
 import FlashMessage  from "react-native-flash-message";
-import {GlobalProvider} from '../context/GlobalState';
-import AuthHandler from './authHandler'
+import {GlobalProvider} from '../../context/GlobalState';
+import AuthHandler from '../authHandler'
 
 const Homescreen: () => React$Node = () => {
     return (
         <View style={ styles.fullScreenView }>
             <StatusBar backgroundColor="black" barStyle="light-content"/>
             <View style={ styles.viewContainer }>
-                <View style={ styles.headerSection }>
-                    <Image source={ Menu } style={ styles.menuImage }/>
-                    <Image source={ SwitchToStats } style={ styles.switchToStatsImage }/>
-                </View>
                 <View style={ styles.statsSection }>
                     <View style={ styles.clockSection }>
                         <Image source={ Clock } style={ styles.clockImage }/>
                         <Text style={ styles.timeSubtitle }>
-                            5:04 
+                            5:04
                         </Text>
                     </View>
                     <View style={ styles.caloriesSection }>
                         <Image source={ Calories } style={ styles.caloriesImage }/>
                         <Text style={ styles.timeSubtitle }>
-                            72 
+                            72
                         </Text>
                     </View>
                     <View style={ styles.intensitySection }>
                         <Image source={ Muscle } style={ styles.muscleImage }/>
                         <Text style={ styles.timeSubtitle }>
-                            127 
+                            127
                         </Text>
                     </View>
                 </View>
                 <View style={ styles.circleProgressBarSection }>
                     <Image source={ CircleOne } style={ styles.circleOneImage }/>
                     <Text style={ styles.percentageTitle }>
-                        60% 
+                        60%
                     </Text>
                     <Text style={ styles.bpmSubtitle }>
-                        120 BPM 
+                        120 BPM
                     </Text>
                 </View>
                 <View style={ styles.bigZoneTitleSection }>
                     <Text style={ styles.bigZoneTitle }>
-                        WARM UP ZONE 
+                        WARM UP ZONE
                     </Text>
                 </View>
                 <View style={ styles.startButtonSection }>

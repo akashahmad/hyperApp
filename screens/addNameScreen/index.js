@@ -96,15 +96,20 @@ const addNameScreen = (props) => {
             </TextInput>
             <TouchableOpacity style={ styles.signUpButton }
                               onPress={() => {
-                                  signupHandler()
+                                  if (!firstName) {
+                                      setFirstNameValidator(true)
+                                  }
+                                  else {
+                                      setShow("onBoardingOne")
+                                  }
                               }}>
-            <LinearGradient 
-                colors={['#55CBFF', '#63FFCF']} 
-                style={ styles.gradient }
-                start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-            >
-                <Text style={ styles.signUpButtonText }>SIGN UP</Text>
-            </LinearGradient>
+                <LinearGradient
+                    colors={['#55CBFF', '#63FFCF']}
+                    style={ styles.gradient }
+                    start={{x: 0, y: 0}} end={{x: 1, y: 0}}
+                >
+                    <Text style={ styles.signUpButtonText }>Next</Text>
+                </LinearGradient>
             </TouchableOpacity>
         </View>
     )

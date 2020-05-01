@@ -4,8 +4,8 @@ import LinearGradient from 'react-native-linear-gradient';
 import BackTwo from '../../assets/images/back-two.png';
 import ProfileAvatar from '../../assets/images/profile-avatar.png';
 import FlashMessage  from "react-native-flash-message";
-import {GlobalProvider} from '../context/GlobalState';
-import AuthHandler from './authHandler'
+import {GlobalProvider} from '../../context/GlobalState';
+import AuthHandler from '../authHandler'
 
 {/* Need to put header up here with Save and Cancel buttons and move edit profile text to header, bc Save button 
 currently gets cut off by keyboard. So remove save button and have save and cancel buttons in header like ttyl App */}

@@ -13,110 +13,111 @@ import AuthHandler from './authHandler'
 
 const App: () => React$Node = () => {
     return (
-        // <View style={{flex: 1}}>
-        //     <GlobalProvider>
-        //         <AuthHandler/>
-        //     </GlobalProvider>
-        //     <FlashMessage
-        //         position="top"
-        //         autoHide={true}
-        //         hideOnPress={true}
-        //         duration={5000}
-        //     />
-        // </View>  
+
         <>
-            <View style={ styles.fullScreenView }>
-                <StatusBar backgroundColor="black" barStyle="light-content"/>
-                <View style={ styles.viewContainer }>
-                    <Image source={ Close } style={ styles.closeImage }/>
-                    <View style={ styles.liveStatsTitleSection }>
-                        <Text style={ styles.liveStatsText }>
-                            WORKOUT SUMMARY
-                        </Text>
-                    </View>
-                    <View style={ styles.zoneSummarySection }>
-                        <Text style={ styles.zoneText }>
-                            WARM UP ZONE
-                        </Text>
-                        <Image source={ Bar } style={ styles.barImage }/>
-                        <Text style={ styles.timeText }>
-                            5 MINS
-                        </Text>
-                    </View> 
-                    <View style={ styles.zoneSummarySectionHigher }>
-                        <Text style={ styles.zoneText }>
-                            FAT BURNING ZONE
-                        </Text>
-                        <Image source={ Bar } style={ styles.barImage }/>
-                        <Text style={ styles.timeText }>
-                            10 MINS
-                        </Text>
-                    </View>
-                    <View style={ styles.zoneSummarySectionHigher }>
-                        <Text style={ styles.zoneText }>
-                            PRO ATHLETE ZONE
-                        </Text>
-                        <Image source={ Bar } style={ styles.barImage }/>
-                        <Text style={ styles.timeText }>
-                            15 MINS
-                        </Text>
-                    </View>
-                    <View style={ styles.zoneSummarySectionHigher }>
-                        <Text style={ styles.zoneText }>
-                            BEAST MODE
-                        </Text>
-                        <Image source={ Bar } style={ styles.barImage }/>
-                        <Text style={ styles.timeText }>
-                            2 MINS
-                        </Text>
-                    </View> 
-                    <View style={ styles.statsRowContainer }>
-                        <View style={ styles.individualStatContainer }>
-                            <Image source={ Fire } style={ styles.fireImage }/>
-                            <Text style={ styles.iconTitle }>
-                                CALORIES {"\n"}BURNED
-                            </Text>
-                            <Text style={ styles.iconStat }>
-                                72
-                            </Text>
-                        </View>
-                        <View style={ styles.individualStatContainer }>
-                            <Image source={ Clock } style={ styles.fireImage }/>
-                            <Text style={ styles.iconTitle }>
-                                WORKOUT {"\n"}DURATION
-                            </Text>
-                            <Text style={ styles.iconStat }>
-                                5:04
-                            </Text>
-                        </View>
-                        <View style={ styles.individualStatContainer }>
-                            <Image source={ Heart } style={ styles.fireImage }/>
-                            <Text style={ styles.iconTitle }>
-                                AVERAGE {"\n"}BPM
-                            </Text>
-                            <Text style={ styles.iconStat }>
-                                85
-                            </Text>
-                        </View>
-                    </View> 
-                    <View style={ styles.streakShareContainer }>
-                        <View style={ styles.streakContainer }>
-                            <Text style={ styles.messageText }>
-                                YOUR ROCK!
-                            </Text>
-                            <Text style={ styles.streakText }>
-                                WORKOUT STREAK 3
-                            </Text>
-                        </View>
-                        <View style={ styles.shareContainer }>
-                            <Text style={ styles.shareText }>
-                                SHARE
-                            </Text>
-                            <Image source={ Share } style={ styles.shareImage }/>
-                        </View>
-                    </View> 
-                </View>
-            </View>
+        <View style={{flex: 1}}>
+            <GlobalProvider>
+                <AuthHandler/>
+            </GlobalProvider>
+            <FlashMessage
+                position="top"
+                autoHide={true}
+                hideOnPress={true}
+                duration={5000}
+            />
+        </View>
+            {/*<View style={ styles.fullScreenView }>*/}
+                {/*<StatusBar backgroundColor="black" barStyle="light-content"/>*/}
+                {/*<View style={ styles.viewContainer }>*/}
+                    {/*<Image source={ Close } style={ styles.closeImage }/>*/}
+                    {/*<View style={ styles.liveStatsTitleSection }>*/}
+                        {/*<Text style={ styles.liveStatsText }>*/}
+                            {/*WORKOUT SUMMARY*/}
+                        {/*</Text>*/}
+                    {/*</View>*/}
+                    {/*<View style={ styles.zoneSummarySection }>*/}
+                        {/*<Text style={ styles.zoneText }>*/}
+                            {/*WARM UP ZONE*/}
+                        {/*</Text>*/}
+                        {/*<Image source={ Bar } style={ styles.barImage }/>*/}
+                        {/*<Text style={ styles.timeText }>*/}
+                            {/*5 MINS*/}
+                        {/*</Text>*/}
+                    {/*</View> */}
+                    {/*<View style={ styles.zoneSummarySectionHigher }>*/}
+                        {/*<Text style={ styles.zoneText }>*/}
+                            {/*FAT BURNING ZONE*/}
+                        {/*</Text>*/}
+                        {/*<Image source={ Bar } style={ styles.barImage }/>*/}
+                        {/*<Text style={ styles.timeText }>*/}
+                            {/*10 MINS*/}
+                        {/*</Text>*/}
+                    {/*</View>*/}
+                    {/*<View style={ styles.zoneSummarySectionHigher }>*/}
+                        {/*<Text style={ styles.zoneText }>*/}
+                            {/*PRO ATHLETE ZONE*/}
+                        {/*</Text>*/}
+                        {/*<Image source={ Bar } style={ styles.barImage }/>*/}
+                        {/*<Text style={ styles.timeText }>*/}
+                            {/*15 MINS*/}
+                        {/*</Text>*/}
+                    {/*</View>*/}
+                    {/*<View style={ styles.zoneSummarySectionHigher }>*/}
+                        {/*<Text style={ styles.zoneText }>*/}
+                            {/*BEAST MODE*/}
+                        {/*</Text>*/}
+                        {/*<Image source={ Bar } style={ styles.barImage }/>*/}
+                        {/*<Text style={ styles.timeText }>*/}
+                            {/*2 MINS*/}
+                        {/*</Text>*/}
+                    {/*</View> */}
+                    {/*<View style={ styles.statsRowContainer }>*/}
+                        {/*<View style={ styles.individualStatContainer }>*/}
+                            {/*<Image source={ Fire } style={ styles.fireImage }/>*/}
+                            {/*<Text style={ styles.iconTitle }>*/}
+                                {/*CALORIES {"\n"}BURNED*/}
+                            {/*</Text>*/}
+                            {/*<Text style={ styles.iconStat }>*/}
+                                {/*72*/}
+                            {/*</Text>*/}
+                        {/*</View>*/}
+                        {/*<View style={ styles.individualStatContainer }>*/}
+                            {/*<Image source={ Clock } style={ styles.fireImage }/>*/}
+                            {/*<Text style={ styles.iconTitle }>*/}
+                                {/*WORKOUT {"\n"}DURATION*/}
+                            {/*</Text>*/}
+                            {/*<Text style={ styles.iconStat }>*/}
+                                {/*5:04*/}
+                            {/*</Text>*/}
+                        {/*</View>*/}
+                        {/*<View style={ styles.individualStatContainer }>*/}
+                            {/*<Image source={ Heart } style={ styles.fireImage }/>*/}
+                            {/*<Text style={ styles.iconTitle }>*/}
+                                {/*AVERAGE {"\n"}BPM*/}
+                            {/*</Text>*/}
+                            {/*<Text style={ styles.iconStat }>*/}
+                                {/*85*/}
+                            {/*</Text>*/}
+                        {/*</View>*/}
+                    {/*</View> */}
+                    {/*<View style={ styles.streakShareContainer }>*/}
+                        {/*<View style={ styles.streakContainer }>*/}
+                            {/*<Text style={ styles.messageText }>*/}
+                                {/*YOUR ROCK!*/}
+                            {/*</Text>*/}
+                            {/*<Text style={ styles.streakText }>*/}
+                                {/*WORKOUT STREAK 3*/}
+                            {/*</Text>*/}
+                        {/*</View>*/}
+                        {/*<View style={ styles.shareContainer }>*/}
+                            {/*<Text style={ styles.shareText }>*/}
+                                {/*SHARE*/}
+                            {/*</Text>*/}
+                            {/*<Image source={ Share } style={ styles.shareImage }/>*/}
+                        {/*</View>*/}
+                    {/*</View> */}
+                {/*</View>*/}
+            {/*</View>*/}
         </>
     );
 };

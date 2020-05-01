@@ -7,9 +7,9 @@ import Clock from '../../assets/images/white-clock.png';
 import Heart from '../../assets/images/white-heart.png';
 import Fire from '../../assets/images/white-fire.png';
 import Share from '../../assets/images/share.png';
-import FlashMessage  from "react-native-flash-message";
-import {GlobalProvider} from '../context/GlobalState';
-import AuthHandler from './authHandler'
+// import FlashMessage  from "react-native-flash-message";
+import {GlobalProvider} from '../../context/GlobalState';
+import AuthHandler from '../authHandler'
 
 const WorkoutSummary: () => React$Node = () => {
     return (

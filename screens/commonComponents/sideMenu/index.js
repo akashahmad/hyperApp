@@ -17,28 +17,61 @@ export default({navigation}) => {
         <View style={styles.container}>
             <ScrollView>
                 <View style={styles.logoImageContainer}>
+                    <TouchableOpacity onPress={()=>navigation.navigate('Home')}>
                     <Image
                         source={NavLogoIcon}
                         style={styles.logoImage}
                     />
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.navSectionStyle}>
-                    <TouchableOpacity onPress={()=>navigation.navigate('Example')} style={styles.navRowFlex}>
+                    <TouchableOpacity onPress={()=>navigation.navigate('EditProfile')} style={styles.navRowFlex}>
                         <Image
                             source={Login}
                             style={styles.coffeeImage}
                         />
-                        <Text style={styles.navItemStyle}>Example</Text>
+                        <Text style={styles.navItemStyle}>Edit Profile</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.navSectionStyle}>
+                    <TouchableOpacity onPress={()=>navigation.navigate('LeaderBoard')} style={styles.navRowFlex}>
+                        <Image
+                            source={Login}
+                            style={styles.coffeeImage}
+                        />
+                        <Text style={styles.navItemStyle}>Leader Board</Text>
                     </TouchableOpacity>
                 </View>
 
-                <TouchableOpacity onPress={() =>signOut()} style={styles.navRowFlexss}>
-                    <Image
-                        source={Login}
-                        style={styles.coffeeImage}
-                    />
-                    <Text style={styles.navItemStyle}>Logout</Text>
-                </TouchableOpacity>
+                <View style={styles.navSectionStyle}>
+                    <TouchableOpacity onPress={()=>navigation.navigate('LeaderBoardSearch')} style={styles.navRowFlex}>
+                        <Image
+                            source={Login}
+                            style={styles.coffeeImage}
+                        />
+                        <Text style={styles.navItemStyle}>Leader Board Search</Text>
+                    </TouchableOpacity>
+                </View>
+
+                <View style={styles.navSectionStyle}>
+                    <TouchableOpacity onPress={()=>navigation.navigate('LiveStats')} style={styles.navRowFlex}>
+                        <Image
+                            source={Login}
+                            style={styles.coffeeImage}
+                        />
+                        <Text style={styles.navItemStyle}>Live Stats</Text>
+                    </TouchableOpacity>
+                </View>
+
+                <View style={styles.navSectionStyle}>
+                    <TouchableOpacity onPress={() =>signOut()} style={styles.navRowFlexss}>
+                        <Image
+                            source={Login}
+                            style={styles.coffeeImage}
+                        />
+                        <Text style={styles.navItemStyle}>Logout</Text>
+                    </TouchableOpacity>
+                </View>
             </ScrollView>
         </View>
     )

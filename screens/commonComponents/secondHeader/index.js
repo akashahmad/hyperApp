@@ -1,6 +1,6 @@
 import React from "react";
-import {Image, View, StatusBar, TouchableOpacity, StyleSheet} from "react-native";
-import SwitchToStats from '../../../assets/images/switch-to-stats.png';
+import {Image, View, StatusBar, TouchableOpacity, StyleSheet, Text} from "react-native";
+import Menu from '../../../assets/images/menu.png';
 
 function Toggle(props) {
     let {navigation} = props;
@@ -9,18 +9,13 @@ function Toggle(props) {
         <View style={ styles.viewContainer }>
             <View style={ styles.headerSection }>
                 <TouchableOpacity
-                    style={{padding: 20}}
                     onPress={() => navigation.toggleDrawer()}
+                    style={styles.menuImage}
                 >
                     <Image
-                        source={require("../../../assets/images/toggle.png")}
-                        style={{
-                            backgroundColor: "transparent",
-                            width: 25,
-                            height: 17
-                        }}/>
+                        source={Menu}
+                    />
                 </TouchableOpacity>
-                <Image source={ SwitchToStats } style={ styles.switchToStatsImage }/>
             </View>
         </View>
     </View>
@@ -38,7 +33,7 @@ const styles = StyleSheet.create({
     },
 
     viewContainer: {
-        width: '84%',
+        width: '84%'
     },
 
     headerSection: {
@@ -48,10 +43,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
 
-    opacity: {
-        backgroundColor: "orange",
-    },
-
     menuImage: {
         width: 19,
         height: 17,
@@ -59,11 +50,6 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
 
-    switchToStatsImage: {
-        width: 19,
-        height: 19,
-        resizeMode: 'contain',
-        marginTop: 20
-    }
+
 
 });

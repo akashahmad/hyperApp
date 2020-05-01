@@ -3,9 +3,9 @@ import React, {useState} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import Menu from '../../assets/images/menu.png';
 import ProfileAvatar from '../../assets/images/profile-avatar.png';
-import FlashMessage  from "react-native-flash-message";
-import {GlobalProvider} from '../context/GlobalState';
-import AuthHandler from './authHandler'
+// import FlashMessage  from "react-native-flash-message";
+// import {GlobalProvider} from '../../context/GlobalState';
+// import AuthHandler from '../authHandler'
 
 const Leaderboard: () => React$Node = () => {
     return (
@@ -13,7 +13,6 @@ const Leaderboard: () => React$Node = () => {
         <View style={ styles.fullScreenView }>
             <StatusBar backgroundColor="black" barStyle="light-content"/>
             <View style={ styles.viewContainer }>
-                <Image source={ Menu } style={ styles.menuImage }/>
                 <View style={ styles.liveStatsTitleSection }>
                     <Text style={ styles.liveStatsText }>
                         LEADERBOARD

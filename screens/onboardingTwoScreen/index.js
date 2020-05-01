@@ -3,15 +3,18 @@ import React, {useState} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import BackTwo from '../../assets/images/back-two.png';
 import FlashMessage  from "react-native-flash-message";
-import {GlobalProvider} from '../context/GlobalState';
-import AuthHandler from './authHandler'
+import {GlobalProvider} from '../../context/GlobalState';
+import AuthHandler from '../authHandler'
 
-const OnboardingTwoScreen: () => React$Node = () => {
+const OnboardingTwoScreen = (props) => {
+    let {setShow} = props
     return (
         <View style={ styles.fullScreenView }>
             <StatusBar backgroundColor="black" barStyle="light-content"/>
             <View style={ styles.viewContainer }>
-                <Image source={ BackTwo } style={ styles.backImage }/>
+                <TouchableOpacity onPress={() => setShow("onBoardingOne")}>
+                    <Image source={ BackTwo } style={ styles.backImage }/>
+                </TouchableOpacity>
                 <View style={ styles.inputTextSection }>
                     <Text style={ styles.inputTextTitle }>
                         To get started, we need to calculate your maximum heart rate using your age and gender. 
@@ -36,7 +39,11 @@ const OnboardingTwoScreen: () => React$Node = () => {
                         <View style={ styles.circleDark }></View>
                     </View>
                     <View style={ styles.buttonContainer }>
-                        <TouchableOpacity style={ styles.signUpButton }>
+                        <TouchableOpacity style={ styles.signUpButton }
+                                          onPress={() => {
+                                              setShow("onBoardingThree")
+                                          }}
+                        >
                         <LinearGradient 
                             colors={['#55CBFF', '#63FFCF']} 
                             style={ styles.gradient }

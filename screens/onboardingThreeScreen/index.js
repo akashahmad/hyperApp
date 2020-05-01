@@ -3,32 +3,35 @@ import React, {useState} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import BackTwo from '../../assets/images/back-two.png';
 import FlashMessage  from "react-native-flash-message";
-import {GlobalProvider} from '../context/GlobalState';
-import AuthHandler from './authHandler'
+import {GlobalProvider} from '../../context/GlobalState';
+import AuthHandler from '../authHandler'
 
-const OnboardingThreeScreen: () => React$Node = () => {
+const OnboardingThreeScreen = (props) => {
+    let {setShow} = props
     return (
         <View style={ styles.fullScreenView }>
             <StatusBar backgroundColor="black" barStyle="light-content"/>
             <View style={ styles.viewContainer }>
-                <Image source={ BackTwo } style={ styles.backImage }/>
+                <TouchableOpacity onPress={() => setShow("onBoardingTwo")}>
+                    <Image source={ BackTwo } style={ styles.backImage }/>
+                </TouchableOpacity>
                 <View style={ styles.titleSection }>
                     <Text style={ styles.firstTitle }>
-                        You’re ready to go! 
+                        You’re ready to go!
                     </Text>
                     <Text style={ styles.firstSubtitle }>
-                        Your maximum heart rate is 
+                        Your maximum heart rate is
                     </Text>
                 </View>
                 <View style={ styles.hrSection }>
                     <Text style={ styles.hrTitle }>
-                        165 
+                        165
                     </Text>
                 </View>
                 <View style={ styles.hrParagraphSection }>
                     <Text style={ styles.hrParagraph }>
-                        We’ll use this to number determine your heart rate zones during your workout. Make sure 
-                        your shirt is connected to Bluetooth on your phone. 
+                        We’ll use this to number determine your heart rate zones during your workout. Make sure
+                        your shirt is connected to Bluetooth on your phone.
                     </Text>
                 </View>
                 <View style={ styles.circlePlusButtonSection }>
@@ -39,13 +42,13 @@ const OnboardingThreeScreen: () => React$Node = () => {
                     </View>
                     <View style={ styles.buttonContainer }>
                         <TouchableOpacity style={ styles.signUpButton }>
-                        <LinearGradient 
-                            colors={['#55CBFF', '#63FFCF']} 
-                            style={ styles.gradient }
-                            start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-                        >
-                            <Text style={ styles.signUpButtonText }>FINISH</Text>
-                        </LinearGradient>
+                            <LinearGradient
+                                colors={['#55CBFF', '#63FFCF']}
+                                style={ styles.gradient }
+                                start={{x: 0, y: 0}} end={{x: 1, y: 0}}
+                            >
+                                <Text style={ styles.signUpButtonText }>FINISH</Text>
+                            </LinearGradient>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -143,7 +146,7 @@ const styles = StyleSheet.create({
     circleLight: {
         width: 7,
         height: 7,
-        borderRadius: 44/2,
+        borderRadius: 44 / 2,
         backgroundColor: 'white',
         marginLeft: 4,
         marginRight: 4
@@ -152,7 +155,7 @@ const styles = StyleSheet.create({
     circleDark: {
         width: 7,
         height: 7,
-        borderRadius: 44/2,
+        borderRadius: 44 / 2,
         backgroundColor: '#686868',
         marginLeft: 4,
         marginRight: 4

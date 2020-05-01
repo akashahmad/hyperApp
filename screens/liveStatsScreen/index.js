@@ -7,9 +7,9 @@ import CircleThree from '../../assets/images/circle-three.png';
 import CircleFour from '../../assets/images/circle-four.png';
 import GradientFire from '../../assets/images/gradient-fire.png';
 import GradientMuscle from '../../assets/images/gradient-muscle.png';
-import FlashMessage  from "react-native-flash-message";
-import {GlobalProvider} from '../context/GlobalState';
-import AuthHandler from './authHandler'
+// import FlashMessage  from "react-native-flash-message";
+// import {GlobalProvider} from '../../context/GlobalState';
+// import AuthHandler from '../authHandler'
 
 const LiveStatsScreen: () => React$Node = () => {
     return (

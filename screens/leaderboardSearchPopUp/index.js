@@ -1,12 +1,12 @@
 import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput} from 'react-native';
 import React, {useState} from 'react';
-import LinearGradient from 'react-native-linear-gradient';
+// import LinearGradient from 'react-native-linear-gradient';
 import Close from '../../assets/images/close.png';
 import Search from '../../assets/images/search.png';
 import ProfileAvatar from '../../assets/images/profile-avatar.png';
-import FlashMessage  from "react-native-flash-message";
-import {GlobalProvider} from '../context/GlobalState';
-import AuthHandler from './authHandler'
+// import FlashMessage  from "react-native-flash-message";
+// import {GlobalProvider} from '../../context/GlobalState';
+// import AuthHandler from '../authHandler'
 
 const LeaderboardSearchPopUp: () => React$Node = () => {
     return (
