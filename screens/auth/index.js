@@ -44,16 +44,6 @@ const App: () => React$Node = () => {
                     setPassword={setPassword}
                     password={password}
                 />;
-
-            case "logInSuccess":
-                return <LogInSuccessScreen
-                    setShow={setShow}
-                />;
-            case "signUpSuccess":
-                return <SignUpSuccessScreen
-                    setShow={setShow}
-                />;
-
             case "onBoardingOne":
                 return <OnBoardingOne
                     setShow={setShow}
@@ -66,6 +56,15 @@ const App: () => React$Node = () => {
                 return <OnBoardingThree
                     setShow={setShow}
                 />;
+            case "logInSuccess":
+                return <LogInSuccessScreen
+                    setShow={setShow}
+                />;
+            case "signUpSuccess":
+                return <SignUpSuccessScreen
+                    setShow={setShow}
+                />;
+
             default:
                 return <MainAuthScreen setShow={setShow}/>
         }

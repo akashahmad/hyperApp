@@ -15,10 +15,7 @@ const addNameScreen = (props) => {
     const [lastName, setLastName] = useState("");
     const [firstNameValidator, setFirstNameValidator] = useState(false);
     const signupHandler = () => {
-        if (!firstName) {
-            setFirstNameValidator(true)
-        }
-        else {
+
             setLoader(true);
             setMainScreen("signup");
             auth().createUserWithEmailAndPassword(email, password).then(data => {
@@ -36,7 +33,6 @@ const addNameScreen = (props) => {
                     setLoader(false)
                     setEmail("");
                     setPassword("");
-                    setShow("signUpSuccess")
                 })
                     .catch(err => {
                         setLoader(false)
@@ -58,7 +54,6 @@ const addNameScreen = (props) => {
                     icon: "danger"
                 });
             });
-        }
     };
     return (
         <View style={ styles.fullScreenView }>
