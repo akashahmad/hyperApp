@@ -93,7 +93,7 @@ const getStartedScreen = (props) => {
             {
                 passwordValidator &&
                 <Text
-                    style={{color: "red"}}>{"gender is required"}</Text>
+                    style={{color: "red"}}>{password ? "Password length should be 8 characters" : "This field is required"}</Text>
             }
             <TouchableOpacity style={ styles.signUpButton } onPress={() => showNext()}>
             <LinearGradient 

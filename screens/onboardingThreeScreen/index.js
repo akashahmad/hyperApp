@@ -1,22 +1,34 @@
-import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput} from 'react-native';
-import React, {useState,useContext} from 'react';
+import { View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput } from 'react-native';
+import React, { useState, useContext, useEffect } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import BackTwo from '../../assets/images/back-two.png';
-import FlashMessage  from "react-native-flash-message";
-import {GlobalProvider} from '../../context/GlobalState';
+import FlashMessage from "react-native-flash-message";
+import { GlobalProvider } from '../../context/GlobalState';
 import AuthHandler from '../authHandler'
 
-import {GlobalContext} from '../../context/GlobalState';
-import {showMessage} from 'react-native-flash-message'
+import { GlobalContext } from '../../context/GlobalState';
+import { showMessage } from 'react-native-flash-message'
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 const OnboardingThreeScreen = (props) => {
-    let {setShow,email,setEmail,setPassword,password,setFirstName,firstName,setLastName,lastName,setGender,gender,setdob,dob} = props
-    const {setLoader} = useContext(GlobalContext);
+    let { setShow, email, setEmail, setPassword, password, setFirstName, firstName, setLastName, lastName, setGender, gender, setdob, dob } = props
+    const { setLoader } = useContext(GlobalContext);
+    const [heartrate, setHeartrate] = useState('')
+    useEffect(() => {
+        let year = new Date().getFullYear()
+        var dobyear = dob.substring(0, 4);
+        let age = year - dobyear;
+        if (gender === "male") {
+            let heartrat = 208 - (0.7 * age)
+            setHeartrate(heartrat)
+        }
+        else if (gender === "female") {
+            let heartrat = 206 - (0.88 * age)
+            setHeartrate(heartrat)
+        }
+    }, []);
     const signupHandler = () => {
-
         setLoader(true);
-        
         auth().createUserWithEmailAndPassword(email, password).then(data => {
             let uid = data.user.uid;
             let userObj = {
@@ -26,15 +38,15 @@ const OnboardingThreeScreen = (props) => {
                 photoURL: "",
                 uid: uid,
                 gender,
-                DOB:dob
+                DOB: dob
             };
             firestore().collection('users')
                 .doc(uid)
                 .set(userObj).then(res => {
-                setLoader(false)
-                setEmail("");
-                setPassword("");
-            })
+                    setLoader(false)
+                    setEmail("");
+                    setPassword("");
+                })
                 .catch(err => {
                     setLoader(false)
                     showMessage({
@@ -55,50 +67,48 @@ const OnboardingThreeScreen = (props) => {
                 icon: "danger"
             });
         });
-};
+    };
     return (
-        <View style={ styles.fullScreenView }>
-            <StatusBar backgroundColor="black" barStyle="light-content"/>
-            <View style={ styles.viewContainer }>
+        <View style={styles.fullScreenView}>
+            <StatusBar backgroundColor="black" barStyle="light-content" />
+            <View style={styles.viewContainer}>
                 <TouchableOpacity onPress={() => setShow("onBoardingTwo")}>
-                    <Image source={ BackTwo } style={ styles.backImage }/>
+                    <Image source={BackTwo} style={styles.backImage} />
                 </TouchableOpacity>
-                <View style={ styles.titleSection }>
-                    <Text style={ styles.firstTitle }>
+                <View style={styles.titleSection}>
+                    <Text style={styles.firstTitle}>
                         You’re ready to go!
                     </Text>
-                    <Text style={ styles.firstSubtitle }>
+                    <Text style={styles.firstSubtitle}>
                         Your maximum heart rate is
                     </Text>
                 </View>
-                <View style={ styles.hrSection }>
-                    <Text style={ styles.hrTitle }>
-                        165
+                <View style={styles.hrSection}>
+                    <Text style={styles.hrTitle}>
+                        {heartrate}
                     </Text>
                 </View>
-                <View style={ styles.hrParagraphSection }>
-                    <Text style={ styles.hrParagraph }>
+                <View style={styles.hrParagraphSection}>
+                    <Text style={styles.hrParagraph}>
                         We’ll use this to number determine your heart rate zones during your workout. Make sure
                         your shirt is connected to Bluetooth on your phone.
                     </Text>
                 </View>
-                <View style={ styles.circlePlusButtonSection }>
-                    <View style={ styles.circleContainer }>
-                        <View style={ styles.circleDark }></View>
-                        <View style={ styles.circleDark }></View>
-                        <View style={ styles.circleLight }></View>
+                <View style={styles.circlePlusButtonSection}>
+                    <View style={styles.circleContainer}>
+                        <View style={styles.circleDark}></View>
+                        <View style={styles.circleDark}></View>
+                        <View style={styles.circleLight}></View>
                     </View>
-                    <View style={ styles.buttonContainer }>
-                        <TouchableOpacity style={ styles.signUpButton }
-                        onPress={() => {signupHandler()}}
+                    <View style={styles.buttonContainer}>
+                        <TouchableOpacity style={styles.signUpButton}
+                            onPress={() => { signupHandler() }}
                         >
                             <LinearGradient
                                 colors={['#55CBFF', '#63FFCF']}
-                                style={ styles.gradient }
-                                start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-                                
-                            >
-                                <Text style={ styles.signUpButtonText }>FINISH</Text>
+                                style={styles.gradient}
+                                start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
+                                <Text style={styles.signUpButtonText}>FINISH</Text>
                             </LinearGradient>
                         </TouchableOpacity>
                     </View>
@@ -107,7 +117,6 @@ const OnboardingThreeScreen = (props) => {
         </View>
     );
 };
-
 const styles = StyleSheet.create({
 
     fullScreenView: {
