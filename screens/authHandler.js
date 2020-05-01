@@ -8,7 +8,6 @@ import Loader from "./commonComponents/loader";
 export default () => {
     const {loggedIn, mainScreen, loader} = useContext(GlobalContext);
     return <View style={{flex: 1}}>
-        <StatusBar hidden/>
         {
             loggedIn && mainScreen === "home" ?
                 <Navigations/>
