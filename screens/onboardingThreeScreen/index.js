@@ -1,13 +1,61 @@
 import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState,useContext} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import BackTwo from '../../assets/images/back-two.png';
 import FlashMessage  from "react-native-flash-message";
 import {GlobalProvider} from '../../context/GlobalState';
 import AuthHandler from '../authHandler'
 
+import {GlobalContext} from '../../context/GlobalState';
+import {showMessage} from 'react-native-flash-message'
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 const OnboardingThreeScreen = (props) => {
-    let {setShow} = props
+    let {setShow,email,setEmail,setPassword,password,setFirstName,firstName,setLastName,lastName,setGender,gender,setdob,dob} = props
+    const {setLoader} = useContext(GlobalContext);
+    const signupHandler = () => {
+
+        setLoader(true);
+        
+        auth().createUserWithEmailAndPassword(email, password).then(data => {
+            let uid = data.user.uid;
+            let userObj = {
+                firstName: firstName,
+                lastName: lastName,
+                email,
+                photoURL: "",
+                uid: uid,
+                gender,
+                DOB:dob
+            };
+            firestore().collection('users')
+                .doc(uid)
+                .set(userObj).then(res => {
+                setLoader(false)
+                setEmail("");
+                setPassword("");
+            })
+                .catch(err => {
+                    setLoader(false)
+                    showMessage({
+                        message: error.message,
+                        type: "danger",
+                        backgroundColor: "red",
+                        color: "white",
+                        icon: "danger",
+                    });
+                })
+        }).catch(function (error) {
+            setLoader(false)
+            showMessage({
+                message: error.message,
+                type: "danger",
+                backgroundColor: "red",
+                color: "white",
+                icon: "danger"
+            });
+        });
+};
     return (
         <View style={ styles.fullScreenView }>
             <StatusBar backgroundColor="black" barStyle="light-content"/>
@@ -41,11 +89,14 @@ const OnboardingThreeScreen = (props) => {
                         <View style={ styles.circleLight }></View>
                     </View>
                     <View style={ styles.buttonContainer }>
-                        <TouchableOpacity style={ styles.signUpButton }>
+                        <TouchableOpacity style={ styles.signUpButton }
+                        onPress={() => {signupHandler()}}
+                        >
                             <LinearGradient
                                 colors={['#55CBFF', '#63FFCF']}
                                 style={ styles.gradient }
                                 start={{x: 0, y: 0}} end={{x: 1, y: 0}}
+                                
                             >
                                 <Text style={ styles.signUpButtonText }>FINISH</Text>
                             </LinearGradient>

@@ -1,13 +1,14 @@
-import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput} from 'react-native';
+import {View,Picker, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput,MenuOption} from 'react-native';
 import React, {useState} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import BackTwo from '../../assets/images/back-two.png';
 import FlashMessage  from "react-native-flash-message";
 import {GlobalProvider} from '../../context/GlobalState';
 import AuthHandler from '../authHandler'
-
+import Calender from '../../assets/images/calendar.png'
+import DatePicker from 'react-native-datepicker'
 const OnboardingTwoScreen = (props) => {
-    let {setShow} = props
+    let {setShow,setGender,gender,setdob,dob} = props
     return (
         <View style={ styles.fullScreenView }>
             <StatusBar backgroundColor="black" barStyle="light-content"/>
@@ -21,16 +22,45 @@ const OnboardingTwoScreen = (props) => {
                     </Text>
                 </View>
                 <View style={ styles.inputSection }>
-                    <TextInput
+                <DatePicker
+      // style={{width: 500}}
+       
+        // mode="date"
+        placeholder="MM / DD / YYYY"
+        // format="YYYY-MM-DD"
+        date={dob}
+        // minDate="2016-05-01"
+        // maxDate="2016-06-01"
+        // confirmBtnText="Confirm"
+        // cancelBtnText="Cancel"
+        iconSource={Calender}
+        customStyles={{
+            dateInput: styles.whenDateInput,
+            dateIcon: styles.dateIcon
+        }}
+        style={{width: "100%", marginTop: 20}}
+        onDateChange={(date) => {setdob(date)}}
+
+      />
+                    {/* <TextInput
                         style={ styles.inputFieldBirthday }
                         placeholder='MM / DD / YYYY'
                     >
-                    </TextInput>
-                    <TextInput
+                    </TextInput> */}
+                    {/* <TextInput
                         style={ styles.inputFieldGender }
                         placeholder='Gender'
                     >
-                    </TextInput>
+                    </TextInput> */}
+                    <Picker
+    selectedValue={gender?gender:''}
+    onValueChange={(itemValue, itemPosition) =>
+        setGender(itemValue)}
+    style={{backgroundColor:"white",marginTop:30}}>
+    <Picker.Item value="" label="Select Gender"/>
+    <Picker.Item value="male" label="Male" />
+    <Picker.Item value="female" label="Female" />
+</Picker>
                 </View>
                 <View style={ styles.circlePlusButtonSection }>
                     <View style={ styles.circleContainer }>
@@ -170,7 +200,28 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontFamily: 'Biryani-ExtraBold'
     },
-
+    whenDateInput: {
+        paddingLeft: 20,
+        paddingRight: 20,
+        color: "rgb(109, 114, 120)",
+        fontSize: 16,
+        alignItems:"flex-start",
+        borderRadius: 4,
+        borderWidth: 1,
+        borderColor: "rgb(220, 221, 223)",
+        borderStyle: "solid",
+        backgroundColor:"white",
+        height: 56
+       
+    },
+    dateIcon: {
+        position: 'absolute',
+        right: 0,
+        top: 4,
+        marginLeft: 0
+    },
+    
+    
 });
 
 export default OnboardingTwoScreen;

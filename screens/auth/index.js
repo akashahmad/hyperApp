@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View} from "react-native";
+import React, { useState } from 'react';
+import { View } from "react-native";
 import MainAuthScreen from '../mainAuthScreen';
 import GetStartedScreen from '../getStartedScreen';
 import AddNameScreen from '../addNameScreen';
@@ -11,13 +11,16 @@ import OnBoardingTwo from '../onboardingTwoScreen';
 import OnBoardingThree from '../onboardingThreeScreen';
 
 
-const App: () => React$Node = () => {
+const App=() => {
     const [show, setShow] = useState(null);
     const [email, setEmail] = useState("");
     const [emailValidator, setEmailValidator] = useState(false);
     const [password, setPassword] = useState("");
     const [passwordValidator, setPasswordValidator] = useState(false);
-
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [dob, setdob] = useState("");
+    const [gender, setGender] = useState("");
     const showComponent = () => {
         switch (show) {
             case "login":
@@ -51,10 +54,26 @@ const App: () => React$Node = () => {
             case "onBoardingTwo":
                 return <OnBoardingTwo
                     setShow={setShow}
+                    gender={gender}
+                    setGender={setGender}
+                    dob={dob}
+                    setdob={setdob}
                 />;
             case "onBoardingThree":
                 return <OnBoardingThree
                     setShow={setShow}
+                    email={email}
+                    setEmail={setEmail}
+                    setPassword={setPassword}
+                    password={password}
+                    setFirstName={setFirstName}
+                    firstName={firstName}
+                    setLastName={setLastName}
+                    lastName={lastName}
+                    setGender={setGender}
+                    gender={gender}
+                    setdob={setdob}
+                    dob={dob}
                 />;
             case "logInSuccess":
                 return <LogInSuccessScreen
@@ -66,11 +85,11 @@ const App: () => React$Node = () => {
                 />;
 
             default:
-                return <MainAuthScreen setShow={setShow}/>
+                return <MainAuthScreen setShow={setShow} />
         }
     };
     return (
-        <View style={{flex: 1}}>
+        <View style={{ flex: 1 }}>
             {showComponent()}
         </View>
     );
