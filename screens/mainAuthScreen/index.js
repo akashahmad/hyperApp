@@ -1,5 +1,6 @@
 import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar} from 'react-native';
 import React, {useState, useEffect} from 'react';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import LinearGradient from 'react-native-linear-gradient';
 import Logo from '../../assets/images/hyper-logo-one.png';
 import LogoTwo from '../../assets/images/hyper-am-logo-rn-test.png';
@@ -20,7 +21,7 @@ const mainAuthScreen = (props) => {
                         style={ styles.gradient }
                         start={{x: 0, y: 0}} end={{x: 1, y: 0}}
                     >
-                        <Text style={ styles.signUpButtonText }>SIGN UP</Text>
+                        <Text style={ [newStyles.signUpButtonText, styles.signUpButtonText]  }>SIGN UP</Text>
                     </LinearGradient>
                     </TouchableOpacity>
                 </View>
@@ -94,8 +95,8 @@ const styles = StyleSheet.create({
     },
 
     signUpButtonText: {
-        color: 'white',
-        fontSize: 14,
+        // color: 'white',
+        // fontSize: 14,
         // fontSize: '87%',
         fontFamily: 'Biryani-ExtraBold'
     },
@@ -149,5 +150,14 @@ const styles = StyleSheet.create({
     }
 
 });
+
+const newStyles = EStyleSheet.create({
+    signUpButtonText: {
+        
+        fontSize: '7rem',
+        color: 'green'
+        
+    },
+})
 
 export default mainAuthScreen;
