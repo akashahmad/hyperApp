@@ -28,7 +28,7 @@ const Homescreen =()=> {
         setHeartrate(heartrat)
        }
       },[]);
-    return (
+    return ( 
         <View style={ styles.fullScreenView }>
             <StatusBar backgroundColor="black" barStyle="light-content"/>
             <View style={ styles.viewContainer }>
