@@ -11,10 +11,12 @@ import {LoginManager, AccessToken} from 'react-native-fbsdk';
 import auth from '@react-native-firebase/auth';
 import {showMessage} from 'react-native-flash-message'
 
+import firestore from '@react-native-firebase/firestore';
 const getStartedScreen = (props) => {
     let {setShow, email, setEmail, emailValidator, setEmailValidator, password, setPassword, passwordValidator, setPasswordValidator} = props;
     const {setLoader, setMainScreen} = useContext(GlobalContext);
     const [message, setMessage] = useState(null);
+    const[emailAvailable,setEmailAvailable]=useState(false);
 
     const showNext = () => {
         if (!email || (email && !validateEmail(email)) || !password || (password.length < 8)) {
@@ -25,7 +27,22 @@ const getStartedScreen = (props) => {
                 setPasswordValidator(true)
             }
         } else {
+            firestore()
+            .collection('users')
+            .where('email', '==',email)
+            .get()
+            .then(querySnapshot => {
+              console.log('Total users: ', querySnapshot.size);
+          if(querySnapshot.size>0)
+          {
+              console.log("already exist user")
+              setEmailAvailable(true)
+          }
+          else{
             setShow("addName")
+          }
+            });
+           
         }
     }
 
@@ -78,6 +95,11 @@ const getStartedScreen = (props) => {
                 emailValidator &&
                 <Text
                     style={{color: "red"}}>{emailValidator && email ? "Email is invalid" : "Email field is required"}</Text>
+            }
+             {
+                emailAvailable &&
+                <Text
+                    style={{color: "red"}}>{"Email already exists"}</Text>
             }
             <TextInput
                 style={ styles.inputFieldPassword }
