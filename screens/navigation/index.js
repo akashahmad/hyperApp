@@ -29,7 +29,7 @@ const AppStack = createStackNavigator({
     Home: {
         screen: MainDashboard,
         navigationOptions: ({navigation}) => ({
-            header: () => <FirstHeader navigation={navigation}/>,
+            // header: () => <FirstHeader navigation={navigation}/>,
             headerTitle: " "
         })
     },

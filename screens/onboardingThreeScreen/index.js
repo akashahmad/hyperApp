@@ -1,5 +1,6 @@
 import { View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput } from 'react-native';
 import React, { useState, useContext, useEffect } from 'react';
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import LinearGradient from 'react-native-linear-gradient';
 import BackTwo from '../../assets/images/back-two.png';
 import FlashMessage from "react-native-flash-message";
@@ -72,9 +73,11 @@ const OnboardingThreeScreen = (props) => {
         <View style={styles.fullScreenView}>
             <StatusBar backgroundColor="black" barStyle="light-content" />
             <View style={styles.viewContainer}>
-                <TouchableOpacity onPress={() => setShow("onBoardingTwo")}>
-                    <Image source={BackTwo} style={styles.backImage} />
-                </TouchableOpacity>
+                <View style={ styles.backButtonContainer }>
+                    <TouchableOpacity onPress={() => setShow("onBoardingTwo")}>
+                        <Image source={BackTwo} style={styles.backImage} />
+                    </TouchableOpacity>
+                </View>
                 <View style={styles.titleSection}>
                     <Text style={styles.firstTitle}>
                         You’re ready to go!
@@ -128,34 +131,40 @@ const styles = StyleSheet.create({
     },
 
     viewContainer: {
-        width: '84%',
+        width: '90%',
         height: '90%'
     },
 
+    backButtonContainer: {
+        marginTop: '5%'
+    },
+
     backImage: {
-        width: 17,
-        height: 17,
-        resizeMode: 'contain',
-        marginTop: 20
+        width: 16,
+        height: 16,
+        resizeMode: 'contain'
     },
 
     titleSection: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 100
+        // marginTop: 100 
     },
 
     firstTitle: {
         color: 'white',
-        fontSize: 20,
+        // fontSize: 20,
+        fontSize: RFPercentage(2.75),
         fontFamily: 'Biryani-Bold',
-        textAlign: 'center'
+        textAlign: 'center',
+        marginTop: '26%'
     },
 
     firstSubtitle: {
         color: 'white',
-        fontSize: 12,
+        // fontSize: 12,
+        fontSize: RFPercentage(1.5),
         fontFamily: 'Biryani-Light',
         textAlign: 'center',
         marginTop: 12
@@ -165,28 +174,33 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 20
+        // marginTop: 20
     },
 
     hrTitle: {
         color: 'white',
-        fontSize: 60,
+        // fontSize: 60,
+        fontSize: RFPercentage(7.3),
         fontFamily: 'Biryani-Black',
-        textAlign: 'center'
+        textAlign: 'center',
+        marginTop: '5%'
     },
 
     hrParagraphSection: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 20
+        // marginTop: 20
     },
 
     hrParagraph: {
         color: 'white',
-        fontSize: 11,
+        // fontSize: 11,
+        fontSize: RFPercentage(1.40),
         fontFamily: 'Biryani-Light',
-        textAlign: 'center'
+        textAlign: 'center',
+        marginTop: '5%',
+        width: '95%'
     },
 
     circlePlusButtonSection: {
@@ -236,14 +250,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 8,
-        paddingTop: 15,
-        paddingBottom: 15,
+        paddingTop: 14,
+        paddingBottom: 14,
         marginTop: 10
     },
 
     signUpButtonText: {
         color: 'white',
-        fontSize: 14,
+        // fontSize: 14,
+        fontSize: RFPercentage(1.75),
         fontFamily: 'Biryani-ExtraBold'
     },
 

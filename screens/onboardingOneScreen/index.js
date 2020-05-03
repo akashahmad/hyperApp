@@ -1,5 +1,6 @@
 import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar} from 'react-native';
 import React, {useState} from 'react';
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import LinearGradient from 'react-native-linear-gradient';
 import FlashMessage  from "react-native-flash-message";
 import {GlobalProvider} from '../../context/GlobalState';
@@ -12,8 +13,8 @@ const OnboardingOneScreen = (props) => {
             <StatusBar backgroundColor="black" barStyle="light-content"/>
             <View style={ styles.viewContainer }>
                 <View style={ styles.welcomeSection }>
-                    <Text style={ styles.welcomeText }>
-                        WELCOME
+                    <Text style={ styles.welcomeText }> 
+                        WELCOME!
                     </Text>
                 </View>
                 <View style={ styles.infoSection }>
@@ -33,7 +34,7 @@ const OnboardingOneScreen = (props) => {
                     <View style={ styles.circleContainer }>
                         <View style={ styles.circleLight }></View>
                         <View style={ styles.circleDark }></View>
-                        <View style={ styles.circleDark }></View>
+                        <View style={ styles.circleDark }></View> 
                     </View>
                     <View style={ styles.buttonContainer }>
                         <TouchableOpacity style={ styles.signUpButton }
@@ -67,33 +68,37 @@ const styles = StyleSheet.create({
     },
 
     viewContainer: {
-        width: '84%',
+        width: '90%',
         height: '90%'
     },
 
     welcomeSection: {
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'center', 
         alignItems: 'center',
-        marginTop: 150
     },
 
     welcomeText: {
         color: 'white',
-        fontSize: 20,
-        fontFamily: 'Biryani-Bold'
+        // fontSize: 20,
+        fontSize: RFPercentage(2.75),
+        fontFamily: 'Biryani-ExtraBold',
+        marginTop: '25%'
     },
 
     infoSection: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 50
+        // marginTop: 50,
+        marginTop: '33%',
+        
     },
 
     infoParagraph: {
         color: 'white',
-        fontSize: 13,
+        // fontSize: 13,
+        fontSize: RFPercentage(1.75),
         fontFamily: 'Biryani-Light',
         textAlign: 'center',
         marginTop: 10
@@ -146,14 +151,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 8,
-        paddingTop: 15,
-        paddingBottom: 15,
+        paddingTop: 14,
+        paddingBottom: 14,
         marginTop: 10
     },
 
     signUpButtonText: {
         color: 'white',
-        fontSize: 14,
+        // fontSize: 14,
+        fontSize: RFPercentage(1.75),
         fontFamily: 'Biryani-ExtraBold'
     },
 

@@ -1,5 +1,6 @@
 import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput} from 'react-native';
 import React, {useState,useEffect, useContext} from 'react';
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import LinearGradient from 'react-native-linear-gradient';
 import Menu from '../../assets/images/menu.png';
 import SwitchToStats from '../../assets/images/switch-to-stats.png';
@@ -11,7 +12,8 @@ import FlashMessage  from "react-native-flash-message";
 import {GlobalProvider} from '../../context/GlobalState';
 import AuthHandler from '../authHandler'
 import {GlobalContext} from '../../context/GlobalState';
-const Homescreen =()=> {
+const Homescreen =(props)=> {
+    const {navigation} = props;
     const {user} = useContext(GlobalContext);
     const[heartrate,setHeartrate]=useState('')
     useEffect(() => {
@@ -28,10 +30,25 @@ const Homescreen =()=> {
         setHeartrate(heartrat)
        }
       },[]);
-    return ( 
+    return (  
         <View style={ styles.fullScreenView }>
             <StatusBar backgroundColor="black" barStyle="light-content"/>
             <View style={ styles.viewContainer }>
+                <View style={ styles.headerSection }>
+                    <TouchableOpacity
+                        // style={{padding: 20}}
+                        onPress={() => navigation.toggleDrawer()}
+                    >
+                        <Image
+                            source={require("../../assets/images/menu.png")}
+                            style={{
+                                backgroundColor: "transparent",
+                                width: 19,
+                                height: 17
+                            }}/>
+                    </TouchableOpacity>
+                    <Image source={ SwitchToStats } style={ styles.switchToStatsImage }/> 
+                </View>
                 <View style={ styles.statsSection }>
                     <View style={ styles.clockSection }>
                         <Image source={ Clock } style={ styles.clockImage }/>
@@ -87,7 +104,7 @@ const styles = StyleSheet.create({
     },
 
     viewContainer: {
-        width: '84%',
+        width: '90%',
         height: '90%'
     },
 

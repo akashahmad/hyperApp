@@ -1,5 +1,6 @@
 import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput} from 'react-native';
 import React, {useState, useEffect, useContext} from "react";
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import LinearGradient from 'react-native-linear-gradient';
 import {GlobalContext} from '../../context/GlobalState';
 import {showMessage} from 'react-native-flash-message'
@@ -58,54 +59,62 @@ const addNameScreen = (props) => {
     return (
         <View style={ styles.fullScreenView }>
             <StatusBar backgroundColor="black" barStyle="light-content"/>
-            <TouchableOpacity onPress={() => setShow("signup")}>
-                <Image source={ BackTwo } style={ styles.backImage }></Image>
-            </TouchableOpacity>
-            <Text style={ styles.getStartedText }>
-                ADD YOUR NAME
-            </Text>
-            <Text style={ styles.subtitleText }>
-                Enter your first and last name below
-            </Text>
-            <TextInput
-                style={ styles.inputFieldEmail }
-                placeholder='First name'
-                autoFocus
-                value={firstName ? firstName : ""}
-                onChangeText={value => {
-                    setFirstNameValidator(false);
-                    setFirstName(value)
-                }}
-            >
-            </TextInput>
-            {
-                firstNameValidator &&
-                <Text style={{color: "red"}}>First Name is required</Text>
-            }
-            <TextInput
-                style={ styles.inputFieldPassword }
-                placeholder='Last name'
-                onChangeText={value => setLastName(value)}
-                value={lastName ? lastName : ""}
-            >
-            </TextInput>
-            <TouchableOpacity style={ styles.signUpButton }
-                              onPress={() => {
-                                  if (!firstName) {
-                                      setFirstNameValidator(true)
-                                  }
-                                  else {
-                                      setShow("onBoardingOne")
-                                  }
-                              }}>
-                <LinearGradient
-                    colors={['#55CBFF', '#63FFCF']}
-                    style={ styles.gradient }
-                    start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-                >
-                    <Text style={ styles.signUpButtonText }>Next</Text>
-                </LinearGradient>
-            </TouchableOpacity>
+            <View style={ styles.viewContainer }>
+                <View style={ styles.backButtonContainer }>
+                    <TouchableOpacity onPress={() => setShow("signup")}>
+                        <Image source={ BackTwo } style={ styles.backImage }></Image>
+                    </TouchableOpacity>
+                </View>
+                <View style={ styles.addNameContainer }>
+                    <Text style={ styles.getStartedText }>
+                        ADD YOUR NAME
+                    </Text>
+                    <Text style={ styles.subtitleText }>
+                        Enter your first and last name below
+                    </Text>
+                </View>
+                <View style={ styles.inputFieldsContainer }>
+                    <TextInput
+                        style={ styles.inputFieldEmail }
+                        placeholder='First name'
+                        autoFocus
+                        value={firstName ? firstName : ""}
+                        onChangeText={value => {
+                            setFirstNameValidator(false);
+                            setFirstName(value)
+                        }}
+                    >
+                    </TextInput>
+                    {
+                        firstNameValidator &&
+                        <Text style={{color: "red"}}>First Name is required</Text>
+                    }
+                    <TextInput
+                        style={ styles.inputFieldPassword }
+                        placeholder='Last name'
+                        onChangeText={value => setLastName(value)}
+                        value={lastName ? lastName : ""}
+                    >
+                    </TextInput>
+                    <TouchableOpacity style={ styles.signUpButton }
+                                onPress={() => {
+                                    if (!firstName) {
+                                        setFirstNameValidator(true)
+                                    }
+                                    else {
+                                        setShow("onBoardingOne")
+                                    }
+                                }}>
+                        <LinearGradient
+                            colors={['#55CBFF', '#63FFCF']}
+                            style={ styles.gradient }
+                            start={{x: 0, y: 0}} end={{x: 1, y: 0}}
+                        >
+                            <Text style={ styles.signUpButtonText }>NEXT</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
+                </View>
+            </View>
         </View>
     )
 };
@@ -115,51 +124,62 @@ const styles = StyleSheet.create({
     fullScreenView: {
         flex: 1,
         backgroundColor: 'black',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
+    viewContainer: {
+        width: '90%',
+        height: '90%'
+    },
+
+    backButtonContainer: {
+        marginTop: '5%'
     },
 
     backImage: {
-        width: 17,
-        height: 17,
-        marginTop: 60,
-        marginLeft: 28,
+        width: 16,
+        height: 16,
         resizeMode: 'contain'
+    },
+
+    addNameContainer: {
+        marginTop: '5%'
     },
 
     getStartedText: {
         color: 'white',
-        // fontWeight: '800',
-        fontSize: 25,
-        marginTop: 20,
-        marginLeft: 30,
+        // fontSize: 25,
+        fontSize: RFPercentage(3),
         fontFamily: 'Biryani-Black'
     },
 
     subtitleText: {
         color: 'white',
-        fontWeight: '300',
-        fontSize: 12,
-        marginTop: -3,
-        marginLeft: 30,
+        fontSize: RFPercentage(1.5),
+        // fontSize: 12,
         fontFamily: 'Biryani-ExtraLight',
     },
 
+    inputFieldsContainer: {
+        marginTop: '5%'
+    },
+
     inputFieldEmail: {
-        width: '84%',
         backgroundColor: 'white',
         borderRadius: 9,
         padding: 14,
-        marginLeft: 30,
-        marginTop: 40,
+        fontSize: RFPercentage(1.75),
         fontFamily: 'Biryani-Regular'
     },
 
     inputFieldPassword: {
-        width: '84%',
+        marginTop: 8,
         backgroundColor: 'white',
         borderRadius: 9,
         padding: 14,
-        marginLeft: 30,
-        marginTop: 10,
+        fontSize: RFPercentage(1.75),
         fontFamily: 'Biryani-Regular'
     },
 
@@ -168,82 +188,21 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 8,
-        paddingTop: 15,
-        paddingBottom: 15,
-        marginLeft: 30,
-        marginTop: 10
+        paddingTop: 14,
+        paddingBottom: 14,
+        marginTop: 8
     },
 
     signUpButton: {
-        // paddingTop: 16,
-        // // paddingRight: 130,
-        // paddingBottom: 16,
-        // // paddingLeft: 130,
-        // borderRadius: 9,
-        // width: '84%',
-        // display: 'flex',
-        // justifyContent: 'center',
-        // alignItems: 'center',
-        // marginLeft: 30,
-        // marginTop: 10,
-        width: '91.5%'
+        width: '100%'
     },
 
     signUpButtonText: {
         color: 'white',
-        // fontWeight: '700',
-        fontSize: 14,
+        // fontSize: 14,
+        fontSize: RFPercentage(1.75),
         fontFamily: 'Biryani-ExtraBold'
-    },
-
-    breakLinesContainer: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 30,
-    },
-
-    lineImage: {},
-
-    orText: {
-        color: 'white',
-        fontSize: 12,
-        fontFamily: 'Biryani-ExtraBold',
-        paddingLeft: 10,
-        paddingRight: 10
-    },
-
-    facebookButton: {
-        backgroundColor: '#147AF8',
-        paddingTop: 16,
-        // paddingRight: 130,
-        paddingBottom: 16,
-        // paddingLeft: 130,
-        borderRadius: 9,
-        width: '84%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft: 30,
-        marginTop: 30,
-    },
-
-    facebookText: {
-        color: 'white',
-        fontWeight: '700',
-        fontSize: 14,
-        fontFamily: 'Biryani-ExtraBold'
-    },
-
-    alreadyHaveAccountText: {
-        color: 'white',
-        fontSize: 10,
-        fontFamily: 'Biryani-Light',
-        marginLeft: 30,
-        marginTop: 17,
-        textAlign: 'center'
-    },
+    }
 
 });
 

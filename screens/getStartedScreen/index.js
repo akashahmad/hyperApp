@@ -1,5 +1,6 @@
 import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput} from 'react-native';
 import React, {useState, useEffect, useContext} from 'react';
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import LinearGradient from 'react-native-linear-gradient';
 import {GlobalContext} from '../../context/GlobalState';
 import {validateEmail} from '../../utils/functions'
@@ -71,103 +72,113 @@ const getStartedScreen = (props) => {
     return (
         <View style={ styles.fullScreenView }>
             <StatusBar backgroundColor="black" barStyle="light-content"/>
-            <TouchableOpacity onPress={() => setShow("")}>
-                <Image source={ BackTwo } style={ styles.backImage }/>
-            </TouchableOpacity>
-            <Text style={ styles.getStartedText }>
-                LET'S GET STARTED
-            </Text>
-            <Text style={ styles.subtitleText }>
-                Enter your email and create a password below
-            </Text>
-            <TextInput
-                style={ styles.inputFieldEmail }
-                placeholder='Email address'
-                autoFocus
-                value={email ? email : ""}
-                onChangeText={value => {
-                    setEmailValidator(false);
-                    setEmail(value.replace(/\s/g, ''))
-                }}
-            >
-            </TextInput>
-            {
-                emailValidator &&
-                <Text
-                    style={{color: "red"}}>{emailValidator && email ? "Email is invalid" : "Email field is required"}</Text>
-            }
-             {
-                emailAvailable &&
-                <Text
-                    style={{color: "red"}}>{"Email already exists"}</Text>
-            }
-            <TextInput
-                style={ styles.inputFieldPassword }
-                placeholder='Password'
-                value={password ? password : ""}
-                onChangeText={value => {
-                    setPasswordValidator(false);
-                    setPassword(value)
-                }}
-                secureTextEntry={true}
-            >
-            </TextInput>
-            {
-                passwordValidator &&
-                <Text
-                    style={{color: "red"}}>{password ? "Password length should be 8 characters" : "This field is required"}</Text>
-            }
-            <TouchableOpacity style={ styles.signUpButton } onPress={() => showNext()}>
-            <LinearGradient 
-                colors={['#55CBFF', '#63FFCF']} 
-                style={ styles.gradient }
-                start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-            >
-                <Text style={ styles.signUpButtonText }>NEXT</Text>
-            </LinearGradient>
-            </TouchableOpacity>
-            <View style={ styles.breakLinesContainer }>
-                <Image source={ Line } style={ styles.lineImage }></Image>
-                <Text style={ styles.orText }>OR</Text>
-                <Image source={ Line } style={ styles.lineImage }></Image>
-            </View>
-            <TouchableOpacity style={ styles.facebookButton }
-                              onPress={() => {
-                                  setLoader(true);
-                                  setMainScreen("signup");
-                                  setMessage('Signing in...');
-                                  onFacebookButtonPress()
-                                      .then(() => {
-                                          console.log('Signed in with Facebook!')
-                                          setShow("signUpSuccess")
-                                          setLoader(false);
-                                          setMessage(null);
-                                      })
-                                      .catch(error => {
-                                          setLoader(false);
-                                          setMessage(null);
-                                          showMessage({
-                                              message: error,
-                                              type: "danger",
-                                              backgroundColor: "red",
-                                              color: "white",
-                                              icon: "danger",
-                                          });
-                                      })
-                              }}
-            >
-                <View style={ styles.fbLogofbTextContainer }>
-                    <Image source={ FBLogo } style={ styles.fbLogo }></Image>
-                    <Text style={ styles.facebookText }>{message === 'Signing in...' ? "Signing in..." : "CONTINUE AS FACEBOOK"}</Text>
+            <View style={ styles.viewContainer }>
+                <View style={ styles.backButtonContainer }>
+                    <TouchableOpacity onPress={() => setShow("")}>
+                        <Image source={ BackTwo } style={ styles.backImage }/>
+                    </TouchableOpacity>
                 </View>
-            </TouchableOpacity>
-            <View style={ styles.logInOptionContainer }>
-                <Text style={ styles.alreadyHaveAccountText }>
-                    Already have an account? &nbsp;
-                        <Text style={ styles.logInOption }>
-                            Log In
-                        </Text>
-                </Text>
+                <View style={ styles.getStartedContainer }>
+                    <Text style={ styles.getStartedText }>
+                        LET'S GET STARTED
+                    </Text>
+                    <Text style={ styles.subtitleText }>
+                        Enter your email and create a password below
+                    </Text>  
+                </View>
+                <View style={ styles.inputFieldsContainer }>
+                    <TextInput
+                        style={ styles.inputFieldEmail }
+                        placeholder='Email address'
+                        autoFocus
+                        value={email ? email : ""}
+                        onChangeText={value => {
+                            setEmailValidator(false);
+                            setEmail(value.replace(/\s/g, ''))
+                        }}
+                    >
+                    </TextInput>
+                    {
+                        emailValidator &&
+                        <Text
+                            style={{color: "red"}}>{emailValidator && email ? "Email is invalid" : "Email field is required"}</Text>
+                    }
+                    {
+                        emailAvailable &&
+                        <Text
+                            style={{color: "red"}}>{"Email already exists"}</Text>
+                    }
+                    <TextInput
+                        style={ styles.inputFieldPassword }
+                        placeholder='Password'
+                        value={password ? password : ""}
+                        onChangeText={value => {
+                            setPasswordValidator(false);
+                            setPassword(value)
+                        }}
+                        secureTextEntry={true}
+                    >
+                    </TextInput>
+                    {
+                        passwordValidator &&
+                        <Text
+                            style={{color: "red"}}>{password ? "Password length should be 8 characters" : "This field is required"}</Text>
+                    }
+                    <TouchableOpacity style={ styles.signUpButton } onPress={() => showNext()}>
+                    <LinearGradient 
+                        colors={['#55CBFF', '#63FFCF']} 
+                        style={ styles.gradient }
+                        start={{x: 0, y: 0}} end={{x: 1, y: 0}}
+                    >
+                        <Text style={ styles.signUpButtonText }>NEXT</Text>
+                    </LinearGradient>
+                    </TouchableOpacity>
+                </View>
+                <View style={ styles.breakLinesContainer }>
+                    <Image source={ Line } style={ styles.lineImage }></Image>
+                    <Text style={ styles.orText }>OR</Text>
+                    <Image source={ Line } style={ styles.lineImage }></Image>
+                </View>
+                <View style={ styles.facebookButtonContainer }>
+                    <TouchableOpacity style={ styles.facebookButton }
+                                    onPress={() => {
+                                        setLoader(true);
+                                        setMainScreen("signup");
+                                        setMessage('Signing in...');
+                                        onFacebookButtonPress()
+                                            .then(() => {
+                                                console.log('Signed in with Facebook!')
+                                                setShow("signUpSuccess")
+                                                setLoader(false);
+                                                setMessage(null);
+                                            })
+                                            .catch(error => {
+                                                setLoader(false);
+                                                setMessage(null);
+                                                showMessage({
+                                                    message: error,
+                                                    type: "danger",
+                                                    backgroundColor: "red",
+                                                    color: "white",
+                                                    icon: "danger",
+                                                });
+                                            })
+                                    }}
+                    >
+                        <View style={ styles.fbLogofbTextContainer }>
+                            <Image source={ FBLogo } style={ styles.fbLogo }></Image>
+                            <Text style={ styles.facebookText }>{message === 'Signing in...' ? "Signing in..." : "CONTINUE AS FACEBOOK"}</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>              
+                <View style={ styles.logInOptionContainer }>
+                    <Text style={ styles.alreadyHaveAccountText }>
+                        Already have an account? &nbsp;
+                            <Text style={ styles.logInOption }>
+                                Log In
+                            </Text>
+                    </Text>
+                </View>
             </View>
         </View>
     )
@@ -178,56 +189,67 @@ const styles = StyleSheet.create({
     fullScreenView: {
         flex: 1,
         backgroundColor: 'black',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
+    viewContainer: {
+        width: '90%',
+        height: '90%'
+    },
+
+    backButtonContainer: {
+        marginTop: '5%'
     },
 
     backImage: {
-        width: 17,
-        height: 17,
-        marginTop: 60,
-        marginLeft: 28,
+        width: 16,
+        height: 16,
         resizeMode: 'contain'
+    },
+
+    getStartedContainer: {
+        marginTop: '5%'
     },
 
     getStartedText: {
         color: 'white',
-        // fontWeight: '800',
-        fontSize: 25,
-        marginTop: 20,
-        marginLeft: 30,
+        // fontSize: 25,
+        fontSize: RFPercentage(3),
         fontFamily: 'Biryani-Black'
     },
 
     subtitleText: {
         color: 'white',
-        fontWeight: '300',
-        fontSize: 12,
-        marginTop: -3,
-        marginLeft: 30,
+        fontSize: RFPercentage(1.5),
+        // fontSize: 12,
         fontFamily: 'Biryani-ExtraLight',
     },
 
+    inputFieldsContainer: {
+        marginTop: '5%'
+    },
+
     inputFieldEmail: {
-        width: '84%',
         backgroundColor: 'white',
         borderRadius: 9,
         padding: 14,
-        marginLeft: 30,
-        marginTop: 50,
-        fontFamily: 'Biryani-Regular'
+        fontFamily: 'Biryani-Regular',
+        fontSize: RFPercentage(1.75)
     },
 
     inputFieldPassword: {
-        width: '84%',
+        marginTop: 8,
         backgroundColor: 'white',
         borderRadius: 9,
         padding: 14,
-        marginLeft: 30,
-        marginTop: 10,
-        fontFamily: 'Biryani-Regular'
+        fontFamily: 'Biryani-Regular',
+        fontSize: RFPercentage(1.75)
     },
 
     signUpButton: {
-        width: '91.5%',
+        width: '100%',
     },
 
     gradient: {
@@ -235,29 +257,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 8,
-        paddingTop: 15,
-        paddingBottom: 15,
-        marginLeft: 30,
-        marginTop: 10
+        paddingTop: 14,
+        paddingBottom: 14,
+        marginTop: 8
     },
-
-    // signUpButton: {
-    //     backgroundColor: '#63FFCF',
-    //     paddingTop: 16,
-    //     paddingBottom: 16,
-    //     borderRadius: 9,
-    //     width: '84%',
-    //     display: 'flex',
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //     marginLeft: 30,
-    //     marginTop: 10,
-    // },
 
     signUpButtonText: {
         color: 'white',
-        // fontWeight: '700',
-        fontSize: 14,
+        // fontSize: 14,
+        fontSize: RFPercentage(1.75),
         fontFamily: 'Biryani-ExtraBold'
     },
 
@@ -269,34 +277,29 @@ const styles = StyleSheet.create({
         marginTop: 15,
     },
 
-    // lineImage: {},
-
     lineImage: {
-        width: '37%',
+        width: '45%',
         opacity: 0.2 
     },
 
     orText: {
         color: 'white',
-        fontSize: 10,
+        fontSize: RFPercentage(1.35),
         fontFamily: 'Biryani-SemiBold',
         paddingLeft: 10,
         paddingRight: 10
     },
 
+    facebookButtonContainer: {
+        marginTop: 15,
+    },
+
     facebookButton: {
         backgroundColor: '#147AF8',
-        paddingTop: 5,
-        // paddingRight: 130,
-        paddingBottom: 5,
-        // paddingLeft: 130,
-        borderRadius: 9,
-        width: '84%',
-        // display: 'flex',
-        // justifyContent: 'center',
-        // alignItems: 'center',
-        marginLeft: 30,
-        marginTop: 15,
+        paddingTop: 3,
+        paddingBottom: 3,
+        borderRadius: 8,
+        width: '100%',   
     },
 
     fbLogofbTextContainer: {
@@ -316,38 +319,29 @@ const styles = StyleSheet.create({
     facebookText: {
         color: 'white',
         fontWeight: '700',
-        fontSize: 12,
+        // fontSize: 12,
+        fontSize: RFPercentage(1.5),
         fontFamily: 'Biryani-ExtraBold'
     },
 
     logInOptionContainer: {
-        // display: 'flex',
-        // justifyContent: 'center',
-        // alignItems: 'center',
         position: 'absolute',
-        bottom: 40,
+        bottom: 0,
         width: '100%'
     },
 
     alreadyHaveAccountText: {
         color: 'white',
-        fontSize: 10,
+        // fontSize: 10,
+        fontSize: RFPercentage(1.35),
         fontFamily: 'Biryani-Regular',
-        // marginLeft: 30,
-        // marginTop: 17,
         textAlign: 'center',
-        // position: 'absolute',
-        // bottom: 40,
-        // display: 'flex',
-        // justifyContent: 'center',
-        // alignItems: 'center'
     },
 
     logInOption: {
-        color: '#B7FFFD',
-        // color: '#63FFC3',
-        // opacity: 0.5,
-        fontSize: 10,
+        color: '#6fffec',
+        // fontSize: 10,
+        fontSize: RFPercentage(1.35),
         fontFamily: 'Biryani-Regular'
     }
 

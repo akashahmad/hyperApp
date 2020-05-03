@@ -1,5 +1,6 @@
 import { View, Picker, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput, MenuOption } from 'react-native';
 import React, { useState } from 'react';
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import LinearGradient from 'react-native-linear-gradient';
 import BackTwo from '../../assets/images/back-two.png';
 import FlashMessage from "react-native-flash-message";
@@ -30,9 +31,11 @@ const OnboardingTwoScreen = (props) => {
         <View style={styles.fullScreenView}>
             <StatusBar backgroundColor="black" barStyle="light-content" />
             <View style={styles.viewContainer}>
-                <TouchableOpacity onPress={() => setShow("onBoardingOne")}>
-                    <Image source={BackTwo} style={styles.backImage} />
-                </TouchableOpacity>
+                <View style={ styles.backButtonContainer }>
+                    <TouchableOpacity onPress={() => setShow("onBoardingOne")}>
+                        <Image source={BackTwo} style={styles.backImage} />
+                    </TouchableOpacity>
+                </View>
                 <View style={styles.inputTextSection}>
                     <Text style={styles.inputTextTitle}>
                         To get started, we need to calculate your maximum heart rate using your age and gender.
@@ -83,6 +86,7 @@ const OnboardingTwoScreen = (props) => {
                         <Picker.Item value="male" label="Male" />
                         <Picker.Item value="female" label="Female" />
                     </Picker>
+                    
                     {
                         genderValidator &&
                         <Text
@@ -125,40 +129,48 @@ const styles = StyleSheet.create({
     },
 
     viewContainer: {
-        width: '84%',
+        width: '90%',
         height: '90%'
     },
 
+    backButtonContainer: {
+        marginTop: '5%'
+    },
+
     backImage: {
-        width: 17,
-        height: 17,
-        resizeMode: 'contain',
-        marginTop: 20
+        width: 16,
+        height: 16,
+        resizeMode: 'contain'
     },
 
     inputTextSection: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 40
+        // marginTop: 40
     },
 
     inputTextTitle: {
         color: 'white',
-        fontSize: 12,
+        // fontSize: 12,
+        fontSize: RFPercentage(1.5),
         fontFamily: 'Biryani-Bold',
-        textAlign: 'center'
+        textAlign: 'center',
+        marginTop: '10%',
+        width: '95%'
     },
 
     inputSection: {
-        marginTop: 20
+        // marginTop: 20,
+        marginTop: '5%',
     },
 
     inputFieldBirthday: {
         backgroundColor: 'white',
         borderRadius: 9,
         padding: 14,
-        fontFamily: 'Biryani-Regular'
+        fontFamily: 'Biryani-Regular',
+        fontSize: RFPercentage(1.75)
     },
 
     inputFieldGender: {
@@ -170,7 +182,7 @@ const styles = StyleSheet.create({
     },
 
     circlePlusButtonSection: {
-        marginTop: 20,
+        marginTop: '5%',
         width: '100%'
     },
 
@@ -222,8 +234,9 @@ const styles = StyleSheet.create({
 
     signUpButtonText: {
         color: 'white',
-        fontSize: 14,
-        fontFamily: 'Biryani-ExtraBold'
+        // fontSize: 14,
+        fontFamily: 'Biryani-ExtraBold',
+        fontSize: RFPercentage(1.75),
     },
     whenDateInput: {
         paddingLeft: 20,

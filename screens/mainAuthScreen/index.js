@@ -1,6 +1,6 @@
 import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar} from 'react-native';
 import React, {useState, useEffect} from 'react';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import LinearGradient from 'react-native-linear-gradient';
 import Logo from '../../assets/images/hyper-logo-one.png';
 import LogoTwo from '../../assets/images/hyper-am-logo-rn-test.png';
@@ -21,26 +21,18 @@ const mainAuthScreen = (props) => {
                         style={ styles.gradient }
                         start={{x: 0, y: 0}} end={{x: 1, y: 0}}
                     >
-                        <Text style={ [newStyles.signUpButtonText, styles.signUpButtonText]  }>SIGN UP</Text>
+                        <Text style={ styles.signUpButtonText }>SIGN UP</Text>
                     </LinearGradient>
                     </TouchableOpacity>
+                    <TouchableOpacity style={ styles.loginButton } onPress={() => setShow("login")}>
+                        <Text style={ styles.loginButtonText }>LOG IN</Text>
+                    </TouchableOpacity>
                 </View>
-                {/* <Image source={ LogoTwo } style={ styles.logoImageTwo }/>
-                <TouchableOpacity style={ styles.signUpButton } onPress={() => setShow("signup")}>
-                <LinearGradient 
-                    colors={['#55CBFF', '#63FFCF']} 
-                    style={ styles.gradient }
-                    start={{x: 0, y: 0}} end={{x: 1, y: 0}}
-                >
-                    <Text style={ styles.signUpButtonText }>SIGN UP</Text>
-                </LinearGradient>
-                </TouchableOpacity>
-                <TouchableOpacity style={ styles.loginButton } onPress={() => setShow("login")}>
-                    <Text style={ styles.loginButtonText }>LOG IN</Text>
-                </TouchableOpacity>
-                <Text style={ styles.legalText }>
-                    By continuing, you agree to Hyper’s Terms of Service and Privacy Policy.
-                </Text>  */}
+                <View style={ styles.legalTextContainer }>
+                    <Text style={ styles.legalText }>
+                        By continuing, you agree to Hyper’s Terms of Service and Privacy Policy.
+                    </Text> 
+                </View>
             </View>
         </View>
     )
@@ -58,8 +50,7 @@ const styles = StyleSheet.create({
 
     viewContainer: {
         width: '90%',
-        height: '90%',
-        backgroundColor: 'blue'
+        height: '90%'
     },
 
     logoImageContainer: {
@@ -72,13 +63,14 @@ const styles = StyleSheet.create({
         width: '85%',
         // height: 60,
         height: '25%',
-        marginTop: '20%'
+        marginTop: '25%'
     },
 
     buttonsContainer: {
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: 120
     },
 
     signUpButton: {
@@ -90,36 +82,23 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 8,
-        paddingTop: '4%',
-        paddingBottom: '4%'
+        paddingTop: 14,
+        paddingBottom: 14
     },
 
     signUpButtonText: {
-        // color: 'white',
         // fontSize: 14,
-        // fontSize: '87%',
-        fontFamily: 'Biryani-ExtraBold'
+        fontFamily: 'Biryani-ExtraBold',
+        fontSize: RFPercentage(1.75),
+        color: 'white'
     },
-
-    // signUpButton: {
-    //     backgroundColor: '#63FFCF',
-    //     paddingTop: 20,
-    //     paddingBottom: 20,
-    //     borderRadius: 8,
-    //     width: '84%',
-    //     display: 'flex',
-    //     justifyContent: 'center',
-    //     alignItems: 'center'
-    // },
 
     loginButton: {
         backgroundColor: 'white',
-        paddingTop: 15,
-        // paddingRight: 130,
-        paddingBottom: 15,
-        // paddingLeft: 130,
+        paddingTop: 14,
+        paddingBottom: 14,
         borderRadius: 8,
-        width: '84%',
+        width: '100%',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -128,36 +107,26 @@ const styles = StyleSheet.create({
 
     loginButtonText: {
         color: 'black',
-        // fontWeight: '700',
-        fontSize: 14,
+        // fontSize: 14,
+        fontSize: RFPercentage(1.75),
         fontFamily: 'Biryani-ExtraBold'
+    },
+
+    legalTextContainer: {
+        position: 'absolute',
+        bottom: 0,
+        width: '100%'
     },
 
     legalText: {
         color: '#FFFFFF',
-        // fontWeight: '500',
-        fontSize: 10,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
+        // fontSize: 10,
         textAlign: 'center',
-        // bottom: 0,
-        width: '84%',
         lineHeight: 20,
-        position: 'absolute',
-        bottom: 40,
-        fontFamily: 'Biryani-Bold'
+        fontFamily: 'Biryani-Bold',
+        fontSize: RFPercentage(1.35)
     }
 
 });
-
-const newStyles = EStyleSheet.create({
-    signUpButtonText: {
-        
-        fontSize: '7rem',
-        color: 'green'
-        
-    },
-})
 
 export default mainAuthScreen;
