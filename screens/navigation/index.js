@@ -29,7 +29,7 @@ const AppStack = createStackNavigator({
     Home: {
         screen: MainDashboard,
         navigationOptions: ({navigation}) => ({
-            // header: () => <FirstHeader navigation={navigation}/>,
+            header: null,
             headerTitle: " "
         })
     },
@@ -37,6 +37,7 @@ const AppStack = createStackNavigator({
     EditProfile: {
         screen: EditProfile,
         navigationOptions: ({navigation}) => ({
+            header: null,
             headerTitle: " "
         })
     },
@@ -44,6 +45,7 @@ const AppStack = createStackNavigator({
     LeaderBoard: {
         screen: LeaderBoard,
         navigationOptions: ({navigation}) => ({
+            header: null,
             header: () => <SecondHeader navigation={navigation}/>,
             headerTitle: " "
         })
@@ -52,6 +54,7 @@ const AppStack = createStackNavigator({
     LeaderBoardSearch: {
         screen: LeaderBoardSearch,
         navigationOptions: ({navigation}) => ({
+            header: null,
             headerTitle: " "
         })
     },
@@ -59,6 +62,7 @@ const AppStack = createStackNavigator({
     LiveStats: {
         screen: LiveStats,
         navigationOptions: ({navigation}) => ({
+            header: null,
             headerTitle: " "
         })
     },
@@ -66,6 +70,7 @@ const AppStack = createStackNavigator({
     WorkOutSummary: {
         screen: WorkOutSummary,
         navigationOptions: ({navigation}) => ({
+            header: null,
             headerTitle: " "
         })
     },

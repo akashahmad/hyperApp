@@ -10,13 +10,16 @@ import AuthHandler from '../authHandler'
 {/* Need to put header up here with Save and Cancel buttons and move edit profile text to header, bc Save button 
 currently gets cut off by keyboard. So remove save button and have save and cancel buttons in header like ttyl App */}
 
-const EditProfile: () => React$Node = () => {
+const EditProfile= (props) => {
+    const {navigation} = props;
     return (
 
         <View style={ styles.fullScreenView }>
             <StatusBar backgroundColor="black" barStyle="light-content"/>
             <View style={ styles.viewContainer }>
-                <Image source={ BackTwo } style={ styles.backImage }/>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <Image source={ BackTwo } style={ styles.backImage }/>
+                </TouchableOpacity>
                 <View style={ styles.liveStatsTitleSection }>
                     <Text style={ styles.liveStatsText }>
                         EDIT PROFILE

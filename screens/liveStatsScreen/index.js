@@ -11,12 +11,15 @@ import GradientMuscle from '../../assets/images/gradient-muscle.png';
 // import {GlobalProvider} from '../../context/GlobalState';
 // import AuthHandler from '../authHandler'
 
-const LiveStatsScreen: () => React$Node = () => {
+const LiveStatsScreen = (props) => {
+    const {navigation} = props;
     return (
         <View style={ styles.fullScreenView }>
             <StatusBar backgroundColor="black" barStyle="light-content"/>
             <View style={ styles.viewContainer }>
-                <Image source={ BackTwo } style={ styles.backImage }/>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <Image source={ BackTwo } style={ styles.backImage }/>
+                </TouchableOpacity>
                 <View style={ styles.liveStatsTitleSection }>
                     <Text style={ styles.liveStatsText }>
                         LIVE STATS

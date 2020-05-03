@@ -8,12 +8,15 @@ import ProfileAvatar from '../../assets/images/profile-avatar.png';
 // import {GlobalProvider} from '../../context/GlobalState';
 // import AuthHandler from '../authHandler'
 
-const LeaderboardSearchPopUp: () => React$Node = () => {
+const LeaderboardSearchPopUp= (props) => {
+    const {navigation} = props;
     return (
         <View style={ styles.fullScreenView }>
             <StatusBar backgroundColor="black" barStyle="light-content"/>
             <View style={ styles.viewContainer }>
-                <Image source={ Close } style={ styles.closeImage }/>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <Image source={ Close } style={ styles.closeImage }/>
+                </TouchableOpacity>
                 <View style={ styles.liveStatsTitleSection }>
                     <Text style={ styles.liveStatsText }>
                         SEARCH USER
@@ -24,7 +27,7 @@ const LeaderboardSearchPopUp: () => React$Node = () => {
                 </View>
                 <View style={ styles.textInputFieldContainer }>
                     <Image source={ Search } style={ styles.searchImage }/>
-                    <TextInput 
+                    <TextInput
                         style={ styles.inputFieldBirthday }
                         placeholder='Search'
                     >
@@ -35,31 +38,31 @@ const LeaderboardSearchPopUp: () => React$Node = () => {
                     <Text style={ styles.userNameText }>
                         DANNY M.
                     </Text>
-                </View> 
+                </View>
                 <View style={ styles.leaderboardRowInfoHigher }>
                     <Image source={ ProfileAvatar } style={ styles.avatarImage }/>
                     <Text style={ styles.userNameText }>
                         DANNY M.
                     </Text>
-                </View> 
+                </View>
                 <View style={ styles.leaderboardRowInfoHigher }>
                     <Image source={ ProfileAvatar } style={ styles.avatarImage }/>
                     <Text style={ styles.userNameText }>
                         DANNY M.
                     </Text>
-                </View> 
+                </View>
                 <View style={ styles.leaderboardRowInfoHigher }>
                     <Image source={ ProfileAvatar } style={ styles.avatarImage }/>
                     <Text style={ styles.userNameText }>
                         DANNY M.
                     </Text>
-                </View> 
+                </View>
                 <View style={ styles.leaderboardRowInfoHigher }>
                     <Image source={ ProfileAvatar } style={ styles.avatarImage }/>
                     <Text style={ styles.userNameText }>
                         DANNY M.
                     </Text>
-                </View>     
+                </View>
             </View>
         </View>
     );
