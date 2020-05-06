@@ -46,6 +46,10 @@ const App = () => {
                 return <AddNameScreen
                     setShow={setShow}
                     email={email}
+                    firstName={firstName}
+                    setFirstName={setFirstName}
+                    lastName={lastName}
+                    setLastName={setLastName}
                     setEmail={setEmail}
                     setPassword={setPassword}
                     password={password}

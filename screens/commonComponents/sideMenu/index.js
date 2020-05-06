@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
-import { GlobalContext } from '../../../context/GlobalState';
-import { ScrollView, Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import React, {useContext} from "react";
+import {GlobalContext} from '../../../context/GlobalState';
+import {ScrollView, Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import MenuLogo from '../../../assets/images/menu-logo.png';
 import Muscle from '../../../assets/images/muscle-two.png';
@@ -11,66 +11,66 @@ import Bluetooth from '../../../assets/images/bluetooth.png';
 import Edit from '../../../assets/images/edit.png';
 import Logout from '../../../assets/images/logout.png';
 import auth from '@react-native-firebase/auth';
-export default ({ navigation }) => {
-    const { setUser, setId, setLoggedIn, user } = useContext(GlobalContext);
-    //console.log(user)
+export default({navigation}) => {
+    const {setUser, setId, setLoggedIn,user} = useContext(GlobalContext);
+//console.log(user)
     const signOut = () => {
         auth().signOut();
         setUser(null);
         setId(null);
         setLoggedIn(false);
     };
-    let Name = user.firstName + ' ' + user.lastName
+    let Name=user.firstName+' '+user.lastName
     return (
-        <View style={styles.fullScreenView}>
-            <View style={styles.viewContainer}>
-                <View style={styles.headerSection}>
-                    <Image source={{ uri: user.photoURL }} style={styles.avatarImage} style={{ width: 70, height: 70, borderRadius: 70 / 2 }} />
-                    <View style={styles.namePlusIntensityContainer}>
-                        <Text style={styles.nameText}>
-                            {Name}
+        <View style={ styles.fullScreenView }>
+            <View style={ styles.viewContainer }>
+                <View style={ styles.headerSection }>
+                    <Image source={ MenuLogo }  style={ styles.menuLogo }/>
+                    <View style={ styles.namePlusIntensityContainer }>
+                        <Text style={ styles.nameText }>
+                           {Name}
                         </Text>
-                        <View style={styles.intensityContainer}>
-                            <Image source={Muscle} style={styles.muscleImage} />
-                            <Text style={styles.intensityText}>
+                        <View style={ styles.intensityContainer }>
+                            <Image source={ Muscle }  style={ styles.muscleImage }/>
+                            <Text style={ styles.intensityText }>
                                 524
                             </Text>
                         </View>
                     </View>
                 </View>
-                <TouchableOpacity onPress={() => navigation.navigate('LeaderBoard')} style={styles.menuItemSection}>
-                    <Image source={Leaderboard} style={styles.menuImage} />
-                    <Text style={styles.menuText}>
+                <TouchableOpacity onPress={()=>navigation.navigate('LeaderBoard')} style={ styles.menuItemSection }>
+                    <Image source={ Leaderboard }  style={ styles.menuImage }/>
+                    <Text style={ styles.menuText }>
                         LEADERBOARD
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('WorkoutHistory')} style={styles.menuItemSection}>
-                    <Image source={Dumbell} style={styles.menuImageTwo} />
-                    <Text style={styles.menuTextTwo}>
+                <TouchableOpacity onPress={()=>navigation.navigate('WorkoutHistory')} style={ styles.menuItemSection }>
+                    <Image source={ Dumbell }  style={ styles.menuImageTwo }/>
+                    <Text style={ styles.menuTextTwo }>
                         WORKOUT HISTORY
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('HRGuide')} style={styles.menuItemSection}>
-                    <Image source={Guide} style={styles.menuImageThree} />
-                    <Text style={styles.menuTextThree}>
+                <TouchableOpacity onPress={()=>navigation.navigate('HRGuide')} style={ styles.menuItemSection }>
+                    <Image source={ Guide }  style={ styles.menuImageThree }/>
+                    <Text style={ styles.menuTextThree }>
                         HEART RATE GUIDE
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('PairShirt')} style={styles.menuItemSection}>
-                    <Image source={Bluetooth} style={styles.menuImageFour} />
-                    <Text style={styles.menuTextFour}>
+                <TouchableOpacity onPress={()=>navigation.navigate('PairShirt')} style={ styles.menuItemSection }>
+                    <Image source={ Bluetooth }  style={ styles.menuImageFour }/>
+                    <Text style={ styles.menuTextFour }>
                         PAIR SHIRT
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('EditProfile')} style={styles.menuItemSection}>
-                    <Image source={Edit} style={styles.menuImageFive} />
-                    <Text style={styles.menuTextFive}>
+                <TouchableOpacity onPress={()=>navigation.navigate('EditProfile')} style={ styles.menuItemSection }>
+                    <Image source={ Edit }  style={ styles.menuImageFive }/>
+                    <Text style={ styles.menuTextFive }>
                         EDIT PROFILE
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => signOut()} style={styles.menuItemSection}>
-                    <Image source={Logout} style={styles.menuImageSix} />
-                    <Text style={styles.menuTextSix}>
+                <TouchableOpacity onPress={() =>signOut()} style={ styles.menuItemSection }>
+                    <Image source={ Logout }  style={ styles.menuImageSix }/>
+                    <Text style={ styles.menuTextSix }>
                         LOGOUT
                     </Text>
                 </TouchableOpacity>

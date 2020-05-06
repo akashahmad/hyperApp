@@ -27,6 +27,9 @@ const EditProfile = (props) => {
     const [location, setLocation] = useState(user.location)
     const [saveLoader, setSaveLoader] = useState('')
     const [passwordValidator, setPasswordValidator] = useState(false);
+    const [emailValidator, setEmailValidator] = useState(false);
+    
+    const [errorMessage, setErrorMessage] = useState(false);
     const options = {
         title: 'Select Avatar',
         storageOptions: {
@@ -74,64 +77,69 @@ const EditProfile = (props) => {
     const update = async () => {
         console.log(location)
         setSaveLoader('SAVING...')
-        if (password) {
-            if (password.length < 8) {
-                setSaveLoader('')
-                setPasswordValidator(true)
-            }
-            else {
-                var users = auth().currentUser;
-                users.updatePassword(password).then(function () {
-                    console.log("password updated")
-                }).catch(function (error) {
-                    console.log(error)
-                });
-                users.updateEmail(email).then(function () {
-                    console.log("updated")
-                }).catch(function (error) {
-                    console.log(error)
-                });
+        // if (password) {
+        //     if (password.length < 8) {
+        //         setSaveLoader('')
+        //         setPasswordValidator(true)
+        //     }
+        //     else {
+        //         var users = auth().currentUser;
+        //         users.updatePassword(password).then(function () {
+        //             console.log("password updated")
+        //         }).catch(function (error) {
+        //             console.log(error)
+        //         });
+        //         users.updateEmail(email).then(function () {
+        //             console.log("updated")
+        //         }).catch(function (error) {
+        //             console.log(error)
+        //         });
 
-                firestore()
-                    .collection('users')
-                    .doc(user.uid)
-                    .update({
-                        firstName: firstName,
-                        lastName: lastName,
-                        email: email,
-                        location:location
-                    })
-                    .then(() => {
+        //         firestore()
+        //             .collection('users')
+        //             .doc(user.uid)
+        //             .update({
+        //                 firstName: firstName,
+        //                 lastName: lastName,
+        //                 email: email,
+        //                 location:location
+        //             })
+        //             .then(() => {
 
-                        navigation.goBack()
-                        console.log('User updated!');
-                    });
-            }
-            console.log("password")
-        }
-        else {
+        //                 navigation.goBack()
+        //                 console.log('User updated!');
+        //             });
+        //     }
+        //     console.log("password")
+        // }
+        // else {}
+        
             var users = auth().currentUser;
-            users.updateEmail(email).then(function () {
-                console.log("updated")
-            }).catch(function (error) {
-                console.log(error)
-            });
-
-            firestore()
+            users.updateEmail(email).then(res=> {
+                firestore()
                 .collection('users')
                 .doc(user.uid)
                 .update({
                     firstName: firstName,
                     lastName: lastName,
-                    email: email
+                    email: email,
+                    location:location
                 })
                 .then(() => {
 
                     navigation.goBack()
                     console.log('User updated!');
-                });
-        }
+                }); 
+        
+            }).catch(function (error) {
+                console.log(error)
+                setSaveLoader('')
+                setEmailValidator(true)
+                setErrorMessage("email already exists or login again")
+            });
 
+           
+            
     }
     const { navigation } = props;
     return (
@@ -156,7 +164,7 @@ const EditProfile = (props) => {
 
                 <TouchableOpacity onPress={() => updateProfilePic()}>
                     <View style={styles.profileAvatarSection}>
-                        <Image source={{ uri: user.photoURL }} style={styles.avatarImage} style={{ width: 70, height: 70, borderRadius: 70 / 2 }} />
+                        <Image source={{ uri: user.photoURL?user.photoURL:avatarImage }} style={styles.avatarImage} style={{ width: 70, height: 70, borderRadius: 70 / 2 }} />
                         <Text style={styles.changeProfileText}>
                             Change Profile Photo
                     </Text>
@@ -212,6 +220,11 @@ const EditProfile = (props) => {
                             }}
                         >
                         </TextInput>
+                        {
+                        emailValidator &&
+                        <Text
+                            style={{color: "red"}}>{errorMessage}</Text>
+                    }
                     </View>
                     {/* <View style={styles.nameFieldContainer}>
                         <Text style={styles.nameTitle}>

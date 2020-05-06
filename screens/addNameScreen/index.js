@@ -10,10 +10,8 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 
 const addNameScreen = (props) => {
-    let {setShow, email, setEmail, password, setPassword} = props;
+    let {setShow, email, setEmail, password, setPassword,firstName,setFirstName,lastName,setLastName} = props;
     const {setMainScreen, setLoader} = useContext(GlobalContext);
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
     const [firstNameValidator, setFirstNameValidator] = useState(false);
     const signupHandler = () => {
 
