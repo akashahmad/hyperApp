@@ -38,6 +38,7 @@ const OnboardingThreeScreen = (props) => {
                 email,
                 photoURL: "",
                 uid: uid,
+                location:"",
                 gender,
                 DOB: dob
             };

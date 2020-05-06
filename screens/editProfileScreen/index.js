@@ -1,92 +1,264 @@
-import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput} from 'react-native';
-import React, {useState} from 'react';
+import ImagePicker from 'react-native-image-picker';
+import ImageResizer from 'react-native-image-resizer';
+import { View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput } from 'react-native';
+import React, { useState, useContext } from 'react';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import LinearGradient from 'react-native-linear-gradient';
 import BackTwo from '../../assets/images/back-two.png';
 import ProfileAvatar from '../../assets/images/profile-avatar.png';
-import FlashMessage  from "react-native-flash-message";
-import {GlobalProvider} from '../../context/GlobalState';
+import FlashMessage from "react-native-flash-message";
+import { GlobalProvider } from '../../context/GlobalState';
 import AuthHandler from '../authHandler'
+import storage from '@react-native-firebase/storage';
 
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import { GlobalContext } from '../../context/GlobalState';
 {/* Need to put header up here with Save and Cancel buttons and move edit profile text to header, bc Save button 
 currently gets cut off by keyboard. So remove save button and have save and cancel buttons in header like ttyl App */}
 
-const EditProfile= (props) => {
-    const {navigation} = props;
+const EditProfile = (props) => {
+
+    const { setUser, setId, setLoggedIn, user } = useContext(GlobalContext);
+    const [firstName, setFirstName] = useState(user.firstName)
+    const [lastName, setLastName] = useState(user.lastName)
+    const [email, setEmail] = useState(user.email)
+    const [password, setPassword] = useState('')
+    const [location, setLocation] = useState(user.location)
+    const [saveLoader, setSaveLoader] = useState('')
+    const [passwordValidator, setPasswordValidator] = useState(false);
+    const options = {
+        title: 'Select Avatar',
+        storageOptions: {
+            skipBackup: true,
+            path: 'images',
+        },
+    };
+    console.log(user)
+    const updateProfilePic = () => {
+
+        ImagePicker.launchImageLibrary(options, (response) => {
+            if (response.didCancel) {
+                console.log('User cancelled image picker');
+            } else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+            } else if (response.customButton) {
+                console.log('User tapped custom button: ', response.customButton);
+            } else {
+                ImageResizer.createResizedImage((Platform.OS === "ios" ? response.uri : response.path), 1000, 700, 'JPEG', 50).then((res) => {
+
+                    const imageRef = storage().ref('profiles').child(user.uid);
+                    let data = imageRef.putFile(res.uri);
+                    data.on('state_changed', function (snapshot) {
+                    });
+                    return data;
+                }).then(async res => {
+
+
+                    const url = await storage().ref('profiles/' + user.uid).getDownloadURL();
+                    firestore()
+                        .collection('users')
+                        .doc(user.uid)
+                        .update({
+                            photoURL: url
+                        })
+
+                    //  firebase.database().ref("/users/" + id + "/photoURL").set(res.downloadURL);
+                }).catch((err) => {
+                    console.log("err", err);
+                });
+            }
+        });
+
+    }
+    const update = async () => {
+        console.log(location)
+        setSaveLoader('SAVING...')
+        if (password) {
+            if (password.length < 8) {
+                setSaveLoader('')
+                setPasswordValidator(true)
+            }
+            else {
+                var users = auth().currentUser;
+                users.updatePassword(password).then(function () {
+                    console.log("password updated")
+                }).catch(function (error) {
+                    console.log(error)
+                });
+                users.updateEmail(email).then(function () {
+                    console.log("updated")
+                }).catch(function (error) {
+                    console.log(error)
+                });
+
+                firestore()
+                    .collection('users')
+                    .doc(user.uid)
+                    .update({
+                        firstName: firstName,
+                        lastName: lastName,
+                        email: email,
+                        location:location
+                    })
+                    .then(() => {
+
+                        navigation.goBack()
+                        console.log('User updated!');
+                    });
+            }
+            console.log("password")
+        }
+        else {
+            var users = auth().currentUser;
+            users.updateEmail(email).then(function () {
+                console.log("updated")
+            }).catch(function (error) {
+                console.log(error)
+            });
+
+            firestore()
+                .collection('users')
+                .doc(user.uid)
+                .update({
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email
+                })
+                .then(() => {
+
+                    navigation.goBack()
+                    console.log('User updated!');
+                });
+        }
+
+    }
+    const { navigation } = props;
     return (
 
-        <View style={ styles.fullScreenView }>
-            <StatusBar backgroundColor="black" barStyle="light-content"/>
-            <View style={ styles.viewContainer }>
-                <View style={ styles.backButtonContainer }>
+        <View style={styles.fullScreenView}>
+            <StatusBar backgroundColor="black" barStyle="light-content" />
+            <View style={styles.viewContainer}>
+                <View style={styles.backButtonContainer}>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
-                        <Image source={ BackTwo } style={ styles.backImage }/>
+                        <Image source={BackTwo} style={styles.backImage} />
                     </TouchableOpacity>
-                    <Text style={ styles.editText }>
+
+                    <Text style={styles.editText}>
                         EDIT PROFILE
                     </Text>
-                    <TouchableOpacity>
-                        <Text style={ styles.saveText }>
-                            SAVE
+                    <TouchableOpacity onPress={() => update()}>
+                        <Text style={styles.saveText}>
+                            {saveLoader ? saveLoader : 'SAVE'}
                         </Text>
                     </TouchableOpacity>
                 </View>
-                <View style={ styles.profileAvatarSection }>
-                    <Image source={ ProfileAvatar } style={ styles.avatarImage }/>
-                    <Text style={ styles.changeProfileText }>
-                        Change Profile Photo
+
+                <TouchableOpacity onPress={() => updateProfilePic()}>
+                    <View style={styles.profileAvatarSection}>
+                        <Image source={{ uri: user.photoURL }} style={styles.avatarImage} style={{ width: 70, height: 70, borderRadius: 70 / 2 }} />
+                        <Text style={styles.changeProfileText}>
+                            Change Profile Photo
                     </Text>
+                    </View>
+                </TouchableOpacity>
+                <View style={styles.oLineSection}>
+                    <View style={styles.oLine}></View>
                 </View>
-                <View style={ styles.oLineSection }>
-                    <View style={ styles.oLine }></View>
-                </View>
-                <View style={ styles.fieldSection }>
-                    <View style={ styles.nameFieldContainer }>
-                        <Text style={ styles.nameTitle }>
-                            Name
+                <View style={styles.fieldSection}>
+                    <View style={styles.nameFieldContainer}>
+                        <Text style={styles.nameTitle}>
+                            First Name
                         </Text>
-                        <TextInput 
-                            style={ styles.nameInputField }
+                        <TextInput
+                            style={styles.nameInputField}
                             placeholder='Enter name'
+                            value={firstName}
+                            onChangeText={value => {
+                                setFirstName(value)
+                            }}
                         >
                         </TextInput>
                     </View>
-                    <View style={ styles.lineContainer }>
-                        <View style={ styles.oLine }></View>
+                    <View style={styles.nameFieldContainer}>
+                        <Text style={styles.nameTitle}>
+                            Last Name
+                        </Text>
+                        <TextInput
+                            style={styles.nameInputField}
+                            placeholder='Enter name'
+                            value={lastName}
+                            onChangeText={value => {
+                                setLastName(value)
+                            }}
+                        >
+                        </TextInput>
+                    </View>
+                    <View style={styles.lineContainer}>
+                        <View style={styles.oLine}></View>
                     </View>
                 </View>
-                <View style={ styles.fieldSection }>
-                    <View style={ styles.nameFieldContainer }>
-                        <Text style={ styles.nameTitle }>
+                <View style={styles.fieldSection}>
+                    <View style={styles.nameFieldContainer}>
+                        <Text style={styles.nameTitle}>
                             Email
                         </Text>
-                        <TextInput 
-                            style={ styles.nameInputField }
+                        <TextInput
+                            style={styles.nameInputField}
                             placeholder='Enter email address'
+                            value={email}
+                            onChangeText={value => {
+                                setEmail(value)
+                            }}
                         >
                         </TextInput>
                     </View>
-                    <View style={ styles.lineContainer }>
-                        <View style={ styles.oLine }></View>
+                    {/* <View style={styles.nameFieldContainer}>
+                        <Text style={styles.nameTitle}>
+                            PASSWORD
+                        </Text>
+                        <TextInput
+                            style={styles.nameInputField}
+                            placeholder='Enter Password'
+                            value={password}
+                            onChangeText={value => {
+                                setPassword(value)
+                            }}
+                            secureTextEntry={true}
+                        >
+                        </TextInput>
+                        {
+                            passwordValidator &&
+                            <Text
+                                style={{ color: "red" }}>{"Password length should be 8 characters"}</Text>
+                        }
+                    </View> */}
+                    <View style={styles.lineContainer}>
+                        <View style={styles.oLine}></View>
                     </View>
                 </View>
-                <View style={ styles.fieldSection }>
-                    <View style={ styles.nameFieldContainer }>
-                        <Text style={ styles.nameTitle }>
+                <View style={styles.fieldSection}>
+
+                    <View style={styles.nameFieldContainer}>
+                        <Text style={styles.nameTitle}>
                             Location
                         </Text>
-                        <TextInput 
-                            style={ styles.nameInputField }
+                        <TextInput
+                            style={styles.nameInputField}
                             placeholder='City, State'
+                            value={location}
+                            onChangeText={value => {
+                                setLocation(value)
+                            }}
                         >
                         </TextInput>
                     </View>
-                    <View style={ styles.lineContainer }>
-                        <View style={ styles.oLine }></View>
+                    <View style={styles.lineContainer}>
+                        <View style={styles.oLine}></View>
                     </View>
                 </View>
-                <View style={ styles.locationContainer }>
-                    <Text style={ styles.locationText }>
+                <View style={styles.locationContainer}>
+                    <Text style={styles.locationText}>
                         *Your city and state will show up on the leaderboard.
                     </Text>
                 </View>
@@ -208,7 +380,7 @@ const styles = StyleSheet.create({
     locationContainer: {
 
     },
-    
+
     locationText: {
         color: 'white',
         // fontSize: 12,

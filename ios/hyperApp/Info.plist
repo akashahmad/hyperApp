@@ -11,6 +11,8 @@
 			</array>
 		</dict>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Take a photo for us</string>
 	<key>FacebookAppID</key>
 	<string>520133751965220</string>
 	<key>FacebookDisplayName</key>
