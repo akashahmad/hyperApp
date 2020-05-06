@@ -80,7 +80,7 @@ const logInScreen = (props) => {
                 <View style={ styles.backButtonContainer }>
                     <TouchableOpacity onPress={() => setShow("")}>
                         <Image source={ BackTwo } style={ styles.backImage }/>
-                    </TouchableOpacity>
+                    </TouchableOpacity> 
                 </View>
                 <View style={ styles.loginTitleContainer }>
                     <Text style={ styles.getStartedText }>

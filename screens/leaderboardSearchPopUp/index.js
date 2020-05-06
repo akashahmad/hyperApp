@@ -33,36 +33,38 @@ const LeaderboardSearchPopUp= (props) => {
                     >
                     </TextInput>
                 </View>
-                <View style={ styles.leaderboardRowInfo }>
-                    <Image source={ ProfileAvatar } style={ styles.avatarImage }/>
-                    <Text style={ styles.userNameText }>
-                        DANNY M.
-                    </Text>
-                </View>
-                <View style={ styles.leaderboardRowInfoHigher }>
-                    <Image source={ ProfileAvatar } style={ styles.avatarImage }/>
-                    <Text style={ styles.userNameText }>
-                        DANNY M.
-                    </Text>
-                </View>
-                <View style={ styles.leaderboardRowInfoHigher }>
-                    <Image source={ ProfileAvatar } style={ styles.avatarImage }/>
-                    <Text style={ styles.userNameText }>
-                        DANNY M.
-                    </Text>
-                </View>
-                <View style={ styles.leaderboardRowInfoHigher }>
-                    <Image source={ ProfileAvatar } style={ styles.avatarImage }/>
-                    <Text style={ styles.userNameText }>
-                        DANNY M.
-                    </Text>
-                </View>
-                <View style={ styles.leaderboardRowInfoHigher }>
-                    <Image source={ ProfileAvatar } style={ styles.avatarImage }/>
-                    <Text style={ styles.userNameText }>
-                        DANNY M.
-                    </Text>
-                </View>
+                <ScrollView>
+                    <View style={ styles.leaderboardRowInfo }>
+                        <Image source={ ProfileAvatar } style={ styles.avatarImage }/>
+                        <Text style={ styles.userNameText }>
+                            DANNY M.
+                        </Text>
+                    </View>
+                    <View style={ styles.leaderboardRowInfoHigher }>
+                        <Image source={ ProfileAvatar } style={ styles.avatarImage }/>
+                        <Text style={ styles.userNameText }>
+                            DANNY M.
+                        </Text>
+                    </View>
+                    <View style={ styles.leaderboardRowInfoHigher }>
+                        <Image source={ ProfileAvatar } style={ styles.avatarImage }/>
+                        <Text style={ styles.userNameText }>
+                            DANNY M.
+                        </Text>
+                    </View>
+                    <View style={ styles.leaderboardRowInfoHigher }>
+                        <Image source={ ProfileAvatar } style={ styles.avatarImage }/>
+                        <Text style={ styles.userNameText }>
+                            DANNY M.
+                        </Text>
+                    </View>
+                    <View style={ styles.leaderboardRowInfoHigher }>
+                        <Image source={ ProfileAvatar } style={ styles.avatarImage }/>
+                        <Text style={ styles.userNameText }>
+                            DANNY M.
+                        </Text>
+                    </View>
+                </ScrollView>
             </View>
         </View>
     );
@@ -79,7 +81,7 @@ const styles = StyleSheet.create({
     },
 
     viewContainer: {
-        width: '84%',
+        width: '90%',
         height: '90%'
     },
 

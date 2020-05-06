@@ -12,6 +12,9 @@ import LeaderBoard from "../leaderboardScreen";
 import LeaderBoardSearch from "../leaderboardSearchPopUp";
 import LiveStats from "../liveStatsScreen";
 import WorkOutSummary from "../workoutSummary";
+import HRGuide from "../hrGuideScreen";
+import WorkoutHistory from "../workoutHistory";
+import PairShirt from "../pairShirtScreen";
 // import firebase from "../../utils/firebase";
 
 
@@ -46,7 +49,6 @@ const AppStack = createStackNavigator({
         screen: LeaderBoard,
         navigationOptions: ({navigation}) => ({
             header: null,
-            header: () => <SecondHeader navigation={navigation}/>,
             headerTitle: " "
         })
     },
@@ -69,6 +71,30 @@ const AppStack = createStackNavigator({
 
     WorkOutSummary: {
         screen: WorkOutSummary,
+        navigationOptions: ({navigation}) => ({
+            header: null,
+            headerTitle: " "
+        })
+    },
+
+    HRGuide: {
+        screen: HRGuide,
+        navigationOptions: ({navigation}) => ({
+            header: null,
+            headerTitle: " "
+        })
+    },
+
+    WorkoutHistory: {
+        screen: WorkoutHistory,
+        navigationOptions: ({navigation}) => ({
+            header: null,
+            headerTitle: " "
+        })
+    },
+
+    PairShirt: {
+        screen: PairShirt,
         navigationOptions: ({navigation}) => ({
             header: null,
             headerTitle: " "

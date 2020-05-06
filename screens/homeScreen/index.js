@@ -35,19 +35,12 @@ const Homescreen =(props)=> {
             <StatusBar backgroundColor="black" barStyle="light-content"/>
             <View style={ styles.viewContainer }>
                 <View style={ styles.headerSection }>
-                    <TouchableOpacity
-                        // style={{padding: 20}}
-                        onPress={() => navigation.toggleDrawer()}
-                    >
-                        <Image
-                            source={require("../../assets/images/menu.png")}
-                            style={{
-                                backgroundColor: "transparent",
-                                width: 19,
-                                height: 17
-                            }}/>
+                    <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+                        <Image source={ Menu } style={ styles.menuImage}/>
                     </TouchableOpacity>
-                    <Image source={ SwitchToStats } style={ styles.switchToStatsImage }/> 
+                    <TouchableOpacity onPress={()=>navigation.navigate('LiveStats')}>
+                        <Image source={ SwitchToStats } style={ styles.switchToStatsImage }/>
+                    </TouchableOpacity> 
                 </View>
                 <View style={ styles.statsSection }>
                     <View style={ styles.clockSection }>
@@ -112,21 +105,25 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginTop: 20,
+        // marginTop: '5%',
     },
 
     menuImage: {
-        width: 19,
-        height: 17,
+        width: 20,
+        height: 18,
         resizeMode: 'contain',
-        marginTop: 20
+        // marginTop: 20
+        // marginTop: '20%'
     },
 
     switchToStatsImage: {
         width: 19,
         height: 19,
         resizeMode: 'contain',
-        marginTop: 20
+        // marginTop: 20
+        // marginTop: '20%'
     },
 
     statsSection: {
@@ -134,14 +131,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',
-        marginTop: 30
+        // marginTop: 30
     },
 
     clockSection: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginRight: 12
+        marginRight: 12,
+        marginTop: '8%'
     },
 
     caloriesSection: {
@@ -149,14 +147,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginRight: 12,
-        marginLeft: 12
+        marginLeft: 12,
+        marginTop: '8%'
     },
 
     intensitySection: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginLeft: 12
+        marginLeft: 12,
+        marginTop: '8%'
     },
 
     clockImage: {
@@ -179,9 +179,10 @@ const styles = StyleSheet.create({
 
     timeSubtitle: {
         color: 'white',
-        fontSize: 16,
+        // fontSize: 16,
         fontFamily: 'Biryani-Bold',
-        marginTop: 5
+        marginTop: 5,
+        fontSize: RFPercentage(1.9)
     },
 
     circleProgressBarSection: {
@@ -189,12 +190,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 50
+        // marginTop: '10%',
+        // backgroundColor: 'blue',
+        // width: '100%',
+        // height: '55%'
     },
 
     circleOneImage: {
         width: 300,
         height: 300,
-        resizeMode: 'contain'
+        // width: '90%',
+        // height: '90%',
+        resizeMode: 'contain',
     },
 
     percentageTitle: {
@@ -224,8 +231,9 @@ const styles = StyleSheet.create({
 
     bigZoneTitle: {
         color: 'white',
-        fontSize: 32,
+        // fontSize: 32,
         fontFamily: 'Biryani-Black',
+        fontSize: RFPercentage(3.9),
     },
 
     startButtonSection: {
@@ -249,8 +257,9 @@ const styles = StyleSheet.create({
 
     startText: {
         color: 'black',
-        fontSize: 10,
-        fontFamily: 'Biryani-ExtraBold'
+        // fontSize: 10,
+        fontFamily: 'Biryani-ExtraBold',
+        fontSize: RFPercentage(1.28)
     },
 
 });

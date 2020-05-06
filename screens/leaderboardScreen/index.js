@@ -1,18 +1,25 @@
 import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput} from 'react-native';
 import React, {useState} from 'react';
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import LinearGradient from 'react-native-linear-gradient';
-import Menu from '../../assets/images/menu.png';
+import BackTwo from '../../assets/images/back-two.png';
 import ProfileAvatar from '../../assets/images/profile-avatar.png';
 // import FlashMessage  from "react-native-flash-message";
 // import {GlobalProvider} from '../../context/GlobalState';
 // import AuthHandler from '../authHandler'
 
-const Leaderboard: () => React$Node = () => {
+const Leaderboard = (props) => {
+    const {navigation} = props;
     return (
         
         <View style={ styles.fullScreenView }>
             <StatusBar backgroundColor="black" barStyle="light-content"/>
             <View style={ styles.viewContainer }>
+                <View style={ styles.backButtonContainer }>
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                        <Image source={ BackTwo } style={ styles.backImage }/>
+                    </TouchableOpacity> 
+                </View>
                 <View style={ styles.liveStatsTitleSection }>
                     <Text style={ styles.liveStatsText }>
                         LEADERBOARD
@@ -50,57 +57,59 @@ const Leaderboard: () => React$Node = () => {
                         INTENSITY LEVEL
                     </Text>
                 </View>
-                <View style={ styles.oLineSection }>
-                    <View style={ styles.oLine }></View>
-                </View>
-                <View style={ styles.leaderboardRowInfo }>
-                    <View style={ styles.firstArea }>
-                        <Text style={ styles.rankingText }>
-                            1
-                        </Text>
-                        <View style={ styles.imageNameContainer }>
-                            <Image source={ ProfileAvatar } style={ styles.avatarImage }/>
-                            <View style={ styles.nameCityContainer }>
-                                <Text style={ styles.userNameText }>
-                                    DANNY M.
-                                </Text>
-                                <Text style={ styles.userCityText }>
-                                    SAN DIEGO, CA
-                                </Text>
+                <ScrollView>
+                    <View style={ styles.oLineSection }>
+                        <View style={ styles.oLine }></View>
+                    </View>
+                    <View style={ styles.leaderboardRowInfo }>
+                        <View style={ styles.firstArea }>
+                            <Text style={ styles.rankingText }>
+                                1
+                            </Text>
+                            <View style={ styles.imageNameContainer }>
+                                <Image source={ ProfileAvatar } style={ styles.avatarImage }/>
+                                <View style={ styles.nameCityContainer }>
+                                    <Text style={ styles.userNameText }>
+                                        DANNY M.
+                                    </Text>
+                                    <Text style={ styles.userCityText }>
+                                        SAN DIEGO, CA
+                                    </Text>
+                                </View>
                             </View>
                         </View>
-                    </View>
-                    <Text style={ styles.categoryText }>
-                        550
-                    </Text>
-                </View> 
-                <View style={ styles.oLineSectionTwo }>
-                    <View style={ styles.oLineTwo }></View>
-                </View>    
-                <View style={ styles.leaderboardRowInfo }>
-                    <View style={ styles.firstArea }>
-                        <Text style={ styles.rankingText }>
-                            1
+                        <Text style={ styles.categoryText }>
+                            550
                         </Text>
-                        <View style={ styles.imageNameContainer }>
-                            <Image source={ ProfileAvatar } style={ styles.avatarImage }/>
-                            <View style={ styles.nameCityContainer }>
-                                <Text style={ styles.userNameText }>
-                                    DANNY M.
-                                </Text>
-                                <Text style={ styles.userCityText }>
-                                    SAN DIEGO, CA
-                                </Text>
+                    </View> 
+                    <View style={ styles.oLineSectionTwo }>
+                        <View style={ styles.oLineTwo }></View>
+                    </View>    
+                    <View style={ styles.leaderboardRowInfo }>
+                        <View style={ styles.firstArea }>
+                            <Text style={ styles.rankingText }>
+                                1
+                            </Text>
+                            <View style={ styles.imageNameContainer }>
+                                <Image source={ ProfileAvatar } style={ styles.avatarImage }/>
+                                <View style={ styles.nameCityContainer }>
+                                    <Text style={ styles.userNameText }>
+                                        DANNY M.
+                                    </Text>
+                                    <Text style={ styles.userCityText }>
+                                        SAN DIEGO, CA
+                                    </Text>
+                                </View>
                             </View>
                         </View>
-                    </View>
-                    <Text style={ styles.categoryText }>
-                        550
-                    </Text>
-                </View> 
-                <View style={ styles.oLineSectionTwo }>
-                    <View style={ styles.oLineTwo }></View>
-                </View>        
+                        <Text style={ styles.categoryText }>
+                            550
+                        </Text>
+                    </View> 
+                    <View style={ styles.oLineSectionTwo }>
+                        <View style={ styles.oLineTwo }></View>
+                    </View>  
+                </ScrollView>      
             </View>
         </View>
     );
@@ -117,26 +126,31 @@ const styles = StyleSheet.create({
     },
 
     viewContainer: {
-        width: '84%',
+        width: '90%',
         height: '90%'
     },
 
-    menuImage: {
-        width: 19,
-        height: 17,
-        resizeMode: 'contain',
-        marginTop: 20
+    backButtonContainer: {
+        marginTop: '5%'
+    },
+
+    backImage: {
+        width: 16,
+        height: 16,
+        resizeMode: 'contain'
     },
 
     liveStatsTitleSection: {
-        marginTop: 20,
-        marginLeft: 2,
+        // marginTop: 20,
+        // marginLeft: 2,
     },
 
     liveStatsText: {
         color: 'white',
-        fontSize: 25,
-        fontFamily: 'Biryani-Black'
+        // fontSize: 25,
+        fontSize: RFPercentage(3),
+        fontFamily: 'Biryani-Black',
+        marginTop: '5%',
     },
 
     searchFilterButtonsSection: {
@@ -154,11 +168,12 @@ const styles = StyleSheet.create({
 
     searchText: {
         color: 'white',
-        fontSize: 8,
+        // fontSize: 8,
         fontFamily: 'Biryani-Bold',
         margin: 4,
         paddingHorizontal: 7,
         textAlign: 'center',
+        fontSize: RFPercentage(1),
     },
 
     gradient: {
@@ -175,24 +190,30 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         flexDirection: 'row',
-        marginTop: 20
+        // marginTop: 20
+        // marginTop: '5%'
     },
 
     dateTitle: {
         color: 'white',
         fontSize: 10,
         fontFamily: 'Biryani-Bold',
-        marginLeft: 5
+        marginLeft: 5,
+        marginTop: '6%',
+        marginBottom: '2.5%'
     },
 
     labelTitle: {
         color: 'white',
         fontSize: 10,
         fontFamily: 'Biryani-Bold',
+        marginTop: '6%',
+        marginBottom: '2.5%'
     },
 
     oLineSection: {
-        marginTop: 10
+        // marginTop: 10,
+        // marginTop: '2.5%' 
     },
 
     oLine: {
@@ -217,7 +238,8 @@ const styles = StyleSheet.create({
 
     rankingText: {
         color: 'white',
-        fontSize: 22,
+        // fontSize: 22,
+        fontSize: RFPercentage(2.7),
         fontFamily: 'Biryani-ExtraBold',
     },
 
@@ -236,20 +258,23 @@ const styles = StyleSheet.create({
 
     userNameText: {
         color: 'white',
-        fontSize: 9,
+        // fontSize: 9,
+        fontSize: RFPercentage(1.1),
         fontFamily: 'Biryani-ExtraBold',
     },
 
     userCityText: {
         color: 'white',
-        fontSize: 9,
+        // fontSize: 9,
+        fontSize: RFPercentage(1.1),
         fontFamily: 'Biryani-ExtraBold',
         opacity: .55
     },
 
     categoryText: {
         color: 'white',
-        fontSize: 12,
+        // fontSize: 12,
+        fontSize: RFPercentage(1.5),
         fontFamily: 'Biryani-ExtraBold'
     },
     
@@ -261,7 +286,8 @@ const styles = StyleSheet.create({
     },
 
     oLineSectionTwo: {
-        marginTop: 20
+        // marginTop: 20
+        marginTop: '5.5%'
     },
 
     oLineTwo: {
