@@ -10,16 +10,16 @@ import FlashMessage from "react-native-flash-message";
 import { GlobalProvider } from '../../context/GlobalState';
 import AuthHandler from '../authHandler'
 import storage from '@react-native-firebase/storage';
-
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { GlobalContext } from '../../context/GlobalState';
+import { set } from 'react-native-reanimated';
 {/* Need to put header up here with Save and Cancel buttons and move edit profile text to header, bc Save button 
 currently gets cut off by keyboard. So remove save button and have save and cancel buttons in header like ttyl App */}
 
 const EditProfile = (props) => {
 
-    const { setUser, setId, setLoggedIn, user } = useContext(GlobalContext);
+    const { setLoader, user } = useContext(GlobalContext);
     const [firstName, setFirstName] = useState(user.firstName)
     const [lastName, setLastName] = useState(user.lastName)
     const [email, setEmail] = useState(user.email)
@@ -28,7 +28,7 @@ const EditProfile = (props) => {
     const [saveLoader, setSaveLoader] = useState('')
     const [passwordValidator, setPasswordValidator] = useState(false);
     const [emailValidator, setEmailValidator] = useState(false);
-    
+
     const [errorMessage, setErrorMessage] = useState(false);
     const options = {
         title: 'Select Avatar',
@@ -37,7 +37,6 @@ const EditProfile = (props) => {
             path: 'images',
         },
     };
-    console.log(user)
     const updateProfilePic = () => {
 
         ImagePicker.launchImageLibrary(options, (response) => {
@@ -48,6 +47,7 @@ const EditProfile = (props) => {
             } else if (response.customButton) {
                 console.log('User tapped custom button: ', response.customButton);
             } else {
+                setLoader(true)
                 ImageResizer.createResizedImage((Platform.OS === "ios" ? response.uri : response.path), 1000, 700, 'JPEG', 50).then((res) => {
 
                     const imageRef = storage().ref('profiles').child(user.uid);
@@ -65,9 +65,10 @@ const EditProfile = (props) => {
                         .update({
                             photoURL: url
                         })
-
+                    setLoader(false)
                     //  firebase.database().ref("/users/" + id + "/photoURL").set(res.downloadURL);
                 }).catch((err) => {
+                    setLoader(true)
                     console.log("err", err);
                 });
             }
@@ -75,8 +76,7 @@ const EditProfile = (props) => {
 
     }
     const update = async () => {
-        console.log(location)
-        setSaveLoader('SAVING...')
+        setLoader(true)
         // if (password) {
         //     if (password.length < 8) {
         //         setSaveLoader('')
@@ -113,33 +113,33 @@ const EditProfile = (props) => {
         //     console.log("password")
         // }
         // else {}
-        
-            var users = auth().currentUser;
-            users.updateEmail(email).then(res=> {
-                firestore()
+
+        var users = auth().currentUser;
+        users.updateEmail(email).then(res => {
+            firestore()
                 .collection('users')
                 .doc(user.uid)
                 .update({
                     firstName: firstName,
                     lastName: lastName,
                     email: email,
-                    location:location
+                    location: location
                 })
                 .then(() => {
-
+                    setLoader(false)
                     navigation.goBack()
                     console.log('User updated!');
-                }); 
-        
-            }).catch(function (error) {
-                console.log(error)
-                setSaveLoader('')
-                setEmailValidator(true)
-                setErrorMessage("email already exists or login again")
-            });
+                });
 
-           
-            
+        }).catch(function (error) {
+            console.log(error)
+            setLoader(false)
+            setEmailValidator(true)
+            setErrorMessage("This email address already exists")
+        });
+
+
+
     }
     const { navigation } = props;
     return (
@@ -164,7 +164,7 @@ const EditProfile = (props) => {
 
                 <TouchableOpacity onPress={() => updateProfilePic()}>
                     <View style={styles.profileAvatarSection}>
-                        <Image source={{ uri: user.photoURL?user.photoURL:avatarImage }} style={styles.avatarImage} style={{ width: 70, height: 70, borderRadius: 70 / 2 }} />
+                        <Image source={user.photoURL ? { uri: user.photoURL } : ProfileAvatar} style={styles.avatarImage} style={{ width: 60, height: 60, borderRadius: 60 / 2 }} />
                         <Text style={styles.changeProfileText}>
                             Change Profile Photo
                     </Text>
@@ -220,12 +220,13 @@ const EditProfile = (props) => {
                             }}
                         >
                         </TextInput>
-                        {
+
+                    </View>
+                    {
                         emailValidator &&
                         <Text
-                            style={{color: "red"}}>{errorMessage}</Text>
+                            style={{ color: "red" }}>{errorMessage}</Text>
                     }
-                    </View>
                     {/* <View style={styles.nameFieldContainer}>
                         <Text style={styles.nameTitle}>
                             PASSWORD
