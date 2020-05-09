@@ -1,25 +1,26 @@
 import ImagePicker from 'react-native-image-picker';
 import ImageResizer from 'react-native-image-resizer';
-import { View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput } from 'react-native';
-import React, { useState, useContext } from 'react';
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput} from 'react-native';
+import React, {useState, useContext} from 'react';
+import {RFPercentage, RFValue} from "react-native-responsive-fontsize";
 import LinearGradient from 'react-native-linear-gradient';
 import BackTwo from '../../assets/images/back-two.png';
 import ProfileAvatar from '../../assets/images/profile-avatar.png';
 import FlashMessage from "react-native-flash-message";
-import { GlobalProvider } from '../../context/GlobalState';
+import {GlobalProvider} from '../../context/GlobalState';
 import AuthHandler from '../authHandler'
 import storage from '@react-native-firebase/storage';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import { GlobalContext } from '../../context/GlobalState';
-import { set } from 'react-native-reanimated';
+import {GlobalContext} from '../../context/GlobalState';
+import {set} from 'react-native-reanimated';
 {/* Need to put header up here with Save and Cancel buttons and move edit profile text to header, bc Save button 
-currently gets cut off by keyboard. So remove save button and have save and cancel buttons in header like ttyl App */}
+ currently gets cut off by keyboard. So remove save button and have save and cancel buttons in header like ttyl App */
+}
 
 const EditProfile = (props) => {
 
-    const { setLoader, user } = useContext(GlobalContext);
+    const {setLoader, user} = useContext(GlobalContext);
     const [firstName, setFirstName] = useState(user.firstName)
     const [lastName, setLastName] = useState(user.lastName)
     const [email, setEmail] = useState(user.email)
@@ -139,17 +140,16 @@ const EditProfile = (props) => {
         });
 
 
-
     }
-    const { navigation } = props;
+    const {navigation} = props;
     return (
 
         <View style={styles.fullScreenView}>
-            <StatusBar backgroundColor="black" barStyle="light-content" />
+            <StatusBar backgroundColor="black" barStyle="light-content"/>
             <View style={styles.viewContainer}>
                 <View style={styles.backButtonContainer}>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
-                        <Image source={BackTwo} style={styles.backImage} />
+                        <Image source={BackTwo} style={styles.backImage}/>
                     </TouchableOpacity>
 
                     <Text style={styles.editText}>
@@ -164,10 +164,11 @@ const EditProfile = (props) => {
 
                 <TouchableOpacity onPress={() => updateProfilePic()}>
                     <View style={styles.profileAvatarSection}>
-                        <Image source={user.photoURL ? { uri: user.photoURL } : ProfileAvatar} style={styles.avatarImage} style={{ width: 60, height: 60, borderRadius: 60 / 2 }} />
+                        <Image source={user.photoURL ? {uri: user.photoURL} : ProfileAvatar}
+                               style={[styles.avatarImage, {width: 60, height: 60, borderRadius: 60 / 2}]}/>
                         <Text style={styles.changeProfileText}>
                             Change Profile Photo
-                    </Text>
+                        </Text>
                     </View>
                 </TouchableOpacity>
                 <View style={styles.oLineSection}>
@@ -225,28 +226,28 @@ const EditProfile = (props) => {
                     {
                         emailValidator &&
                         <Text
-                            style={{ color: "red" }}>{errorMessage}</Text>
+                            style={{color: "red"}}>{errorMessage}</Text>
                     }
                     {/* <View style={styles.nameFieldContainer}>
-                        <Text style={styles.nameTitle}>
-                            PASSWORD
-                        </Text>
-                        <TextInput
-                            style={styles.nameInputField}
-                            placeholder='Enter Password'
-                            value={password}
-                            onChangeText={value => {
-                                setPassword(value)
-                            }}
-                            secureTextEntry={true}
-                        >
-                        </TextInput>
-                        {
-                            passwordValidator &&
-                            <Text
-                                style={{ color: "red" }}>{"Password length should be 8 characters"}</Text>
-                        }
-                    </View> */}
+                     <Text style={styles.nameTitle}>
+                     PASSWORD
+                     </Text>
+                     <TextInput
+                     style={styles.nameInputField}
+                     placeholder='Enter Password'
+                     value={password}
+                     onChangeText={value => {
+                     setPassword(value)
+                     }}
+                     secureTextEntry={true}
+                     >
+                     </TextInput>
+                     {
+                     passwordValidator &&
+                     <Text
+                     style={{ color: "red" }}>{"Password length should be 8 characters"}</Text>
+                     }
+                     </View> */}
                     <View style={styles.lineContainer}>
                         <View style={styles.oLine}></View>
                     </View>
@@ -391,9 +392,7 @@ const styles = StyleSheet.create({
         marginTop: '1%'
     },
 
-    locationContainer: {
-
-    },
+    locationContainer: {},
 
     locationText: {
         color: 'white',
