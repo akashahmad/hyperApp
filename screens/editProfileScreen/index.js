@@ -42,10 +42,13 @@ const EditProfile = (props) => {
 
         ImagePicker.launchImageLibrary(options, (response) => {
             if (response.didCancel) {
+                setLoader(false)
                 console.log('User cancelled image picker');
             } else if (response.error) {
+                setLoader(false)
                 console.log('ImagePicker Error: ', response.error);
             } else if (response.customButton) {
+                setLoader(false)
                 console.log('User tapped custom button: ', response.customButton);
             } else {
                 setLoader(true)
@@ -69,7 +72,7 @@ const EditProfile = (props) => {
                     setLoader(false)
                     //  firebase.database().ref("/users/" + id + "/photoURL").set(res.downloadURL);
                 }).catch((err) => {
-                    setLoader(true)
+                    setLoader(false)
                     console.log("err", err);
                 });
             }
@@ -164,8 +167,8 @@ const EditProfile = (props) => {
 
                 <TouchableOpacity onPress={() => updateProfilePic()}>
                     <View style={styles.profileAvatarSection}>
-                        <Image source={user.photoURL ? {uri: user.photoURL} : ProfileAvatar}
-                               style={[styles.avatarImage, {width: 60, height: 60, borderRadius: 60 / 2}]}/>
+                        <Image source={user.photoURL ? {uri: user.photoURL} : ProfileAvatar} style={styles.avatarImage}
+                               style={{width: 60, height: 60, borderRadius: 60 / 2}}/>
                         <Text style={styles.changeProfileText}>
                             Change Profile Photo
                         </Text>
