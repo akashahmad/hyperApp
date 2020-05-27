@@ -16,6 +16,8 @@ export default (state, action) => {
             return {...state, loggedIn: action.payload};
         case "SET_MAIN_SCREEN":
             return {...state, mainScreen: action.payload};
+            case "SET_HRM":
+                return {...state, hrm: action.payload};
         default:
             return state;
     }

@@ -1,5 +1,6 @@
-import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput} from 'react-native';
-import React, {useState} from 'react';
+import { View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput, Alert } from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { GlobalContext } from '../../context/GlobalState';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import LinearGradient from 'react-native-linear-gradient';
 import BackTwo from '../../assets/images/back-two.png';
@@ -7,35 +8,101 @@ import Calories from '../../assets/images/gradient-fire.png';
 import Clock from '../../assets/images/gradient-clock.png';
 import Heart from '../../assets/images/gradient-heart.png';
 import Muscle from '../../assets/images/gradient-muscle.png';
-
+import { BleManager } from 'react-native-ble-plx';
+import { Buffer } from 'buffer';
+const HEAR_RATE_SERVICE_GUID = '180D';
+const HEART_RATE_MEASUREMENT_CHARACTERISTIC_GUID = '2A37';
+const manager = new BleManager()
 const Leaderboard = (props) => {
-    const {navigation} = props;
+    const { setHrm,hrm } = useContext(GlobalContext);
+    const { navigation } = props;
+    const [pair, setPair] = useState('CONNECT SHIRT')
+    const [errorMessage, setErrorMessage] = useState('');
+    const scanAndConnect = () => {
+        manager.startDeviceScan([HEAR_RATE_SERVICE_GUID], null, (error, device) => {
+            setPair('CONNECTING...')
+            if (error) {
+                setPair('CONNECT SHIRT')  
+setErrorMessage("Something went wrong please make sure you have allowed all the permissions and your BLUETOOTH and LOCATION is ON")
+                console.log(error)
+            }
+            else if (device.name==="CL813-0000817") {
+                
+                manager.stopDeviceScan()
+                device.connect().then(async (device) => {
+                    return await device.discoverAllServicesAndCharacteristics()
+                }).then(async (device) => {
+                    if (device.isConnected()) {
+                        console.log("connected")
+                        manager.monitorCharacteristicForDevice(
+                            device.id,
+                            HEAR_RATE_SERVICE_GUID,
+                            HEART_RATE_MEASUREMENT_CHARACTERISTIC_GUID,
+                            (error, characteristic) => {
+                                if (error) {
+                                    setErrorMessage("something went wrong try again")
+                                    console.log('HeartRateMonitor.startHeartRateMonitor ... monitorCharacteristicForDevice: error=', error);
+                                }
+
+                                if (characteristic && characteristic.value) {
+                                    let heartRate = -1;
+                                    let decoded = Buffer.from(characteristic.value, 'base64');
+                                    let firstBitValue = decoded.readInt8(0) & 0x01;
+                                    if (firstBitValue == 0) {
+                                        setPair('CONNECTED SUCCESFULLY')
+                                        // Heart Rate Value Format is in the 2nd byte
+                                      setHrm(decoded.readUInt8(1))
+                                        console.log(hrm);
+                                    } else {
+                                        setPair('CONNECTED SUCCESFULLY')
+                                        setHrm((decoded.readInt8(1) << 8) + decoded.readInt8(2))
+                                        // Heart Rate Value Format is in the 2nd and 3rd bytes
+                                        console.log((decoded.readInt8(1) << 8) + decoded.readInt8(2));
+                                    }
+                                    // console.log(characteristic)
+                                }
+                            })
+                    }
+                })
+                // console.log(device)
+
+            }
+            else {
+               setErrorMessage("No Device Found Make Sure your device is connected with strip and try agin if you face the same problem then put out the battery of device and ")
+            }
+        })
+    }
+
     return (
-        
-        <View style={ styles.fullScreenView }>
-            <StatusBar backgroundColor="black" barStyle="light-content"/>
-            <View style={ styles.viewContainer }>
-                <View style={ styles.backButtonContainer }>
-                    <TouchableOpacity onPress={() => navigation.goBack()}>
+
+        <View style={styles.fullScreenView}>
+            <StatusBar backgroundColor="black" barStyle="light-content" />
+            <View style={styles.viewContainer}>
+                <View style={styles.backButtonContainer}>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
                         <Image source={ BackTwo } style={ styles.backImage }/>
-                    </TouchableOpacity> 
+                    </TouchableOpacity>
                 </View>
-                <View style={ styles.liveStatsTitleSection }>
-                    <Text style={ styles.liveStatsText }>
+                <View style={styles.liveStatsTitleSection}>
+                    <Text style={styles.liveStatsText}>
                         PAIR SHIRT
                     </Text>
+                    
                 </View>
-                <View style={ styles.pairButtonSection }>
-                    <TouchableOpacity style={ styles.signUpButton }>
-                        <LinearGradient 
-                            colors={['#55CBFF', '#63FFCF']} 
-                            style={ styles.gradient }
-                            start={{x: 0, y: 0}} end={{x: 1, y: 0}}
+
+                <Text style={{ color: "red" }}>{errorMessage}</Text>
+
+                <View style={styles.pairButtonSection}>
+                    <TouchableOpacity style={styles.signUpButton} onPress={scanAndConnect}>
+                        <LinearGradient
+                            colors={['#55CBFF', '#63FFCF']}
+                            style={styles.gradient}
+                            start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
                         >
-                            <Text style={ styles.signUpButtonText }>CONNECT SHIRT</Text>
+                            <Text style={styles.signUpButtonText}>{pair ? pair : "CONNECT SHIRT"}</Text>
                         </LinearGradient>
                     </TouchableOpacity>
-                </View>        
+                </View>
             </View>
         </View>
     );
@@ -58,12 +125,14 @@ const styles = StyleSheet.create({
 
     backButtonContainer: {
         marginTop: '5%'
+        
     },
 
     backImage: {
         width: 16,
         height: 16,
-        resizeMode: 'contain'
+        resizeMode: 'contain',
+        marginBottom: '5%'
     },
 
     liveStatsTitleSection: {

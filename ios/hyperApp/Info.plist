@@ -11,6 +11,24 @@
 			</array>
 		</dict>
 	</array>
+<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+<string>Location Permission</string>
+<key>NSLocationAlwaysUsageDescription</key>
+<string>Location Permission</string>
+
+<key>NSBluetoothAlwaysUsageDescription</key>
+<string>Bluetooth Permission</string>
+
+<key>NSLocationUsageDescription</key>
+<string>GPS data is required to...</string>
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>Location Permission</string>
+<key>UIBackgroundModes</key>
+<array>
+   <string>fetch</string>
+   <string>location</string>
+   <string>remote-notification</string>
+</array>
 	<key>NSCameraUsageDescription</key>
 	<string>Take a photo for us</string>
 	<key>FacebookAppID</key>
