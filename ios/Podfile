@@ -44,6 +44,7 @@ target 'hyperApp' do
 
   pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
 
+
   pod 'react-native-ble-plx', :path => '../node_modules/react-native-ble-plx'
 
   target 'hyperAppTests' do

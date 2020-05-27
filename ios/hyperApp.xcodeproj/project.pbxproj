@@ -19,6 +19,7 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* hyperAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* hyperAppTests.m */; };
+		414B7689247F0A610022E1B5 /* bluetooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B7688247F0A610022E1B5 /* bluetooth.swift */; };
 		41F145632456720B00643A39 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41F145622456720B00643A39 /* GoogleService-Info.plist */; };
 		581211BCD0E9415D897E63FF /* Biryani-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 910753DC73394FB98065EA7A /* Biryani-Regular.ttf */; };
 		5FFCFDD15F3556DFDFB02FCD /* libPods-hyperApp-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B9EAC6914C593A9B14B3F2 /* libPods-hyperApp-tvOS.a */; };
@@ -67,6 +68,8 @@
 		2D02E4901E0B4A5D006451C7 /* hyperApp-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hyperApp-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E6C674284E0826ED50F20BF /* libPods-hyperApp-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hyperApp-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F8E4F4866AE430E91AC4A2C /* Biryani-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Biryani-SemiBold.ttf"; path = "../assets/fonts/Biryani-SemiBold.ttf"; sourceTree = "<group>"; };
+		414B7687247F0A600022E1B5 /* hyperApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "hyperApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		414B7688247F0A610022E1B5 /* bluetooth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bluetooth.swift; sourceTree = "<group>"; };
 		41F145622456720B00643A39 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		54B9EAC6914C593A9B14B3F2 /* libPods-hyperApp-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hyperApp-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		552A5BD2B4DCA25D1EB10A76 /* Pods-hyperApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hyperApp.release.xcconfig"; path = "Target Support Files/Pods-hyperApp/Pods-hyperApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -149,6 +152,8 @@
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				41F145622456720B00643A39 /* GoogleService-Info.plist */,
+				414B7688247F0A610022E1B5 /* bluetooth.swift */,
+				414B7687247F0A600022E1B5 /* hyperApp-Bridging-Header.h */,
 			);
 			name = hyperApp;
 			sourceTree = "<group>";
@@ -327,6 +332,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = KTV2T7AYTG;
+						LastSwiftMigration = 1130;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -605,6 +611,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				414B7689247F0A610022E1B5 /* bluetooth.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -657,6 +664,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B97F94FB93FE7BB1D2950AEB /* Pods-hyperAppTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -680,6 +688,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 89A0A36F5BC06853A0B93A52 /* Pods-hyperAppTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = hyperAppTests/Info.plist;
@@ -701,6 +710,7 @@
 			baseConfigurationReference = 12E5AF6FACDD5324355A8E6C /* Pods-hyperApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 2;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = KTV2T7AYTG;
@@ -713,6 +723,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperapp.hyperApp;
 				PRODUCT_NAME = hyperApp;
+				SWIFT_OBJC_BRIDGING_HEADER = "hyperApp-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -722,6 +735,7 @@
 			baseConfigurationReference = 552A5BD2B4DCA25D1EB10A76 /* Pods-hyperApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = KTV2T7AYTG;
 				INFOPLIST_FILE = hyperApp/Info.plist;
@@ -733,6 +747,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hyperapp.hyperApp;
 				PRODUCT_NAME = hyperApp;
+				SWIFT_OBJC_BRIDGING_HEADER = "hyperApp-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
