@@ -7,6 +7,7 @@ const initialState = {
     user: null,
     loader: false,
     loggedIn: false,
+    hrm:'',
     mainScreen: "home"
 }
 
@@ -29,6 +30,12 @@ export const GlobalProvider = ({children}) => {
         dispatch({
             type: 'SET_ID',
             payload: id
+        });
+    }
+    function setHrm(hrm) {
+        dispatch({
+            type: 'SET_HRM',
+            payload: hrm
         });
     }
 
@@ -60,6 +67,8 @@ export const GlobalProvider = ({children}) => {
         loader: state.loader,
         loggedIn: state.loggedIn,
         mainScreen: state.mainScreen,
+        hrm:state.hrm,
+        setHrm,
         setUser,
         setId,
         setLoader,

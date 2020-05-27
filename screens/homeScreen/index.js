@@ -14,8 +14,9 @@ import AuthHandler from '../authHandler'
 import {GlobalContext} from '../../context/GlobalState';
 const Homescreen =(props)=> {
     const {navigation} = props;
-    const {user} = useContext(GlobalContext);
+    const {user,hrm} = useContext(GlobalContext);
     const[heartrate,setHeartrate]=useState('')
+    const[hrmPercentage,setHrmPercentage]=useState('')
     useEffect(() => {
        let year=new Date().getFullYear()
        let dob = user.DOB;
@@ -29,6 +30,7 @@ const Homescreen =(props)=> {
         let heartrat= 206 - (0.88 * age)
         setHeartrate(heartrat)
        }
+       setHrmPercentage((parseInt(hrm)/heartrate)*100)
       },[]);
     return (  
         <View style={ styles.fullScreenView }>
@@ -63,9 +65,16 @@ const Homescreen =(props)=> {
                     </View>
                 </View>
                 <View style={ styles.circleProgressBarSection }>
+                <Text style={ styles.bpmSubtitle }>
+                        {hrm}{"\n"}{"\n"}{"\n"}{"\n"}{"\n"}{"\n"}{"\n"}{"\n"}
+                    </Text>
                     <Image source={ CircleOne } style={ styles.circleOneImage }/>
+                    
+                    <Text style>
+                        {hrm}
+                    </Text>
                     <Text style={ styles.percentageTitle }>
-                        60%
+                    {parseInt((parseInt(hrm)/parseInt(heartrate))*100)}%
                     </Text>
                     <Text style={ styles.bpmSubtitle }>
                         {heartrate}

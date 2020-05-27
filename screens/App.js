@@ -11,7 +11,7 @@ import FlashMessage  from "react-native-flash-message";
 import {GlobalProvider} from '../context/GlobalState';
 import AuthHandler from './authHandler'
 
-const App: () => React$Node = () => {
+const App= () => {
     return (
 
         <>

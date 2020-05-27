@@ -190,7 +190,8 @@ const styles = StyleSheet.create({
     backImage: {
         width: 16,
         height: 16,
-        resizeMode: 'contain'
+        resizeMode: 'contain',
+        marginBottom: '5%'
     },
 
     loginTitleContainer: {
