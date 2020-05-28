@@ -8,6 +8,8 @@ const initialState = {
     loader: false,
     loggedIn: false,
     hrm:'',
+    connectDevice:"CONNECT SHIRT",
+    deviceId:"",
     mainScreen: "home"
 }
 
@@ -59,6 +61,18 @@ export const GlobalProvider = ({children}) => {
             payload: value
         });
     }
+    function setConnectDevice(connectDevice) {
+        dispatch({
+            type: 'SET_CONNECT_DEVICE',
+            payload: connectDevice
+        });
+    }
+    function setDeviceId(deviceId) {
+        dispatch({
+            type: 'SET_DEVICE_ID',
+            payload: deviceId
+        });
+    }
 
 
     return (<GlobalContext.Provider value={{
@@ -68,6 +82,10 @@ export const GlobalProvider = ({children}) => {
         loggedIn: state.loggedIn,
         mainScreen: state.mainScreen,
         hrm:state.hrm,
+        connectDevice:state.connectDevice,
+        deviceId:state.deviceId,
+        setDeviceId,
+        setConnectDevice,
         setHrm,
         setUser,
         setId,

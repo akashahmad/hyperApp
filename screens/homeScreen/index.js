@@ -12,6 +12,7 @@ import FlashMessage  from "react-native-flash-message";
 import {GlobalProvider} from '../../context/GlobalState';
 import AuthHandler from '../authHandler'
 import {GlobalContext} from '../../context/GlobalState';
+import ProgressCircle from 'react-native-progress-circle';
 const Homescreen =(props)=> {
     const {navigation} = props;
     const {user,hrm} = useContext(GlobalContext);
@@ -64,7 +65,7 @@ const Homescreen =(props)=> {
                         </Text>
                     </View>
                 </View>
-                <View style={ styles.circleProgressBarSection }>
+                {/* <View style={ styles.circleProgressBarSection }>
                 <Text style={ styles.bpmSubtitle }>
                         {hrm}{"\n"}{"\n"}{"\n"}{"\n"}{"\n"}{"\n"}{"\n"}{"\n"}
                     </Text>
@@ -79,7 +80,20 @@ const Homescreen =(props)=> {
                     <Text style={ styles.bpmSubtitle }>
                         {heartrate}
                     </Text>
-                </View>
+                </View> */}
+                <View style={{ marginTop:50 ,marginLeft:16}}>
+                <ProgressCircle
+            percent={hrm?parseInt((parseInt(hrm)/parseInt(heartrate))*100):0}
+            radius={170}
+            borderWidth={20}
+            color="#3399FF"
+            shadowColor="white"
+            bgColor="black"
+        >
+            <Text style={{ fontSize: 15 ,color:"white"}}>{hrm?hrm:0}</Text>
+            <Text style={{ fontSize: 40 ,color:"white"}}>{hrm?parseInt((parseInt(hrm)/parseInt(heartrate))*100)+'%':"Not Connected"} </Text>
+            <Text style={{ fontSize: 15 ,color:"white"}}>{heartrate?heartrate:0}</Text>
+        </ProgressCircle></View>
                 <View style={ styles.bigZoneTitleSection }>
                     <Text style={ styles.bigZoneTitle }>
                         WARM UP ZONE

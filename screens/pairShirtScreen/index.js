@@ -14,15 +14,17 @@ const HEAR_RATE_SERVICE_GUID = '180D';
 const HEART_RATE_MEASUREMENT_CHARACTERISTIC_GUID = '2A37';
 const manager = new BleManager()
 const Leaderboard = (props) => {
-    const { setHrm,hrm } = useContext(GlobalContext);
+    const { setHrm,hrm,connectDevice,setConnectDevice,deviceId,setDeviceId } = useContext(GlobalContext);
     const { navigation } = props;
-    const [pair, setPair] = useState('CONNECT SHIRT')
     const [errorMessage, setErrorMessage] = useState('');
     const scanAndConnect = () => {
+        if(connectDevice==='CONNECT SHIRT'){
+            setErrorMessage('')
+        setConnectDevice('CONNECTING...')
         manager.startDeviceScan([HEAR_RATE_SERVICE_GUID], null, (error, device) => {
-            setPair('CONNECTING...')
+            
             if (error) {
-                setPair('CONNECT SHIRT')  
+                setConnectDevice('CONNECT SHIRT')  
 setErrorMessage("Something went wrong please make sure you have allowed all the permissions and your BLUETOOTH and LOCATION is ON")
                 console.log(error)
             }
@@ -34,13 +36,15 @@ setErrorMessage("Something went wrong please make sure you have allowed all the 
                 }).then(async (device) => {
                     if (device.isConnected()) {
                         console.log("connected")
+                        setDeviceId(device.id)
+                        console.log(device.id)
                         manager.monitorCharacteristicForDevice(
                             device.id,
                             HEAR_RATE_SERVICE_GUID,
                             HEART_RATE_MEASUREMENT_CHARACTERISTIC_GUID,
                             (error, characteristic) => {
                                 if (error) {
-                                    setErrorMessage("something went wrong try again")
+                                    setErrorMessage("YOUR DEVICE IS DISSCONNECTED")
                                     console.log('HeartRateMonitor.startHeartRateMonitor ... monitorCharacteristicForDevice: error=', error);
                                 }
 
@@ -49,12 +53,12 @@ setErrorMessage("Something went wrong please make sure you have allowed all the 
                                     let decoded = Buffer.from(characteristic.value, 'base64');
                                     let firstBitValue = decoded.readInt8(0) & 0x01;
                                     if (firstBitValue == 0) {
-                                        setPair('CONNECTED SUCCESFULLY')
+                                        setConnectDevice('DISCONNECT')
                                         // Heart Rate Value Format is in the 2nd byte
                                       setHrm(decoded.readUInt8(1))
                                         console.log(hrm);
                                     } else {
-                                        setPair('CONNECTED SUCCESFULLY')
+                                        setConnectDevice('DISCONNECT')
                                         setHrm((decoded.readInt8(1) << 8) + decoded.readInt8(2))
                                         // Heart Rate Value Format is in the 2nd and 3rd bytes
                                         console.log((decoded.readInt8(1) << 8) + decoded.readInt8(2));
@@ -71,6 +75,17 @@ setErrorMessage("Something went wrong please make sure you have allowed all the 
                setErrorMessage("No Device Found Make Sure your device is connected with strip and try agin if you face the same problem then put out the battery of device and ")
             }
         })
+     }
+    else{
+     
+               
+              manager.cancelDeviceConnection(deviceId);
+               
+          setHrm('') 
+          
+          setConnectDevice("CONNECT SHIRT")
+          setErrorMessage('')
+    }
     }
 
     return (
@@ -99,7 +114,7 @@ setErrorMessage("Something went wrong please make sure you have allowed all the 
                             style={styles.gradient}
                             start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
                         >
-                            <Text style={styles.signUpButtonText}>{pair ? pair : "CONNECT SHIRT"}</Text>
+                            <Text style={styles.signUpButtonText}>{connectDevice ? connectDevice : "CONNECT SHIRT"}</Text>
                         </LinearGradient>
                     </TouchableOpacity>
                 </View>
