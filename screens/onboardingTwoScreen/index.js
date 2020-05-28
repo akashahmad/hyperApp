@@ -92,6 +92,10 @@ const OnboardingTwoScreen = (props) => {
                         <Text
                             style={{ color: "red" }}>{"gender is required"}</Text>
                     }
+                    <TextInput
+                        style={ styles.inputFieldBirthdayTwo }
+                        placeholder='Weight'
+                    ></TextInput>
                 </View>
                 <View style={styles.circlePlusButtonSection}>
                     <View style={styles.circleContainer}>
@@ -172,6 +176,15 @@ const styles = StyleSheet.create({
         padding: 14,
         fontFamily: 'Biryani-Regular',
         fontSize: RFPercentage(1.75)
+    },
+
+    inputFieldBirthdayTwo: {
+        backgroundColor: 'white',
+        borderRadius: 9,
+        padding: 14,
+        fontFamily: 'Biryani-Regular',
+        fontSize: RFPercentage(1.75),
+        marginTop: 15
     },
 
     inputFieldGender: {
