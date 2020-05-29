@@ -24,7 +24,7 @@ const Homescreen = (props) => {
     const { user, hrm, setPauseStatus, pauseStatus, setSeconds, seconds, setMinutes, minutes } = useContext(GlobalContext);
     const [heartrate, setHeartrate] = useState('')
     const [hrmPercentage, setHrmPercentage] = useState('')
-    const [age, setAge] = useState()
+   
     const [sec, setSec] = useState(0)
     const [min, setMin] = useState(0)
     const [time, setTime] = useState(0)
@@ -35,7 +35,7 @@ const Homescreen = (props) => {
         let year = new Date().getFullYear()
         let dob = user.DOB;
         var dobyear = dob.substring(0, 4);
-        setAge(year - dobyear);
+        let age=year - dobyear;
 
         if (user.gender === "male") {
 
