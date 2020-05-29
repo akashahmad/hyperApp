@@ -8,14 +8,9 @@ import Clock from '../../assets/images/clock.png';
 import Calories from '../../assets/images/calories.png';
 import Muscle from '../../assets/images/muscle.png';
 import CircleOne from '../../assets/images/zone-circle.png';
-<<<<<<< HEAD
 import Signal from '../../assets/images/signal.png';
-import FlashMessage  from "react-native-flash-message";
-import {GlobalProvider} from '../../context/GlobalState';
-=======
 import FlashMessage from "react-native-flash-message";
 import { GlobalProvider } from '../../context/GlobalState';
->>>>>>> origin/dev
 import AuthHandler from '../authHandler'
 import { GlobalContext } from '../../context/GlobalState';
 import ProgressCircle from 'react-native-progress-circle';
