@@ -1,5 +1,5 @@
-import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput} from 'react-native';
-import React, {useState,useEffect, useContext} from 'react';
+import { View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput } from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import LinearGradient from 'react-native-linear-gradient';
 import Menu from '../../assets/images/menu.png';
@@ -8,60 +8,122 @@ import Clock from '../../assets/images/clock.png';
 import Calories from '../../assets/images/calories.png';
 import Muscle from '../../assets/images/muscle.png';
 import CircleOne from '../../assets/images/zone-circle.png';
+<<<<<<< HEAD
 import Signal from '../../assets/images/signal.png';
 import FlashMessage  from "react-native-flash-message";
 import {GlobalProvider} from '../../context/GlobalState';
+=======
+import FlashMessage from "react-native-flash-message";
+import { GlobalProvider } from '../../context/GlobalState';
+>>>>>>> origin/dev
 import AuthHandler from '../authHandler'
-import {GlobalContext} from '../../context/GlobalState';
+import { GlobalContext } from '../../context/GlobalState';
 import ProgressCircle from 'react-native-progress-circle';
-const Homescreen =(props)=> {
-    const {navigation} = props;
-    const {user,hrm} = useContext(GlobalContext);
-    const[heartrate,setHeartrate]=useState('')
-    const[hrmPercentage,setHrmPercentage]=useState('')
+import Workers from '../../utils/workers'
+import Worker from '../../utils/worker'
+let second = 0;
+let minute = 0;
+let pause = false;
+const Homescreen = (props) => {
+    const { navigation } = props;
+    const { user, hrm, setPauseStatus, pauseStatus, setSeconds, seconds, setMinutes, minutes } = useContext(GlobalContext);
+    const [heartrate, setHeartrate] = useState('')
+    const [hrmPercentage, setHrmPercentage] = useState('')
+    const [age, setAge] = useState()
+    const [sec, setSec] = useState(0)
+    const [min, setMin] = useState(0)
+    const [time, setTime] = useState(0)
+    const [pausing, setPausing] = useState(false)
+
     useEffect(() => {
-       let year=new Date().getFullYear()
-       let dob = user.DOB;
-       var dobyear = dob.substring(0, 4);
-       let age=year-dobyear;
-       if(user.gender==="male"){
-       let heartrat= 208 - (0.7 * age)
-       setHeartrate(heartrat)
-       }
-       else if(user.gender==="female"){
-        let heartrat= 206 - (0.88 * age)
-        setHeartrate(heartrat)
-       }
-       setHrmPercentage((parseInt(hrm)/heartrate)*100)
-      },[]);
-    return (  
-        <View style={ styles.fullScreenView }>
-            <StatusBar backgroundColor="black" barStyle="light-content"/>
-            <View style={ styles.viewContainer }>
-                <View style={ styles.headerSection }>
+        // const worker = new Workers(worker);
+        let year = new Date().getFullYear()
+        let dob = user.DOB;
+        var dobyear = dob.substring(0, 4);
+        setAge(year - dobyear);
+
+        if (user.gender === "male") {
+
+            let heartrat = 208 - (0.7 * age)
+            setHeartrate(heartrat)
+        }
+        else if (user.gender === "female") {
+
+            let heartrat = 206 - (0.88 * age)
+            setHeartrate(heartrat)
+        }
+        setHrmPercentage((parseInt(hrm) / heartrate) * 100)
+    }, []);
+    const startTimer = () => {
+        let check=pause
+        pause = !pause;
+        
+        setPausing(pause)
+    
+        console.log(pausing)
+        if (check) {
+
+            recursiveTimer()
+        }
+
+
+    }
+    const recursiveTimer = () => {
+        console.log(pausing)
+        if (pausing) {
+
+            if (second < 59) {
+
+                second = second + 1
+                setSec(second)
+                
+            }
+            else {
+               // console.log("checkelse", seconds)
+                minute = minute + 1
+                second = 0
+                setSec(0)
+                setMin(minute)
+            }
+            setTimeout(() => {
+                
+                recursiveTimer()
+            }, 1000);
+        }
+
+    }
+    return (
+        <View style={styles.fullScreenView}>
+            <StatusBar backgroundColor="black" barStyle="light-content" />
+            <View style={styles.viewContainer}>
+                <View style={styles.headerSection}>
                     <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
-                        <Image source={ Menu } style={ styles.menuImage}/>
+                        <Image source={Menu} style={styles.menuImage} />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>navigation.navigate('LiveStats')}>
-                        <Image source={ SwitchToStats } style={ styles.switchToStatsImage }/>
-                    </TouchableOpacity> 
+                    <TouchableOpacity onPress={() => navigation.navigate('LiveStats')}>
+                        <Image source={SwitchToStats} style={styles.switchToStatsImage} />
+                    </TouchableOpacity>
                 </View>
-                <View style={ styles.statsSection }>
-                    <View style={ styles.clockSection }>
-                        <Image source={ Clock } style={ styles.clockImage }/>
-                        <Text style={ styles.timeSubtitle }>
-                            5:04
+                <View style={styles.statsSection}>
+                    <View style={styles.clockSection}>
+                        <Image source={Clock} style={styles.clockImage} />
+                        <Text style={styles.timeSubtitle}>
+                            {('0' + (min)).slice(-2) + ':' + ('0' + (sec)).slice(-2)}
                         </Text>
                     </View>
-                    <View style={ styles.caloriesSection }>
-                        <Image source={ Calories } style={ styles.caloriesImage }/>
-                        <Text style={ styles.timeSubtitle }>
-                            72
-                        </Text>
+                    <View style={styles.caloriesSection}>
+                        <Image source={Calories} style={styles.caloriesImage} />
+                        {/* {user ? <Text style={styles.timeSubtitle}>
+                            {user.gender === "male" ?
+                                ((((age * 0.2017) + (hrm * 0.6309) - (((user.weight) / 2.2046) * 0.09036)) - 55.0969) * time / 4.184) :
+                                ((((age * 0.074) + (hrm * 0.4472) - (((user.weight) / 2.2046) * 0.05741)) - 20.4022) * time / 4.184)}
+                        </Text> : <Text style={styles.timeSubtitle}>
+
+                            </Text>} */}
                     </View>
-                    <View style={ styles.intensitySection }>
-                        <Image source={ Muscle } style={ styles.muscleImage }/>
-                        <Text style={ styles.timeSubtitle }>
+                    <View style={styles.intensitySection}>
+                        <Image source={Muscle} style={styles.muscleImage} />
+                        <Text style={styles.timeSubtitle}>
                             127
                         </Text>
                     </View>
@@ -82,28 +144,27 @@ const Homescreen =(props)=> {
                         {heartrate}
                     </Text>
                 </View> */}
+
                 <View style={ styles.circleProgressBarSection }>
                     <ProgressCircle
-                        percent={hrm?parseInt((parseInt(hrm)/parseInt(heartrate))*100):0}
+                        percent={hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) : 0}
                         radius={170}
                         borderWidth={20}
                         color="#3399FF"
                         shadowColor="#63FFCF"
                         bgColor="black"
                     >
-                        <Text style={{ fontSize: 15 ,color:"white"}}>{hrm?hrm:0}</Text>
-                        <Text style={{ fontSize: 40 ,color:"white"}}>{hrm?parseInt((parseInt(hrm)/parseInt(heartrate))*100)+'%':"Not Connected"} </Text>
-                        <Text style={ styles.bpmSubtitle }>{heartrate?heartrate:0}</Text>
-                    </ProgressCircle>
-                </View>
-                <View style={ styles.bigZoneTitleSection }>
-                    <Text style={ styles.bigZoneTitle }>
+                        <Text style={{ fontSize: 40, color: "white" }}>{hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) + '%' : "Not Connected"} </Text>
+                        <Text style={{ fontSize: 15, color: "white" }}>{hrm ? hrm : 0}</Text>
+                    </ProgressCircle></View>
+                <View style={styles.bigZoneTitleSection}>
+                    <Text style={styles.bigZoneTitle}>
                         WARM UP ZONE
                     </Text>
                 </View>
-                <View style={ styles.startButtonSection }>
-                    <TouchableOpacity style={ styles.startCircle }>
-                        <Text style={ styles.startText }>START</Text>
+                <View style={styles.startButtonSection}>
+                    <TouchableOpacity style={styles.startCircle} onPress={startTimer}>
+                        <Text style={styles.startText}>{pausing ? "PAUSE" : "START"}</Text>
                     </TouchableOpacity>
                 </View>
                 {/* No Signal Section */}
@@ -309,7 +370,7 @@ const styles = StyleSheet.create({
     startCircle: {
         width: 75,
         height: 75,
-        borderRadius: 75/2,
+        borderRadius: 75 / 2,
         backgroundColor: 'white',
         display: 'flex',
         alignItems: 'center',

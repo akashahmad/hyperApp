@@ -9,16 +9,23 @@ import AuthHandler from '../authHandler'
 import Calender from '../../assets/images/calendar.png'
 import DatePicker from 'react-native-datepicker'
 const OnboardingTwoScreen = (props) => {
-    let { setShow, setGender, gender, setdob, dob, genderValidator, setGenderValidator, dobValidator, setdobValidator } = props
+    let { setShow, setGender, gender, setdob, dob, genderValidator, setGenderValidator, dobValidator, setdobValidator,setWeight,weight,setWeightValidator,weightValidator } = props
     const showNext = () => {
-        if (!dob || !gender) {
+        if (!dob || !gender || !weight) {
             if (!dob) {
                 setdobValidator(true)
                 setGenderValidator(false)
+                setWeightValidator(false)
                
             }
             else if (!gender) {
                 setGenderValidator(true)
+                setdobValidator(false)
+                setWeightValidator(false)
+            }
+            else if (!weight) {
+                setWeightValidator(true)
+                setGenderValidator(false)
                 setdobValidator(false)
             }
         }
@@ -97,7 +104,13 @@ const OnboardingTwoScreen = (props) => {
                         placeholder='Weight'
                         placeholderTextColor='#b5b5b5'
                         color='black'
+                        onChangeText={value => setWeight(value)}
                     ></TextInput>
+                     {
+                        weightValidator &&
+                        <Text
+                            style={{ color: "red" }}>{"Weight is required"}</Text>
+                    }
                 </View>
                 <View style={styles.circlePlusButtonSection}>
                     <View style={styles.circleContainer}>

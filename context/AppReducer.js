@@ -22,6 +22,12 @@ export default (state, action) => {
             return { ...state, connectDevice: action.payload };
         case "SET_DEVICE_ID":
             return { ...state, deviceId: action.payload };
+        case "SET_MINUTES":
+            return { ...state, minutes: action.payload };
+        case "SET_SECONDS":
+            return { ...state, seconds: action.payload };
+        case "SET_PAUSE_STATUS":
+            return { ...state, pauseStatus: action.payload };
         default:
             return state;
     }

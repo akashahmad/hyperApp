@@ -12,7 +12,7 @@ import { showMessage } from 'react-native-flash-message'
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 const OnboardingThreeScreen = (props) => {
-    let { setShow, email, setEmail, setPassword, password, setFirstName, firstName, setLastName, lastName, setGender, gender, setdob, dob } = props
+    let { setShow, email, setEmail, setPassword, password, setFirstName, firstName, setLastName, lastName, setGender, gender, setdob, dob,setWeight,weight } = props
     const { setLoader } = useContext(GlobalContext);
     const [heartrate, setHeartrate] = useState('')
     useEffect(() => {
@@ -40,7 +40,8 @@ const OnboardingThreeScreen = (props) => {
                 uid: uid,
                 location:"",
                 gender,
-                DOB: dob
+                DOB: dob,
+                weight:weight
             };
             firestore().collection('users')
                 .doc(uid)

@@ -23,7 +23,8 @@ const App = () => {
     const [gender, setGender] = useState("");
     const [genderValidator, setGenderValidator] = useState(false)
     const [dobValidator, setdobValidator] = useState(false)
-
+    const [weight, setWeight] = useState()
+    const [weightValidator,setWeightValidator]=useState()
     const showComponent = () => {
         switch (show) {
             case "login":
@@ -69,6 +70,10 @@ const App = () => {
                     setGenderValidator={setGenderValidator}
                     dobValidator={dobValidator}
                     setdobValidator={setdobValidator}
+                    setWeight={setWeight}
+                    weight={weight}
+                    setWeightValidator={setWeightValidator}
+                    weightValidator={weightValidator}
                 />;
             case "onBoardingThree":
                 return <OnBoardingThree
@@ -85,6 +90,8 @@ const App = () => {
                     gender={gender}
                     setdob={setdob}
                     dob={dob}
+                    setWeight={setWeight}
+                    weight={weight}
                 />;
             case "logInSuccess":
                 return <LogInSuccessScreen
