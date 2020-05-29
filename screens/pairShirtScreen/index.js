@@ -28,7 +28,7 @@ const Leaderboard = (props) => {
 setErrorMessage("Something went wrong please make sure you have allowed all the permissions and your BLUETOOTH and LOCATION is ON")
                 console.log(error)
             }
-            else if (device.name==="CL813-0000817") {
+            else if (device.name) {
                 
                 manager.stopDeviceScan()
                 device.connect().then(async (device) => {

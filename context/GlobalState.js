@@ -1,4 +1,4 @@
-import React, {createContext, useReducer} from 'react';
+import React, { createContext, useReducer } from 'react';
 import AppReducer from './AppReducer';
 
 // Initial state
@@ -7,17 +7,20 @@ const initialState = {
     user: null,
     loader: false,
     loggedIn: false,
-    hrm:'',
-    connectDevice:"CONNECT SHIRT",
-    deviceId:"",
-    mainScreen: "home"
+    hrm: '',
+    connectDevice: "CONNECT SHIRT",
+    deviceId: "",
+    mainScreen: "home",
+    minutes: 0,
+    seconds: 0,
+    pauseStatus: false,
 }
 
 // Create context
 export const GlobalContext = createContext(initialState);
 
 // Provider component
-export const GlobalProvider = ({children}) => {
+export const GlobalProvider = ({ children }) => {
     const [state, dispatch] = useReducer(AppReducer, initialState);
 
     // Actions
@@ -61,6 +64,25 @@ export const GlobalProvider = ({children}) => {
             payload: value
         });
     }
+    function setMinutes(minutes) {
+        dispatch({
+            type: 'SET_MINUTES',
+            payload: minutes
+        });
+    }
+    function setSeconds(seconds) {
+        dispatch({
+            type: 'SET_SECONDS',
+            payload: seconds
+        });
+    }
+    function setPauseStatus(pauseStatus) {
+        dispatch({
+            type: 'SET_PAUSE_STATUS',
+            payload: pauseStatus
+        });
+    }
+
     function setConnectDevice(connectDevice) {
         dispatch({
             type: 'SET_CONNECT_DEVICE',
@@ -81,9 +103,15 @@ export const GlobalProvider = ({children}) => {
         loader: state.loader,
         loggedIn: state.loggedIn,
         mainScreen: state.mainScreen,
-        hrm:state.hrm,
-        connectDevice:state.connectDevice,
-        deviceId:state.deviceId,
+        hrm: state.hrm,
+        connectDevice: state.connectDevice,
+        deviceId: state.deviceId,
+        minutes: state.minutes,
+        seconds: state.seconds,
+        pauseStatus: state.pauseStatus,
+        setMinutes,
+        setSeconds,
+        setPauseStatus,
         setDeviceId,
         setConnectDevice,
         setHrm,
