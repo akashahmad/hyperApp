@@ -75,6 +75,8 @@ const addNameScreen = (props) => {
                     <TextInput
                         style={ styles.inputFieldEmail }
                         placeholder='First name'
+                        placeholderTextColor='#b5b5b5'
+                        color='black'
                         autoFocus
                         value={firstName ? firstName : ""}
                         onChangeText={value => {
@@ -90,6 +92,8 @@ const addNameScreen = (props) => {
                     <TextInput
                         style={ styles.inputFieldPassword }
                         placeholder='Last name'
+                        placeholderTextColor='#b5b5b5'
+                        color='black'
                         onChangeText={value => setLastName(value)}
                         value={lastName ? lastName : ""}
                     >

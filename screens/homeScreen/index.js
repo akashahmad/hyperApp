@@ -8,6 +8,7 @@ import Clock from '../../assets/images/clock.png';
 import Calories from '../../assets/images/calories.png';
 import Muscle from '../../assets/images/muscle.png';
 import CircleOne from '../../assets/images/zone-circle.png';
+import Signal from '../../assets/images/signal.png';
 import FlashMessage  from "react-native-flash-message";
 import {GlobalProvider} from '../../context/GlobalState';
 import AuthHandler from '../authHandler'
@@ -81,19 +82,20 @@ const Homescreen =(props)=> {
                         {heartrate}
                     </Text>
                 </View> */}
-                <View style={{ marginTop:50 ,marginLeft:16}}>
-                <ProgressCircle
-            percent={hrm?parseInt((parseInt(hrm)/parseInt(heartrate))*100):0}
-            radius={170}
-            borderWidth={20}
-            color="#3399FF"
-            shadowColor="white"
-            bgColor="black"
-        >
-            <Text style={{ fontSize: 15 ,color:"white"}}>{hrm?hrm:0}</Text>
-            <Text style={{ fontSize: 40 ,color:"white"}}>{hrm?parseInt((parseInt(hrm)/parseInt(heartrate))*100)+'%':"Not Connected"} </Text>
-            <Text style={{ fontSize: 15 ,color:"white"}}>{heartrate?heartrate:0}</Text>
-        </ProgressCircle></View>
+                <View style={ styles.circleProgressBarSection }>
+                    <ProgressCircle
+                        percent={hrm?parseInt((parseInt(hrm)/parseInt(heartrate))*100):0}
+                        radius={170}
+                        borderWidth={20}
+                        color="#3399FF"
+                        shadowColor="#63FFCF"
+                        bgColor="black"
+                    >
+                        <Text style={{ fontSize: 15 ,color:"white"}}>{hrm?hrm:0}</Text>
+                        <Text style={{ fontSize: 40 ,color:"white"}}>{hrm?parseInt((parseInt(hrm)/parseInt(heartrate))*100)+'%':"Not Connected"} </Text>
+                        <Text style={ styles.bpmSubtitle }>{heartrate?heartrate:0}</Text>
+                    </ProgressCircle>
+                </View>
                 <View style={ styles.bigZoneTitleSection }>
                     <Text style={ styles.bigZoneTitle }>
                         WARM UP ZONE
@@ -104,6 +106,19 @@ const Homescreen =(props)=> {
                         <Text style={ styles.startText }>START</Text>
                     </TouchableOpacity>
                 </View>
+                {/* No Signal Section */}
+                {/* <View style={ styles.pairDeviceSection }>
+                    <Image source={ Signal } style={ styles.signalImage }/>
+                    <Text style={ styles.pairDeviceTitle }>
+                        Make sure your shirt is paired in order to get heart rate data. You can pair your shirt from the option
+                        in the menu. 
+                    </Text>
+                </View>
+                <View style={ styles.startButtonSection }>
+                    <TouchableOpacity style={ styles.startCircleNoPair }>
+                        <Text style={ styles.startTextNoPair }>START</Text>
+                    </TouchableOpacity>
+                </View> */}
             </View>
         </View>
     );
@@ -134,16 +149,16 @@ const styles = StyleSheet.create({
     },
 
     menuImage: {
-        width: 20,
-        height: 18,
-        resizeMode: 'contain',
+        width: 22,
+        height: 20,
+        resizeMode: 'contain'
         // marginTop: 20
         // marginTop: '20%'
     },
 
     switchToStatsImage: {
-        width: 19,
-        height: 19,
+        width: 21,
+        height: 21,
         resizeMode: 'contain',
         // marginTop: 20
         // marginTop: '20%'
@@ -245,6 +260,29 @@ const styles = StyleSheet.create({
         paddingTop: 100
     },
 
+    pairDeviceSection: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
+    signalImage: {
+        width: 50,
+        height: 50,
+        resizeMode: 'contain',
+        marginTop: '50%',
+    },
+
+    pairDeviceTitle: {
+        color: 'white',
+        // fontSize: 32,
+        fontFamily: 'Biryani-Regular',
+        fontSize: RFPercentage(1.70),
+        marginTop: 10,
+        textAlign: 'center',
+        width: '95%'
+    },
+
     bigZoneTitleSection: {
         marginTop: 30,
         display: 'flex',
@@ -278,11 +316,29 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
 
+    startCircleNoPair: {
+        width: 75,
+        height: 75,
+        borderRadius: 75/2,
+        backgroundColor: '#9e9e9e',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
     startText: {
         color: 'black',
         // fontSize: 10,
+        fontFamily: 'Biryani-Black',
+        fontSize: RFPercentage(1.33)
+    },
+
+    startTextNoPair: {
+        color: 'black',
+        // fontSize: 10,
         fontFamily: 'Biryani-ExtraBold',
-        fontSize: RFPercentage(1.28)
+        fontSize: RFPercentage(1.28),
+        opacity: .75
     },
 
 });

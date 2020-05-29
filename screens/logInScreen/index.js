@@ -91,6 +91,8 @@ const logInScreen = (props) => {
                     <TextInput
                         style={ styles.inputFieldEmail }
                         placeholder='Email address'
+                        placeholderTextColor='#b5b5b5'
+                        color='black'
                         autoFocus
                         onChangeText={value => setEmailVal(value.replace(/\s/g, ''))}
                         autoCorrect={false}
@@ -104,6 +106,8 @@ const logInScreen = (props) => {
                     <TextInput
                         style={ styles.inputFieldPassword }
                         placeholder='Password'
+                        placeholderTextColor='#b5b5b5'
+                        color='black'
                         onChangeText={value => setPassVal(value)}
                         autoCorrect={false}
                         secureTextEntry={true}

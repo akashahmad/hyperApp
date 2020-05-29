@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
         // fontSize: 10,
         textAlign: 'center',
         lineHeight: 20,
-        fontFamily: 'Biryani-Bold',
+        fontFamily: 'Biryani-SemiBold',
         fontSize: RFPercentage(1.35)
     }
 

@@ -90,6 +90,8 @@ const getStartedScreen = (props) => {
                     <TextInput
                         style={ styles.inputFieldEmail }
                         placeholder='Email address'
+                        placeholderTextColor='#b5b5b5'
+                        color='black'
                         autoFocus
                         value={email ? email : ""}
                         onChangeText={value => {
@@ -111,6 +113,8 @@ const getStartedScreen = (props) => {
                     <TextInput
                         style={ styles.inputFieldPassword }
                         placeholder='Password'
+                        placeholderTextColor='#b5b5b5'
+                        color='black'
                         value={password ? password : ""}
                         onChangeText={value => {
                             setPasswordValidator(false);

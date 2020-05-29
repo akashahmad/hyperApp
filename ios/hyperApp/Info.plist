@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Bluetooth is used to communicate with BLE devices.</string>
 	<key>CFBundleDisplayName</key>
 	<string>hyperApp</string>
 	<key>CFBundleExecutable</key>
@@ -31,26 +33,6 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
-<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-<string>Location Permission</string>
-<key>NSLocationAlwaysUsageDescription</key>
-<string>Location Permission</string>
-
-<key>NSBluetoothAlwaysUsageDescription</key>
-<string>Bluetooth Permission</string>
-
-<key>NSLocationUsageDescription</key>
-<string>GPS data is required to...</string>
-<key>NSLocationWhenInUseUsageDescription</key>
-<string>Location Permission</string>
-<key>UIBackgroundModes</key>
-<array>
-   <string>fetch</string>
-   <string>location</string>
-   <string>remote-notification</string>
-</array>
-	<key>NSCameraUsageDescription</key>
-	<string>Take a photo for us</string>
 	<key>FacebookAppID</key>
 	<string>520133751965220</string>
 	<key>FacebookDisplayName</key>
@@ -88,8 +70,16 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Bluetooth Permission</string>
 	<key>NSCameraUsageDescription</key>
 	<string>This app requires access to the camera.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Location Permission</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Location Permission</string>
+	<key>NSLocationUsageDescription</key>
+	<string>GPS data is required to...</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -103,6 +93,12 @@
 		<string>Biryani-Light.ttf</string>
 		<string>Biryani-Regular.ttf</string>
 		<string>Biryani-SemiBold.ttf</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>location</string>
+		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

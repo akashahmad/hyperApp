@@ -95,6 +95,8 @@ const OnboardingTwoScreen = (props) => {
                     <TextInput
                         style={ styles.inputFieldBirthdayTwo }
                         placeholder='Weight'
+                        placeholderTextColor='#b5b5b5'
+                        color='black'
                     ></TextInput>
                 </View>
                 <View style={styles.circlePlusButtonSection}>
@@ -277,3 +279,9 @@ const styles = StyleSheet.create({
 });
 
 export default OnboardingTwoScreen;
+
+// Men:
+// ( ((Age x 0.2017) + (Average Heart Rate Beats Per Minute x 0.6309) - (Weight in kilograms x 0.09036)) - 55.0969) x Time in minutes / 4.184
+
+// Women:
+// ( ((Age x 0.074) + (Average Heart Rate Beats Per Minute x 0.4472) - (Weight in kilograms x 0.05741)) - 20.4022) x Time in minutes / 4.184
