@@ -19,12 +19,13 @@ import Worker from '../../utils/worker'
 let second = 0;
 let minute = 0;
 let pause = false;
+let age=0;
 const Homescreen = (props) => {
     const { navigation } = props;
     const { user, hrm, setPauseStatus, pauseStatus, setSeconds, seconds, setMinutes, minutes } = useContext(GlobalContext);
     const [heartrate, setHeartrate] = useState('')
     const [hrmPercentage, setHrmPercentage] = useState('')
-   
+
     const [sec, setSec] = useState(0)
     const [min, setMin] = useState(0)
     const [time, setTime] = useState(0)
@@ -35,7 +36,7 @@ const Homescreen = (props) => {
         let year = new Date().getFullYear()
         let dob = user.DOB;
         var dobyear = dob.substring(0, 4);
-        let age=year - dobyear;
+        age = year - dobyear;
 
         if (user.gender === "male") {
 
@@ -50,39 +51,30 @@ const Homescreen = (props) => {
         setHrmPercentage((parseInt(hrm) / heartrate) * 100)
     }, []);
     const startTimer = () => {
-        let check=pause
+        let check = pause
         pause = !pause;
-        
-        setPausing(pause)
-    
-        console.log(pausing)
-        if (check) {
-
-            recursiveTimer()
+        setPausing(!pausing)
+        if (!check) {
+            recursiveTimer(true)
         }
-
-
     }
-    const recursiveTimer = () => {
-        console.log(pausing)
-        if (pausing) {
-
+    const recursiveTimer = (check) => {
+        console.log("pausing", pausing)
+        if (pause || check) {
             if (second < 59) {
-
                 second = second + 1
                 setSec(second)
-                
             }
             else {
-               // console.log("checkelse", seconds)
+                // console.log("checkelse", seconds)
                 minute = minute + 1
                 second = 0
                 setSec(0)
                 setMin(minute)
             }
             setTimeout(() => {
-                
-                recursiveTimer()
+
+                recursiveTimer(false)
             }, 1000);
         }
 
@@ -108,12 +100,12 @@ const Homescreen = (props) => {
                     </View>
                     <View style={styles.caloriesSection}>
                         <Image source={Calories} style={styles.caloriesImage} />
-                        {/* {user ? <Text style={styles.timeSubtitle}>
+                        {/* {user && hrm ? <Text style={styles.timeSubtitle}>
                             {user.gender === "male" ?
-                                ((((age * 0.2017) + (hrm * 0.6309) - (((user.weight) / 2.2046) * 0.09036)) - 55.0969) * time / 4.184) :
-                                ((((age * 0.074) + (hrm * 0.4472) - (((user.weight) / 2.2046) * 0.05741)) - 20.4022) * time / 4.184)}
+                                ((((parseInt(age) * 0.2017) + (parseInt(hrm) * 0.6309) - (((user.weight) / 2.2046) * 0.09036)) - 55.0969) * parseInt(min) / 4.184) :
+                                    ((((parseInt(age) * 0.074) + (parseInt(hrm) * 0.4472) - ((parseInt(user.weight) / 2.2046) * 0.05741)) - 20.4022) * parseInt(min) / 4.184)}
                         </Text> : <Text style={styles.timeSubtitle}>
-
+                                0
                             </Text>} */}
                     </View>
                     <View style={styles.intensitySection}>
@@ -145,11 +137,13 @@ const Homescreen = (props) => {
                         <View style={styles.innerCircle} />
                     </View>
                     {/* <ProgressCircle
+                <View style={styles.circleProgressBarSection}>
+                    <ProgressCircle
                         percent={hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) : 0}
                         radius={170}
                         borderWidth={20}
                         color="#3399FF"
-                        shadowColor="#63FFCF"
+                        shadowColor="white"
                         bgColor="black"
                     >
                         <Text style={{ fontSize: 40, color: "white" }}>{hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) + '%' : "Not Connected"} </Text>
@@ -393,7 +387,7 @@ const styles = StyleSheet.create({
     startCircleNoPair: {
         width: 75,
         height: 75,
-        borderRadius: 75/2,
+        borderRadius: 75 / 2,
         backgroundColor: '#9e9e9e',
         display: 'flex',
         alignItems: 'center',
