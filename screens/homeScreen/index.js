@@ -100,13 +100,13 @@ const Homescreen = (props) => {
                     </View>
                     <View style={styles.caloriesSection}>
                         <Image source={Calories} style={styles.caloriesImage} />
-                        {/* {user && hrm ? <Text style={styles.timeSubtitle}>
+                        {user && hrm ? <Text style={styles.timeSubtitle}>
                             {user.gender === "male" ?
                                 ((((parseInt(age) * 0.2017) + (parseInt(hrm) * 0.6309) - (((user.weight) / 2.2046) * 0.09036)) - 55.0969) * parseInt(min) / 4.184) :
                                     ((((parseInt(age) * 0.074) + (parseInt(hrm) * 0.4472) - ((parseInt(user.weight) / 2.2046) * 0.05741)) - 20.4022) * parseInt(min) / 4.184)}
                         </Text> : <Text style={styles.timeSubtitle}>
                                 0
-                            </Text>} */}
+                            </Text>}
                     </View>
                     <View style={styles.intensitySection}>
                         <Image source={Muscle} style={styles.muscleImage} />
