@@ -133,11 +133,6 @@ const Homescreen = (props) => {
                 </View> */}
 
                 <View style={ styles.circleProgressBarSection }>
-                    <View style={styles.outerCircle}>
-                        <View style={styles.innerCircle} />
-                    </View>
-                    {/* <ProgressCircle
-                <View style={styles.circleProgressBarSection}>
                     <ProgressCircle
                         percent={hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) : 0}
                         radius={170}
@@ -148,7 +143,7 @@ const Homescreen = (props) => {
                     >
                         <Text style={{ fontSize: 40, color: "white" }}>{hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) + '%' : "Not Connected"} </Text>
                         <Text style={{ fontSize: 15, color: "white" }}>{hrm ? hrm : 0}</Text>
-                    </ProgressCircle> */}
+                    </ProgressCircle>
                 </View>
                 <View style={styles.bigZoneTitleSection}>
                     <Text style={styles.bigZoneTitle}>
