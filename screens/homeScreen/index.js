@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput } from 'react-native';
+import { View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput, Dimensions } from 'react-native';
 import React, { useState, useEffect, useContext } from 'react';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import LinearGradient from 'react-native-linear-gradient';
@@ -141,7 +141,10 @@ const Homescreen = (props) => {
                 </View> */}
 
                 <View style={ styles.circleProgressBarSection }>
-                    <ProgressCircle
+                    <View style={styles.outerCircle}>
+                        <View style={styles.innerCircle} />
+                    </View>
+                    {/* <ProgressCircle
                         percent={hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) : 0}
                         radius={170}
                         borderWidth={20}
@@ -151,7 +154,8 @@ const Homescreen = (props) => {
                     >
                         <Text style={{ fontSize: 40, color: "white" }}>{hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) + '%' : "Not Connected"} </Text>
                         <Text style={{ fontSize: 15, color: "white" }}>{hrm ? hrm : 0}</Text>
-                    </ProgressCircle></View>
+                    </ProgressCircle> */}
+                </View>
                 <View style={styles.bigZoneTitleSection}>
                     <Text style={styles.bigZoneTitle}>
                         WARM UP ZONE
@@ -289,6 +293,20 @@ const styles = StyleSheet.create({
         // width: '100%',
         // height: '55%'
     },
+
+    outerCircle: {
+        borderRadius: 40,
+        width: 80,
+        height: 80,
+        backgroundColor: 'white',
+      },
+      innerCircle: {
+        borderRadius: 35,
+        width: 70,
+        height: 70,
+        margin: 5,
+        backgroundColor: 'black'
+      },
 
     circleOneImage: {
         width: 300,
