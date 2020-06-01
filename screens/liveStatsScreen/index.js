@@ -1,7 +1,8 @@
 import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, ImageBackground} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState,useContext} from 'react';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import BackTwo from '../../assets/images/back-two.png';
+import { GlobalContext } from '../../context/GlobalState';
 import StatsClock from '../../assets/images/stats-clock.png';
 import StatsHeart from '../../assets/images/stats-heart.png';
 import One from '../../assets/images/one.png';
@@ -15,6 +16,8 @@ import Mind from '../../assets/images/blown-mind.png';
 // import AuthHandler from '../authHandler'
 
 const LiveStatsScreen = (props) => { 
+    
+    const {calories} = useContext(GlobalContext);
     const {navigation} = props; 
     return (
         <View style={ styles.fullScreenView }>
@@ -110,7 +113,7 @@ const LiveStatsScreen = (props) => {
                             </Text>
                             <View style={ styles.statImageContainer }>
                                 <Text style={ styles.liveStat }>
-                                    72
+                                {calories?calories:0}
                                 </Text>
                                 <Image source={ Fire } style={ styles.clockImage } />
                             </View>

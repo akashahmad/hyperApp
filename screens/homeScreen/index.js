@@ -25,6 +25,7 @@ let second = 0;
 let minute = 0;
 let pause = false;
 let age = 0;
+let calorie;
 const Homescreen = (props) => {
     const { navigation } = props;
     const { user, hrm, calories, setCalories } = useContext(GlobalContext);
@@ -76,11 +77,18 @@ const Homescreen = (props) => {
                 second = 0
                 setSec(0)
                 setMin(minute)
-                setCalories(
+                calorie=(
                     user.gender === "male" ?
-                        ((((parseInt(age) * 0.2017) + (parseInt(hrm) * 0.6309) - (((user.weight) / 2.2046) * 0.09036)) - 55.0969) * parseInt(minute) / 4.184).toFixed(2) :
-                        ((((parseInt(age) * 0.074) + (parseInt(hrm) * 0.4472) - ((parseInt(user.weight) / 2.2046) * 0.05741)) - 20.4022) * parseInt(minute) / 4.184).toFixed(2)
+                        ((parseInt(age) * 0.2017) + (parseInt(hrm) * 0.6309) - (((user.weight) / 2.2046) * 0.09036) - 55.0969) * (parseInt(minute) / 4.184) :
+                        ((parseInt(age) * 0.074) + (parseInt(hrm) * 0.4472) - (((user.weight) / 2.2046) * 0.05741) - 20.4022) * (parseInt(minute) / 4.184)
                 )
+                if(calorie < 0)
+                {
+                    setCalories(.5)
+                }
+                else {
+                    setCalories(calorie.toFixed(2))
+                }
                 console.log(minute)
                 console.log(calories)
             }
@@ -151,12 +159,12 @@ const Homescreen = (props) => {
                         shadowColor="#63FFCF"
                         bgColor="black"
                     >
-                        <Text style={ styles.percentageTitle }>{hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) + '%' : "Connect"} </Text>
-                        <Text style={ styles.bpmSubtitle }>{hrm ? hrm : 0} BPM</Text>
+                        <Text style={styles.percentageTitle}>{hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) + '%' : "Connect"} </Text>
+                        <Text style={styles.bpmSubtitle}>{hrm ? hrm : 0} BPM</Text>
 
                         {/* Show when device hasn't paired */}
                         {/* <Image source={LookingForHeart} style={styles.lookingForHeartImage} /> */}
-                        
+
                     </ProgressCircle>
                 </View>
                 <View style={styles.bigZoneTitleSection}>
