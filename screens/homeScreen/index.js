@@ -9,6 +9,11 @@ import Calories from '../../assets/images/calories.png';
 import Muscle from '../../assets/images/muscle.png';
 import CircleOne from '../../assets/images/zone-circle.png';
 import Signal from '../../assets/images/signal.png';
+import Pause from '../../assets/images/pause.png';
+import NewClock from '../../assets/images/new-clock.png';
+import NewFire from '../../assets/images/new-fire.png';
+import BlownMind from '../../assets/images/blown-mind.png';
+import LookingForHeart from '../../assets/images/looking-for-heart.png';
 import FlashMessage from "react-native-flash-message";
 import { GlobalProvider } from '../../context/GlobalState';
 import AuthHandler from '../authHandler'
@@ -93,13 +98,13 @@ const Homescreen = (props) => {
                 </View>
                 <View style={styles.statsSection}>
                     <View style={styles.clockSection}>
-                        <Image source={Clock} style={styles.clockImage} />
+                        <Image source={NewClock} style={styles.clockImage} />
                         <Text style={styles.timeSubtitle}>
                             {('0' + (min)).slice(-2) + ':' + ('0' + (sec)).slice(-2)}
                         </Text>
                     </View>
                     <View style={styles.caloriesSection}>
-                        <Image source={Calories} style={styles.caloriesImage} />
+                        <Image source={NewFire} style={styles.caloriesImage} />
                         {user && hrm ? <Text style={styles.timeSubtitle}>
                             {user.gender === "male" ?
                                 ((((parseInt(age) * 0.2017) + (parseInt(hrm) * 0.6309) - (((user.weight) / 2.2046) * 0.09036)) - 55.0969) * parseInt(min) / 4.184) :
@@ -109,7 +114,7 @@ const Homescreen = (props) => {
                             </Text>}
                     </View>
                     <View style={styles.intensitySection}>
-                        <Image source={Muscle} style={styles.muscleImage} />
+                        <Image source={BlownMind} style={styles.muscleImage} />
                         <Text style={styles.timeSubtitle}>
                             127
                         </Text>
@@ -138,11 +143,15 @@ const Homescreen = (props) => {
                         radius={170}
                         borderWidth={20}
                         color="#3399FF"
-                        shadowColor="white"
+                        shadowColor="#63FFCF"
                         bgColor="black"
                     >
-                        <Text style={{ fontSize: 40, color: "white" }}>{hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) + '%' : "Not Connected"} </Text>
-                        <Text style={{ fontSize: 15, color: "white" }}>{hrm ? hrm : 0}</Text>
+                        <Text style={ styles.percentageTitle }>{hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) + '%' : "Connect"} </Text>
+                        <Text style={ styles.bpmSubtitle }>{hrm ? hrm : 0} BPM</Text>
+
+                        {/* Show when device hasn't paired */}
+                        {/* <Image source={LookingForHeart} style={styles.lookingForHeartImage} /> */}
+                        
                     </ProgressCircle>
                 </View>
                 <View style={styles.bigZoneTitleSection}>
@@ -154,6 +163,19 @@ const Homescreen = (props) => {
                     <TouchableOpacity style={styles.startCircle} onPress={startTimer}>
                         <Text style={styles.startText}>{pausing ? "PAUSE" : "START"}</Text>
                     </TouchableOpacity>
+
+                    {/* Show when user taps START */}
+                    {/* <TouchableOpacity style={styles.startCircle}>
+                        <Image source={ Pause } style={ styles.pauseImage }/>
+                    </TouchableOpacity> */}
+
+                    {/* Show when user taps PAUSE */}
+                    {/* <TouchableOpacity style={styles.endWorkoutContainer}>
+                        <Text style={styles.endWorkoutText}>
+                            END WORKOUT
+                        </Text>
+                    </TouchableOpacity> */}
+
                 </View>
                 {/* No Signal Section */}
                 {/* <View style={ styles.pairDeviceSection }>
@@ -247,20 +269,20 @@ const styles = StyleSheet.create({
     },
 
     clockImage: {
-        width: 19,
-        height: 19,
+        width: 24,
+        height: 24,
         resizeMode: 'contain'
     },
 
     caloriesImage: {
-        width: 19,
-        height: 19,
+        width: 26,
+        height: 26,
         resizeMode: 'contain'
     },
 
     muscleImage: {
-        width: 19,
-        height: 19,
+        width: 24,
+        height: 24,
         resizeMode: 'contain'
     },
 
@@ -321,6 +343,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         position: 'absolute',
         paddingTop: 100
+    },
+
+    lookingForHeartImage: {
+        width: '45%',
+        height: '45%',
+        resizeMode: 'contain',
     },
 
     pairDeviceSection: {
@@ -389,6 +417,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
 
+    pauseImage: {
+        width: 17,
+        height: 17,
+        resizeMode: 'contain',
+    },
+
     startText: {
         color: 'black',
         // fontSize: 10,
@@ -403,6 +437,16 @@ const styles = StyleSheet.create({
         fontSize: RFPercentage(1.28),
         opacity: .75
     },
+
+    endWorkoutText: {
+        color: 'white',
+        // fontSize: 10,
+        fontFamily: 'Biryani-Bold',
+        fontSize: RFPercentage(1.10),
+        marginTop: '2%',
+        textDecorationLine: 'underline',
+        opacity: .55
+    }
 
 });
 
