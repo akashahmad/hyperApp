@@ -103,7 +103,7 @@ const OnboardingTwoScreen = (props) => {
                         style={ styles.inputFieldBirthdayTwo }
                         placeholder='Weight'
                         placeholderTextColor='#b5b5b5'
-                        color='black'
+                       // color='black'
                         onChangeText={value => setWeight(value)}
                     ></TextInput>
                      {

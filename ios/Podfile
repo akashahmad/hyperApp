@@ -47,6 +47,8 @@ target 'hyperApp' do
 
   pod 'react-native-ble-plx', :path => '../node_modules/react-native-ble-plx'
 
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
   target 'hyperAppTests' do
     inherit! :search_paths
     # Pods for testing

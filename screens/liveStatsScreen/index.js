@@ -1,5 +1,5 @@
-import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput} from 'react-native';
-import React, {useState} from 'react';
+import { View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput } from 'react-native';
+import React, { useState,useContext } from 'react';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import BackTwo from '../../assets/images/back-two.png';
 import CircleOne from '../../assets/images/full-circle.png';
@@ -8,115 +8,118 @@ import CircleThree from '../../assets/images/circle-three.png';
 import CircleFour from '../../assets/images/circle-four.png';
 import GradientFire from '../../assets/images/gradient-fire.png';
 import GradientMuscle from '../../assets/images/gradient-muscle.png';
+import { GlobalContext } from '../../context/GlobalState';
 // import FlashMessage  from "react-native-flash-message";
 // import {GlobalProvider} from '../../context/GlobalState';
 // import AuthHandler from '../authHandler'
 
 const LiveStatsScreen = (props) => {
-    const {navigation} = props; 
+    
+    const {calories} = useContext(GlobalContext);
+    const { navigation } = props;
     return (
-        <View style={ styles.fullScreenView }>
-            <StatusBar backgroundColor="black" barStyle="light-content"/>
-            <View style={ styles.viewContainer }>
-                <View style={ styles.backButtonContainer }>
+        <View style={styles.fullScreenView}>
+            <StatusBar backgroundColor="black" barStyle="light-content" />
+            <View style={styles.viewContainer}>
+                <View style={styles.backButtonContainer}>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
-                        <Image source={ BackTwo } style={ styles.backImage }/>
+                        <Image source={BackTwo} style={styles.backImage} />
                     </TouchableOpacity>
                 </View>
-                <View style={ styles.liveStatsTitleSection }>
-                    <Text style={ styles.liveStatsText }>
+                <View style={styles.liveStatsTitleSection}>
+                    <Text style={styles.liveStatsText}>
                         LIVE STATS
                     </Text>
                 </View>
-                <View style={ styles.statsContainerWidth }>
-                    <View style={ styles.zoneInfoSection }>
-                        <View style={ styles.zoneNamePlusTimeSection }>
-                            <Text style={ styles.zoneTitle }>
+                <View style={styles.statsContainerWidth}>
+                    <View style={styles.zoneInfoSection}>
+                        <View style={styles.zoneNamePlusTimeSection}>
+                            <Text style={styles.zoneTitle}>
                                 WARM UP ZONE
                             </Text>
-                            <Text style={ styles.zoneTime }>
+                            <Text style={styles.zoneTime}>
                                 10:05
                             </Text>
                         </View>
-                        <View style={ styles.zoneCircleSection }>
-                            <Image source={ CircleTwo } style={ styles.circleOneImage }/>
-                            <Text style={ styles.zonePercentageTitle }>
+                        <View style={styles.zoneCircleSection}>
+                            <Image source={CircleTwo} style={styles.circleOneImage} />
+                            <Text style={styles.zonePercentageTitle}>
                                 0%-60%
                             </Text>
                         </View>
                     </View>
-                    <View style={ styles.zoneInfoSectionNext }>
-                        <View style={ styles.zoneNamePlusTimeSection }>
-                            <Text style={ styles.zoneTitle }>
+                    <View style={styles.zoneInfoSectionNext}>
+                        <View style={styles.zoneNamePlusTimeSection}>
+                            <Text style={styles.zoneTitle}>
                                 FAT BURNING ZONE
                             </Text>
-                            <Text style={ styles.zoneTime }>
+                            <Text style={styles.zoneTime}>
                                 8:27
                             </Text>
                         </View>
-                        <View style={ styles.zoneCircleSection }>
-                            <Image source={ CircleThree } style={ styles.circleOneImage }/>
-                            <Text style={ styles.zonePercentageTitle }>
+                        <View style={styles.zoneCircleSection}>
+                            <Image source={CircleThree} style={styles.circleOneImage} />
+                            <Text style={styles.zonePercentageTitle}>
                                 61%-75%
                             </Text>
                         </View>
                     </View>
-                    <View style={ styles.zoneInfoSectionNext }>
-                        <View style={ styles.zoneNamePlusTimeSection }>
-                            <Text style={ styles.zoneTitle }>
+                    <View style={styles.zoneInfoSectionNext}>
+                        <View style={styles.zoneNamePlusTimeSection}>
+                            <Text style={styles.zoneTitle}>
                                 PRO ATHLETE ZONE
                             </Text>
-                            <Text style={ styles.zoneTime }>
+                            <Text style={styles.zoneTime}>
                                 4:54
                             </Text>
                         </View>
-                        <View style={ styles.zoneCircleSection }>
-                            <Image source={ CircleFour } style={ styles.circleOneImage }/>
-                            <Text style={ styles.zonePercentageTitle }>
+                        <View style={styles.zoneCircleSection}>
+                            <Image source={CircleFour} style={styles.circleOneImage} />
+                            <Text style={styles.zonePercentageTitle}>
                                 76%-90%
                             </Text>
                         </View>
                     </View>
-                    <View style={ styles.zoneInfoSectionNext }>
-                        <View style={ styles.zoneNamePlusTimeSection }>
-                            <Text style={ styles.zoneTitle }>
+                    <View style={styles.zoneInfoSectionNext}>
+                        <View style={styles.zoneNamePlusTimeSection}>
+                            <Text style={styles.zoneTitle}>
                                 BEAST MODE
                             </Text>
-                            <Text style={ styles.zoneTime }>
+                            <Text style={styles.zoneTime}>
                                 2:03
                             </Text>
                         </View>
-                        <View style={ styles.zoneCircleSection }>
-                            <Image source={ CircleOne } style={ styles.circleOneImage }/>
-                            <Text style={ styles.zonePercentageTitle }>
+                        <View style={styles.zoneCircleSection}>
+                            <Image source={CircleOne} style={styles.circleOneImage} />
+                            <Text style={styles.zonePercentageTitle}>
                                 91%-100%
                             </Text>
                         </View>
                     </View>
-                    <View style={ styles.zoneInfoSectionNext }>
-                        <View style={ styles.zoneNamePlusTimeSection }>
-                            <Text style={ styles.zoneTitle }>
+                    <View style={styles.zoneInfoSectionNext}>
+                        <View style={styles.zoneNamePlusTimeSection}>
+                            <Text style={styles.zoneTitle}>
                                 CALORIES BURNED
                             </Text>
-                            <Text style={ styles.zoneTime }>
-                                72
+                            <Text style={styles.zoneTime}>
+                                {calories}
                             </Text>
                         </View>
-                        <View style={ styles.zoneCircleSection }>
-                            <Image source={ GradientFire } style={ styles.gradientFireImage }/>
+                        <View style={styles.zoneCircleSection}>
+                            <Image source={GradientFire} style={styles.gradientFireImage} />
                         </View>
                     </View>
-                    <View style={ styles.zoneInfoSectionNext }>
-                        <View style={ styles.zoneNamePlusTimeSection }>
-                            <Text style={ styles.zoneTitle }>
+                    <View style={styles.zoneInfoSectionNext}>
+                        <View style={styles.zoneNamePlusTimeSection}>
+                            <Text style={styles.zoneTitle}>
                                 INTENSITY LEVEL
                             </Text>
-                            <Text style={ styles.zoneTime }>
+                            <Text style={styles.zoneTime}>
                                 154
                             </Text>
                         </View>
-                        <View style={ styles.zoneCircleSection }>
-                            <Image source={ GradientMuscle } style={ styles.gradientFireImage }/>
+                        <View style={styles.zoneCircleSection}>
+                            <Image source={GradientMuscle} style={styles.gradientFireImage} />
                         </View>
                     </View>
                 </View>

@@ -11,9 +11,7 @@ const initialState = {
     connectDevice: "CONNECT SHIRT",
     deviceId: "",
     mainScreen: "home",
-    minutes: 0,
-    seconds: 0,
-    pauseStatus: false,
+    calories: 0,
 }
 
 // Create context
@@ -64,24 +62,13 @@ export const GlobalProvider = ({ children }) => {
             payload: value
         });
     }
-    function setMinutes(minutes) {
+    function setCalories(calories) {
         dispatch({
-            type: 'SET_MINUTES',
-            payload: minutes
+            type: 'SET_CALORIES',
+            payload: calories
         });
     }
-    function setSeconds(seconds) {
-        dispatch({
-            type: 'SET_SECONDS',
-            payload: seconds
-        });
-    }
-    function setPauseStatus(pauseStatus) {
-        dispatch({
-            type: 'SET_PAUSE_STATUS',
-            payload: pauseStatus
-        });
-    }
+
 
     function setConnectDevice(connectDevice) {
         dispatch({
@@ -106,12 +93,8 @@ export const GlobalProvider = ({ children }) => {
         hrm: state.hrm,
         connectDevice: state.connectDevice,
         deviceId: state.deviceId,
-        minutes: state.minutes,
-        seconds: state.seconds,
-        pauseStatus: state.pauseStatus,
-        setMinutes,
-        setSeconds,
-        setPauseStatus,
+        calories: state.calories,
+        setCalories,
         setDeviceId,
         setConnectDevice,
         setHrm,
