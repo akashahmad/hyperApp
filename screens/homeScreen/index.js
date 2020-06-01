@@ -24,10 +24,10 @@ import Worker from '../../utils/worker'
 let second = 0;
 let minute = 0;
 let pause = false;
-let age=0;
+let age = 0;
 const Homescreen = (props) => {
     const { navigation } = props;
-    const { user, hrm, setPauseStatus, pauseStatus, setSeconds, seconds, setMinutes, minutes } = useContext(GlobalContext);
+    const { user, hrm, calories, setCalories } = useContext(GlobalContext);
     const [heartrate, setHeartrate] = useState('')
     const [hrmPercentage, setHrmPercentage] = useState('')
 
@@ -76,6 +76,13 @@ const Homescreen = (props) => {
                 second = 0
                 setSec(0)
                 setMin(minute)
+                setCalories(
+                    user.gender === "male" ?
+                        ((((parseInt(age) * 0.2017) + (parseInt(hrm) * 0.6309) - (((user.weight) / 2.2046) * 0.09036)) - 55.0969) * parseInt(minute) / 4.184).toFixed(2) :
+                        ((((parseInt(age) * 0.074) + (parseInt(hrm) * 0.4472) - ((parseInt(user.weight) / 2.2046) * 0.05741)) - 20.4022) * parseInt(minute) / 4.184).toFixed(2)
+                )
+                console.log(minute)
+                console.log(calories)
             }
             setTimeout(() => {
 
@@ -106,9 +113,7 @@ const Homescreen = (props) => {
                     <View style={styles.caloriesSection}>
                         <Image source={NewFire} style={styles.caloriesImage} />
                         {user && hrm ? <Text style={styles.timeSubtitle}>
-                            {user.gender === "male" ?
-                                ((((parseInt(age) * 0.2017) + (parseInt(hrm) * 0.6309) - (((user.weight) / 2.2046) * 0.09036)) - 55.0969) * parseInt(min) / 4.184) :
-                                    ((((parseInt(age) * 0.074) + (parseInt(hrm) * 0.4472) - ((parseInt(user.weight) / 2.2046) * 0.05741)) - 20.4022) * parseInt(min) / 4.184)}
+                            {calories ? calories : 0}
                         </Text> : <Text style={styles.timeSubtitle}>
                                 0
                             </Text>}
@@ -137,7 +142,7 @@ const Homescreen = (props) => {
                     </Text>
                 </View> */}
 
-                <View style={ styles.circleProgressBarSection }>
+                <View style={styles.circleProgressBarSection}>
                     <ProgressCircle
                         percent={hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) : 0}
                         radius={170}
@@ -310,14 +315,14 @@ const styles = StyleSheet.create({
         width: 80,
         height: 80,
         backgroundColor: 'white',
-      },
-      innerCircle: {
+    },
+    innerCircle: {
         borderRadius: 35,
         width: 70,
         height: 70,
         margin: 5,
         backgroundColor: 'black'
-      },
+    },
 
     circleOneImage: {
         width: 300,
