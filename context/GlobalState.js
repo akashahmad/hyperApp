@@ -12,6 +12,8 @@ const initialState = {
     deviceId: "",
     mainScreen: "home",
     calories: 0,
+    seconds: 0,
+    minutes: 0,
 }
 
 // Create context
@@ -68,7 +70,18 @@ export const GlobalProvider = ({ children }) => {
             payload: calories
         });
     }
-
+    function setSeconds(seconds) {
+        dispatch({
+            type: 'SET_SECONDS',
+            payload: seconds
+        });
+    }
+    function setMinutes(minutes) {
+        dispatch({
+            type: 'SET_MINUTES',
+            payload: minutes
+        });
+    }
 
     function setConnectDevice(connectDevice) {
         dispatch({
@@ -94,7 +107,11 @@ export const GlobalProvider = ({ children }) => {
         connectDevice: state.connectDevice,
         deviceId: state.deviceId,
         calories: state.calories,
+        seconds: state.seconds,
+        minutes: state.minutes,
         setCalories,
+        setSeconds,
+        setMinutes,
         setDeviceId,
         setConnectDevice,
         setHrm,

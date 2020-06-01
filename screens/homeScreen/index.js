@@ -28,7 +28,7 @@ let age = 0;
 let calorie;
 const Homescreen = (props) => {
     const { navigation } = props;
-    const { user, hrm, calories, setCalories } = useContext(GlobalContext);
+    const { user, hrm, calories, setCalories, setSeconds, setMinutes } = useContext(GlobalContext);
     const [heartrate, setHeartrate] = useState('')
     const [hrmPercentage, setHrmPercentage] = useState('')
 
@@ -77,13 +77,12 @@ const Homescreen = (props) => {
                 second = 0
                 setSec(0)
                 setMin(minute)
-                calorie=(
+                calorie = (
                     user.gender === "male" ?
                         ((parseInt(age) * 0.2017) + (parseInt(hrm) * 0.6309) - (((user.weight) / 2.2046) * 0.09036) - 55.0969) * (parseInt(minute) / 4.184) :
                         ((parseInt(age) * 0.074) + (parseInt(hrm) * 0.4472) - (((user.weight) / 2.2046) * 0.05741) - 20.4022) * (parseInt(minute) / 4.184)
                 )
-                if(calorie < 0)
-                {
+                if (calorie < 0) {
                     setCalories(.5)
                 }
                 else {
@@ -98,6 +97,14 @@ const Homescreen = (props) => {
             }, 1000);
         }
 
+    }
+    const endWorkout = () => {
+        setMinutes(min)
+        setSeconds(sec)
+        setSec(0)
+        setMin(0)
+        minute = 0;
+        second;
     }
     return (
         <View style={styles.fullScreenView}>
@@ -173,22 +180,19 @@ const Homescreen = (props) => {
                     </Text>
                 </View>
                 <View style={styles.startButtonSection}>
-                    <TouchableOpacity style={styles.startCircle} onPress={startTimer}>
-                        <Text style={styles.startText}>{pausing ? "PAUSE" : "START"}</Text>
+                    {pausing ? <View><TouchableOpacity style={styles.startCircle} onPress={startTimer}>
+                        <Image source={Pause} style={styles.pauseImage} />
                     </TouchableOpacity>
+                        <TouchableOpacity style={styles.endWorkoutContainer} onPress={endWorkout}>
+                            <Text style={styles.endWorkoutText}>
+                                END WORKOUT
+                            </Text>
+                        </TouchableOpacity></View> : <TouchableOpacity style={styles.startCircle} onPress={startTimer}>
+                            <Text style={styles.startText}>START</Text>
+                        </TouchableOpacity>
 
-                    {/* Show when user taps START */}
-                    {/* <TouchableOpacity style={styles.startCircle}>
-                        <Image source={ Pause } style={ styles.pauseImage }/>
-                    </TouchableOpacity> */}
 
-                    {/* Show when user taps PAUSE */}
-                    {/* <TouchableOpacity style={styles.endWorkoutContainer}>
-                        <Text style={styles.endWorkoutText}>
-                            END WORKOUT
-                        </Text>
-                    </TouchableOpacity> */}
-
+                    }
                 </View>
                 {/* No Signal Section */}
                 {/* <View style={ styles.pairDeviceSection }>

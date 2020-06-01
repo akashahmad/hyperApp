@@ -17,7 +17,7 @@ import Mind from '../../assets/images/blown-mind.png';
 
 const LiveStatsScreen = (props) => { 
     
-    const {calories} = useContext(GlobalContext);
+    const {calories,minutes,seconds} = useContext(GlobalContext);
     const {navigation} = props; 
     return (
         <View style={ styles.fullScreenView }>
@@ -41,7 +41,7 @@ const LiveStatsScreen = (props) => {
                             </Text>
                             <View style={ styles.statImageContainer }>
                                 <Text style={ styles.liveStat }>
-                                    30:54
+                                    {minutes}:{seconds}
                                 </Text>
                                 <Image source={ StatsClock } style={ styles.clockImage }/>
                             </View>

@@ -24,7 +24,10 @@ export default (state, action) => {
             return { ...state, deviceId: action.payload };
         case "SET_CALORIES":
             return { ...state, calories: action.payload };
-       
+        case "SET_SECONDS":
+            return { ...state, seconds: action.payload };
+        case "SET_MINUTES":
+            return { ...state, minutes: action.payload };
         default:
             return state;
     }
