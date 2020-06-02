@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput, Dimensions } from 'react-native';
+import { View, StyleSheet, Text, ScrollView,Alert, Image, TouchableOpacity, StatusBar, TextInput, Dimensions } from 'react-native';
 import React, { useState, useEffect, useContext } from 'react';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import LinearGradient from 'react-native-linear-gradient';
@@ -31,7 +31,8 @@ const Homescreen = (props) => {
     const { user, hrm, calories, setCalories, setSeconds, setMinutes } = useContext(GlobalContext);
     const [heartrate, setHeartrate] = useState('')
     const [hrmPercentage, setHrmPercentage] = useState('')
-
+    const [resume, setResume] = useState('Start')
+    const [checkResume, setCheckResume] = useState(false)
     const [sec, setSec] = useState(0)
     const [min, setMin] = useState(0)
     const [time, setTime] = useState(0)
@@ -57,26 +58,52 @@ const Homescreen = (props) => {
         setHrmPercentage((parseInt(hrm) / heartrate) * 100)
     }, []);
     const startTimer = () => {
+
         let check = pause
         pause = !pause;
         setPausing(!pausing)
         if (!check) {
+            setResume("RESUME")
+            setCheckResume(true)
             recursiveTimer(true)
         }
     }
+    const endWorkoutPopup = () => {
+        Alert.alert(
+            'Alert',
+            "Are You sure you want to end Workout",
+            [
+                {
+                    text: 'Yes',
+                    onPress: () =>endWorkout()
+                },
+                {
+                    text: 'CANCEL',
+                    style: 'cancel',
+                    onPress: ()=>()=>{}
+                }
+            ],
+        );
+    };
     const recursiveTimer = (check) => {
         console.log("pausing", pausing)
         if (pause || check) {
             if (second < 59) {
                 second = second + 1
                 setSec(second)
+                setSeconds(second)
+                
+                setMinutes(minute)
             }
+
             else {
                 // console.log("checkelse", seconds)
                 minute = minute + 1
                 second = 0
                 setSec(0)
                 setMin(minute)
+                setMinutes(minute)
+                setSeconds(0)
                 calorie = (
                     user.gender === "male" ?
                         ((parseInt(age) * 0.2017) + (parseInt(hrm) * 0.6309) - (((user.weight) / 2.2046) * 0.09036) - 55.0969) * (parseInt(minute) / 4.184) :
@@ -99,12 +126,17 @@ const Homescreen = (props) => {
 
     }
     const endWorkout = () => {
-        setMinutes(min)
-        setSeconds(sec)
+        setCheckResume(false)
+        setResume("START")
+        pause = false;
+        setPausing(false)
+        setMinutes(0)
+        setSeconds(0)
         setSec(0)
         setMin(0)
         minute = 0;
-        second;
+        second = 0;
+        navigation.navigate('WorkOutSummary')
     }
     return (
         <View style={styles.fullScreenView}>
@@ -177,20 +209,25 @@ const Homescreen = (props) => {
                 <View style={styles.bigZoneTitleSection}>
                     <Text style={styles.bigZoneTitle}>
                         {
-                            hrm && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) <= 100 && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) >=91 ? "BEAST MODE":(hrm && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) <= 90 && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) >=76 ? "PRO ATHLETE ZONE":(hrm && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) <= 75 && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) >=61 ? "FAT BURNING ZONE":"WARM UP ZONE"))}
+                            hrm && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) <= 100 && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) >= 91 ? "BEAST MODE" : (hrm && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) <= 90 && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) >= 76 ? "PRO ATHLETE ZONE" : (hrm && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) <= 75 && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) >= 61 ? "FAT BURNING ZONE" : "WARM UP ZONE"))}
                     </Text>
                 </View>
                 <View style={styles.startButtonSection}>
                     {pausing ? <View><TouchableOpacity style={styles.startCircle} onPress={startTimer}>
                         <Image source={Pause} style={styles.pauseImage} />
                     </TouchableOpacity>
-                        <TouchableOpacity style={styles.endWorkoutContainer} onPress={endWorkout}>
+                        <TouchableOpacity style={styles.endWorkoutContainer} onPress={endWorkoutPopup}>
                             <Text style={styles.endWorkoutText}>
                                 END WORKOUT
                             </Text>
-                        </TouchableOpacity></View> : <TouchableOpacity style={styles.startCircle} onPress={startTimer}>
-                            <Text style={styles.startText}>START</Text>
+                        </TouchableOpacity></View> : <View><TouchableOpacity style={styles.startCircle} onPress={startTimer}>
+                            <Text style={styles.startText}>{resume}</Text>
                         </TouchableOpacity>
+                            {checkResume ? <TouchableOpacity style={styles.endWorkoutContainer} onPress={endWorkoutPopup}>
+                                <Text style={styles.endWorkoutText}>
+                                    END WORKOUT
+                            </Text>
+                            </TouchableOpacity>:<View></View>}</View>
 
 
                     }

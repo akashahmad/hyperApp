@@ -41,7 +41,7 @@ const LiveStatsScreen = (props) => {
                             </Text>
                             <View style={ styles.statImageContainer }>
                                 <Text style={ styles.liveStat }>
-                                    {minutes}:{seconds}
+                                    {('0' + (minutes)).slice(-2) + ':' + ('0' + (seconds)).slice(-2)}
                                 </Text>
                                 <Image source={ StatsClock } style={ styles.clockImage }/>
                             </View>

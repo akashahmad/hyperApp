@@ -15,6 +15,7 @@ import WorkOutSummary from "../workoutSummary";
 import HRGuide from "../hrGuideScreen";
 import WorkoutHistory from "../workoutHistory";
 import PairShirt from "../pairShirtScreen";
+ 
 // import firebase from "../../utils/firebase";
 
 
@@ -92,6 +93,7 @@ const AppStack = createStackNavigator({
             headerTitle: " "
         })
     },
+   
 
     PairShirt: {
         screen: PairShirt,

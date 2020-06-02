@@ -11,12 +11,16 @@ import Share from '../../assets/images/share.png';
 import {GlobalProvider} from '../../context/GlobalState';
 import AuthHandler from '../authHandler'
 
-const WorkoutSummary: () => React$Node = () => {
+const WorkoutSummary = (props) => {
+    const {navigation} = props; 
     return (
         <View style={ styles.fullScreenView }>
             <StatusBar backgroundColor="black" barStyle="light-content"/>
             <View style={ styles.viewContainer }>
+                
+            <TouchableOpacity onPress={() => navigation.goBack()}>
                 <Image source={ Close } style={ styles.closeImage }/>
+                </TouchableOpacity>
                 <View style={ styles.liveStatsTitleSection }>
                     <Text style={ styles.liveStatsText }>
                         WORKOUT SUMMARY
