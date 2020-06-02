@@ -176,7 +176,8 @@ const Homescreen = (props) => {
                 </View>
                 <View style={styles.bigZoneTitleSection}>
                     <Text style={styles.bigZoneTitle}>
-                        WARM UP ZONE
+                        {
+                            hrm && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) <= 100 && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) >=91 ? "BEAST MODE":(hrm && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) <= 90 && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) >=76 ? "PRO ATHLETE ZONE":(hrm && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) <= 75 && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) >=61 ? "FAT BURNING ZONE":"WARM UP ZONE"))}
                     </Text>
                 </View>
                 <View style={styles.startButtonSection}>
