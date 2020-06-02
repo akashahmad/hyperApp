@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, ScrollView,Alert, Image, TouchableOpacity, StatusBar, TextInput, Dimensions } from 'react-native';
+import { View, StyleSheet, Text, ScrollView, Alert, Image, TouchableOpacity, StatusBar, TextInput, Dimensions } from 'react-native';
 import React, { useState, useEffect, useContext } from 'react';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import LinearGradient from 'react-native-linear-gradient';
@@ -21,6 +21,7 @@ import { GlobalContext } from '../../context/GlobalState';
 import ProgressCircle from 'react-native-progress-circle';
 import Workers from '../../utils/workers'
 import Worker from '../../utils/worker'
+import AnimatedCircularProgress from 'react-native-conical-gradient-progress';
 let second = 0;
 let minute = 0;
 let pause = false;
@@ -75,12 +76,12 @@ const Homescreen = (props) => {
             [
                 {
                     text: 'Yes',
-                    onPress: () =>endWorkout()
+                    onPress: () => endWorkout()
                 },
                 {
                     text: 'CANCEL',
                     style: 'cancel',
-                    onPress: ()=>()=>{}
+                    onPress: () => () => { }
                 }
             ],
         );
@@ -92,7 +93,7 @@ const Homescreen = (props) => {
                 second = second + 1
                 setSec(second)
                 setSeconds(second)
-                
+
                 setMinutes(minute)
             }
 
@@ -188,23 +189,37 @@ const Homescreen = (props) => {
                         {heartrate}
                     </Text>
                 </View> */}
-
+                
                 <View style={styles.circleProgressBarSection}>
-                    <ProgressCircle
+                <AnimatedCircularProgress
+                    size={350}
+                    width={15}
+                    fill={hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) : 50}
+                    segments={4}
+                    beginColor="#3399FF"
+                    endColor="#63FFCF"
+                    backgroundColor="rgba(169, 169, 169, 0.1)"
+                    linecap="round"
+                >
+                    {/* <ProgressCircle
                         percent={hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) : 0}
                         radius={170}
                         borderWidth={20}
                         color="#3399FF"
                         shadowColor="#63FFCF"
                         bgColor="black"
-                    >
+                    > */}
+                    {fill => (
+                        <View style={styles.titleBox}>
                         <Text style={styles.percentageTitle}>{hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) + '%' : "Connect"} </Text>
                         <Text style={styles.bpmSubtitle}>{hrm ? hrm : 0} BPM</Text>
-
+                        </View> )}
                         {/* Show when device hasn't paired */}
                         {/* <Image source={LookingForHeart} style={styles.lookingForHeartImage} /> */}
-
-                    </ProgressCircle>
+                       
+{/* 
+                    </ProgressCircle> */}
+                    </AnimatedCircularProgress>
                 </View>
                 <View style={styles.bigZoneTitleSection}>
                     <Text style={styles.bigZoneTitle}>
@@ -227,7 +242,7 @@ const Homescreen = (props) => {
                                 <Text style={styles.endWorkoutText}>
                                     END WORKOUT
                             </Text>
-                            </TouchableOpacity>:<View></View>}</View>
+                            </TouchableOpacity> : <View></View>}</View>
 
 
                     }
@@ -273,7 +288,25 @@ const styles = StyleSheet.create({
         marginTop: 20,
         // marginTop: '5%',
     },
-
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#4FC87A',
+      },
+      titleBox: {
+        ...StyleSheet.absoluteFillObject,
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      title: {
+        fontSize: 10,
+        color: 'white',
+        textAlign: 'center',
+      },
+      box: {
+        margin: 10,
+      },
     menuImage: {
         width: 22,
         height: 20,
