@@ -27,6 +27,7 @@ let minute = 0;
 let pause = false;
 let age = 0;
 let calorie;
+
 const Homescreen = (props) => {
     const { navigation } = props;
     const { user, hrm, calories, setCalories, setSeconds, setMinutes } = useContext(GlobalContext);
@@ -38,7 +39,7 @@ const Homescreen = (props) => {
     const [min, setMin] = useState(0)
     const [time, setTime] = useState(0)
     const [pausing, setPausing] = useState(false)
-
+console.log(Dimensions.get('window').width)
     useEffect(() => {
         // const worker = new Workers(worker);
         let year = new Date().getFullYear()
@@ -192,8 +193,10 @@ const Homescreen = (props) => {
                 
                 <View style={styles.circleProgressBarSection}>
                 <AnimatedCircularProgress
-                    size={350}
-                    width={20}
+                    // size={350}
+                    // width={20}
+                    size={parseInt(Dimensions.get('window').width)*0.50}
+                    width={15}
                     fill={hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) : 50}
                     segments={4}
                     beginColor="#55CBFF"
