@@ -32,7 +32,7 @@ const Homescreen = (props) => {
     const { user, hrm, calories, setCalories, setSeconds, setMinutes } = useContext(GlobalContext);
     const [heartrate, setHeartrate] = useState('')
     const [hrmPercentage, setHrmPercentage] = useState('')
-    const [resume, setResume] = useState('Start')
+    const [resume, setResume] = useState('START')
     const [checkResume, setCheckResume] = useState(false)
     const [sec, setSec] = useState(0)
     const [min, setMin] = useState(0)
@@ -193,12 +193,12 @@ const Homescreen = (props) => {
                 <View style={styles.circleProgressBarSection}>
                 <AnimatedCircularProgress
                     size={350}
-                    width={15}
+                    width={20}
                     fill={hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) : 50}
                     segments={4}
-                    beginColor="#3399FF"
-                    endColor="#63FFCF"
-                    backgroundColor="rgba(169, 169, 169, 0.1)"
+                    beginColor="#55CBFF"
+                    endColor="#63FFC3"
+                    backgroundColor="rgba(255, 255, 255, 0.10)"
                     linecap="round"
                 >
                     {/* <ProgressCircle
@@ -386,7 +386,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 50
+        marginTop: 50,
         // marginTop: '10%',
         // backgroundColor: 'blue',
         // width: '100%',
