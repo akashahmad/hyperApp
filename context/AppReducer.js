@@ -28,6 +28,30 @@ export default (state, action) => {
             return { ...state, seconds: action.payload };
         case "SET_MINUTES":
             return { ...state, minutes: action.payload };
+        case "SET_WARMUP_MINUTES":
+            return { ...state, warmUpMinutes: action.payload };
+
+        case "SET_WARMUP_SECONDS":
+            return { ...state, warmUpSeconds: action.payload };
+
+        case "SET_FATBURNING_MINUTES":
+            return { ...state, fatBurningMinutes: action.payload };
+
+        case "SET_FATBURNING_SECONDS":
+            return { ...state, fatBurningSeconds: action.payload };
+
+        case "SET_PROATHLETE_MINUTES":
+            return { ...state, proAthleteMinutes: action.payload };
+
+        case "SET_PROATHLETE_SECONDS":
+            return { ...state, proAthleteSeconds: action.payload };
+
+        case "SET_BEAST_MINUTES":
+            return { ...state, beastMinutes: action.payload };
+
+        case "SET_BEAST_SECONDS":
+            return { ...state, beastSeconds: action.payload };
+
         default:
             return state;
     }

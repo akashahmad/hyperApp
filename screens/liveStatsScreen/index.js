@@ -17,7 +17,7 @@ import Mind from '../../assets/images/blown-mind.png';
 
 const LiveStatsScreen = (props) => { 
     
-    const {calories,minutes,seconds} = useContext(GlobalContext);
+    const {calories,minutes,seconds,beastSeconds,beastMinutes,proAthleteSeconds,proAthleteMinutes,fatBurningSeconds,fatBurningMinutes,warmUpSeconds, warmUpMinutes} = useContext(GlobalContext);
     const {navigation} = props; 
     return (
         <View style={ styles.fullScreenView }>
@@ -65,7 +65,7 @@ const LiveStatsScreen = (props) => {
                             </Text>
                             <View style={ styles.statImageContainer }>
                                 <Text style={ styles.liveStat }>
-                                    10:05
+                                {('0' + (warmUpMinutes)).slice(-2) + ':' + ('0' + (warmUpSeconds)).slice(-2)}
                                 </Text>
                                 <Image source={ One } style={ styles.clockImage } />
                             </View>
@@ -76,7 +76,7 @@ const LiveStatsScreen = (props) => {
                             </Text>
                             <View style={ styles.statImageContainer }>
                                 <Text style={ styles.liveStat }>
-                                    8:25
+                                {('0' + (fatBurningMinutes)).slice(-2) + ':' + ('0' + (fatBurningSeconds)).slice(-2)}
                                 </Text>
                                 <Image source={ Two } style={ styles.clockImage }/>
                             </View>
@@ -89,7 +89,7 @@ const LiveStatsScreen = (props) => {
                             </Text>
                             <View style={ styles.statImageContainer }>
                                 <Text style={ styles.liveStat }>
-                                    4:13
+                                {('0' + (proAthleteMinutes)).slice(-2) + ':' + ('0' + (proAthleteSeconds)).slice(-2)}
                                 </Text>
                                 <Image source={ Three } style={ styles.clockImage } />
                             </View>
@@ -100,7 +100,8 @@ const LiveStatsScreen = (props) => {
                             </Text>
                             <View style={ styles.statImageContainer }>
                                 <Text style={ styles.liveStat }>
-                                    6:42
+                                   
+                                {('0' + (beastMinutes)).slice(-2) + ':' + ('0' + (beastSeconds)).slice(-2)}
                                 </Text>
                                 <Image source={ Four } style={ styles.clockImage }/>
                             </View>
