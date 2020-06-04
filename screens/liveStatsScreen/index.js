@@ -41,7 +41,7 @@ const LiveStatsScreen = (props) => {
                             </Text>
                             <View style={ styles.statImageContainer }>
                                 <Text style={ styles.liveStat }>
-                                    {('0' + (minutes)).slice(-2) + ':' + ('0' + (seconds)).slice(-2)}
+                                    {(minutes) + ':' + ('0' + (seconds)).slice(-2)}
                                 </Text>
                                 <Image source={ StatsClock } style={ styles.clockImage }/>
                             </View>
@@ -65,7 +65,7 @@ const LiveStatsScreen = (props) => {
                             </Text>
                             <View style={ styles.statImageContainer }>
                                 <Text style={ styles.liveStat }>
-                                {('0' + (warmUpMinutes)).slice(-2) + ':' + ('0' + (warmUpSeconds)).slice(-2)}
+                                {(warmUpMinutes) + ':' + ('0' + (warmUpSeconds)).slice(-2)}
                                 </Text>
                                 <Image source={ One } style={ styles.clockImage } />
                             </View>
@@ -76,7 +76,7 @@ const LiveStatsScreen = (props) => {
                             </Text>
                             <View style={ styles.statImageContainer }>
                                 <Text style={ styles.liveStat }>
-                                {('0' + (fatBurningMinutes)).slice(-2) + ':' + ('0' + (fatBurningSeconds)).slice(-2)}
+                                {(fatBurningMinutes) + ':' + ('0' + (fatBurningSeconds)).slice(-2)}
                                 </Text>
                                 <Image source={ Two } style={ styles.clockImage }/>
                             </View>
@@ -89,7 +89,7 @@ const LiveStatsScreen = (props) => {
                             </Text>
                             <View style={ styles.statImageContainer }>
                                 <Text style={ styles.liveStat }>
-                                {('0' + (proAthleteMinutes)).slice(-2) + ':' + ('0' + (proAthleteSeconds)).slice(-2)}
+                                {(proAthleteMinutes) + ':' + ('0' + (proAthleteSeconds)).slice(-2)}
                                 </Text>
                                 <Image source={ Three } style={ styles.clockImage } />
                             </View>
@@ -101,7 +101,7 @@ const LiveStatsScreen = (props) => {
                             <View style={ styles.statImageContainer }>
                                 <Text style={ styles.liveStat }>
                                    
-                                {('0' + (beastMinutes)).slice(-2) + ':' + ('0' + (beastSeconds)).slice(-2)}
+                                {(beastMinutes) + ':' + ('0' + (beastSeconds)).slice(-2)}
                                 </Text>
                                 <Image source={ Four } style={ styles.clockImage }/>
                             </View>

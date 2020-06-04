@@ -241,7 +241,7 @@ const Homescreen = (props) => {
                     <View style={styles.clockSection}>
                         <Image source={NewClock} style={styles.clockImage} />
                         <Text style={styles.timeSubtitle}>
-                            {('0' + (min)).slice(-2) + ':' + ('0' + (sec)).slice(-2)}
+                            {(min) + ':' + ('0' + (sec)).slice(-2)}
                         </Text>
                     </View>
                     <View style={styles.caloriesSection}>
