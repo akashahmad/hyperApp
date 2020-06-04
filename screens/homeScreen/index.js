@@ -8,6 +8,7 @@ import Clock from '../../assets/images/clock.png';
 import Calories from '../../assets/images/calories.png';
 import Muscle from '../../assets/images/muscle.png';
 import CircleOne from '../../assets/images/zone-circle.png';
+import StartButtonCircle from '../../assets/images/start-button-circle.png';
 import Signal from '../../assets/images/signal.png';
 import Pause from '../../assets/images/pause.png';
 import NewClock from '../../assets/images/new-clock.png';
@@ -195,14 +196,15 @@ console.log(Dimensions.get('window').width)
                 <AnimatedCircularProgress
                     // size={350}
                     // width={20}
-                    size={parseInt(Dimensions.get('window').width)*0.50}
-                    width={15}
+                    size={parseInt(Dimensions.get('window').width)*0.80}
+                    width={20}
                     fill={hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) : 50}
                     segments={4}
                     beginColor="#55CBFF"
                     endColor="#63FFC3"
                     backgroundColor="rgba(255, 255, 255, 0.10)"
                     linecap="round"
+                    style={styles.circularProgressBar}
                 >
                     {/* <ProgressCircle
                         percent={hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) : 0}
@@ -230,6 +232,7 @@ console.log(Dimensions.get('window').width)
                             hrm && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) <= 100 && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) >= 91 ? "BEAST MODE" : (hrm && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) <= 90 && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) >= 76 ? "PRO ATHLETE ZONE" : (hrm && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) <= 75 && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) >= 61 ? "FAT BURNING ZONE" : "WARM UP ZONE"))}
                     </Text>
                 </View>
+
                 <View style={styles.startButtonSection}>
                     {pausing ? <View><TouchableOpacity style={styles.startCircle} onPress={startTimer}>
                         <Image source={Pause} style={styles.pauseImage} />
@@ -250,6 +253,7 @@ console.log(Dimensions.get('window').width)
 
                     }
                 </View>
+
                 {/* No Signal Section */}
                 {/* <View style={ styles.pairDeviceSection }>
                     <Image source={ Signal } style={ styles.signalImage }/>
@@ -389,11 +393,14 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 50,
-        // marginTop: '10%',
-        // backgroundColor: 'blue',
+        // marginTop: 50,
+        // backgroundColor: 'red',
         // width: '100%',
         // height: '55%'
+    },
+
+    circularProgressBar: {
+        marginTop: '15%',
     },
 
     outerCircle: {
@@ -420,20 +427,22 @@ const styles = StyleSheet.create({
 
     percentageTitle: {
         color: 'white',
-        fontSize: 65,
+        // fontSize: 65,
         fontFamily: 'Biryani-Black',
         textAlign: 'center',
-        position: 'absolute'
+        position: 'absolute',
+        fontSize: RFPercentage(8)
     },
 
     bpmSubtitle: {
         color: 'white',
-        fontSize: 17,
+        // fontSize: 17,
         fontFamily: 'Biryani-Bold',
         opacity: 0.23,
         textAlign: 'center',
         position: 'absolute',
-        paddingTop: 100
+        paddingTop: 100,
+        fontSize: RFPercentage(2.1)
     },
 
     lookingForHeartImage: {
@@ -466,13 +475,15 @@ const styles = StyleSheet.create({
     },
 
     bigZoneTitleSection: {
-        marginTop: 30,
+        // marginTop: 30,
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        // backgroundColor: 'blue'
     },
 
     bigZoneTitle: {
+        marginTop: '7%',
         color: 'white',
         // fontSize: 32,
         fontFamily: 'Biryani-Black',
@@ -483,7 +494,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        bottom: 20,
+        // bottom: 20,
+        bottom: '2.5%',
         position: 'absolute',
         width: '100%'
     },
