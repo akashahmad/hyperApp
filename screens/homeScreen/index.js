@@ -259,6 +259,18 @@ const Homescreen = (props) => {
         setSeconds(0)
         setSec(0)
         setMin(0)
+        setWarmUpMinutes(0)
+        setWarmUpSeconds(0)
+        setFatBurningMinutes(0)
+        setFatBurningSeconds(0)
+        setProAthleteMinutes(0)
+        setProAthleteSeconds(0)
+        setBeastMinutes(0)
+        setBeastSeconds(0)
+        setIntensityMinutes(0)
+        setIntensitySeconds(0)
+        setIntensityMinutes2(0)
+        setIntensitySeconds2(0)
         minute = 0;
         second = 0;
         navigation.navigate('WorkOutSummary')
