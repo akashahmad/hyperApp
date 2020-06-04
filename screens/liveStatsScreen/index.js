@@ -17,7 +17,7 @@ import Mind from '../../assets/images/blown-mind.png';
 
 const LiveStatsScreen = (props) => { 
     
-    const {calories,minutes,seconds,beastSeconds,beastMinutes,proAthleteSeconds,proAthleteMinutes,fatBurningSeconds,fatBurningMinutes,warmUpSeconds, warmUpMinutes} = useContext(GlobalContext);
+    const {calories,minutes,seconds,beastSeconds,beastMinutes,proAthleteSeconds,proAthleteMinutes,fatBurningSeconds,fatBurningMinutes,warmUpSeconds, warmUpMinutes,intensity,avergaeHeartRate} = useContext(GlobalContext);
     const {navigation} = props; 
     return (
         <View style={ styles.fullScreenView }>
@@ -52,7 +52,7 @@ const LiveStatsScreen = (props) => {
                             </Text>
                             <View style={ styles.statImageContainer }>
                                 <Text style={ styles.liveStat }>
-                                    53
+                                    {avergaeHeartRate}
                                 </Text>
                                 <Image source={ StatsHeart } style={ styles.clockImage }/>
                             </View>
@@ -125,7 +125,7 @@ const LiveStatsScreen = (props) => {
                             </Text>
                             <View style={ styles.statImageContainer }>
                                 <Text style={ styles.liveStat }>
-                                    12
+                                    {intensity}
                                 </Text>
                                 <Image source={ Mind } style={ styles.clockImage }/>
                             </View>

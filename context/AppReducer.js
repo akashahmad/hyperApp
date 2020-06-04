@@ -52,6 +52,22 @@ export default (state, action) => {
         case "SET_BEAST_SECONDS":
             return { ...state, beastSeconds: action.payload };
 
+        case "SET_INTENSITY":
+            return { ...state, intensity: action.payload };
+
+        case "SET_INTENSITY_MINUTES":
+            return { ...state, intensityMinutes: action.payload };
+
+        case "SET_INTENSITY_SECONDS":
+            return { ...state, intensitySeconds: action.payload };
+        case "SET_INTENSITY_MINUTES2":
+            return { ...state, intensityMinutes2: action.payload };
+
+        case "SET_INTENSITY_SECONDS2":
+            return { ...state, intensitySeconds2: action.payload };
+        case "SET_AVERAGE_HEARTRATE":
+            return { ...state, avergaeHeartRate: action.payload };
+
         default:
             return state;
     }

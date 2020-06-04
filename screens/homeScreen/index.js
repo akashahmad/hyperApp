@@ -36,10 +36,17 @@ let localProAthleteMinutes = 0;
 let localProAthleteSeconds = 0;
 let localBeastMinutes = 0;
 let localBeastSeconds = 0;
+let localIntensity = 0;
+let localIntensityMinutes = 0;
+let localIntensitySeconds = 0;
+let localIntensityMinutes2 = 0;
+let localIntensitySeconds2 = 0;
+let localAverageHeartRateArray = [];
+let localAverageHeartRate = 0;
+let newHrm = 0;
 const Homescreen = (props) => {
     const { navigation } = props;
-
-    const { user, hrm, calories, setCalories, setSeconds, setMinutes, setWarmUpMinutes, setWarmUpSeconds, setFatBurningMinutes, setFatBurningSeconds, setProAthleteMinutes, setProAthleteSeconds, setBeastMinutes, setBeastSeconds, beastSeconds, beastMinutes, proAthleteSeconds, proAthleteMinutes, fatBurningSeconds, fatBurningMinutes, warmUpSeconds, warmUpMinutes } = useContext(GlobalContext);
+    const { user, hrm, calories, setCalories, setSeconds, setMinutes, setWarmUpMinutes, setWarmUpSeconds, setFatBurningMinutes, setFatBurningSeconds, setProAthleteMinutes, setProAthleteSeconds, setBeastMinutes, setBeastSeconds, setIntensity, setIntensityMinutes, setIntensitySeconds, setIntensityMinutes2, setIntensitySeconds2,setAverageHeartRate,avergaeHeartRate, intensitySeconds2, intensityMinutes2, intensitySeconds, intensityMinutes, intensity, beastSeconds, beastMinutes, proAthleteSeconds, proAthleteMinutes, fatBurningSeconds, fatBurningMinutes, warmUpSeconds, warmUpMinutes } = useContext(GlobalContext);
     const [heartrate, setHeartrate] = useState('')
     const [hrmPercentage, setHrmPercentage] = useState('')
     const [resume, setResume] = useState('START')
@@ -65,7 +72,7 @@ const Homescreen = (props) => {
             let heartrat = 206 - (0.88 * age)
             setHeartrate(heartrat)
         }
-        setHrmPercentage((parseInt(hrm) / heartrate) * 100)
+        setHrmPercentage((parseInt(newHrm) / heartrate) * 100)
     }, []);
     const startTimer = () => {
 
@@ -117,7 +124,7 @@ const Homescreen = (props) => {
 
     }
     const recursiveTimer = (check) => {
-        
+
         if (pause || check) {
 
 
@@ -138,11 +145,14 @@ const Homescreen = (props) => {
                 setMin(minute)
                 setMinutes(minute)
                 setSeconds(0)
-
+                localAverageHeartRateArray.push(newHrm)
+                localAverageHeartRate = localAverageHeartRateArray.reduce((a, b) => a + b, 0);
+                localAverageHeartRate = parseInt(localAverageHeartRate / localAverageHeartRateArray.length);
+                setAverageHeartRate(localAverageHeartRate)
                 calorie = (
                     user.gender === "male" ?
-                        ((parseInt(age) * 0.2017) + (parseInt(hrm) * 0.6309) - (((user.weight) / 2.2046) * 0.09036) - 55.0969) * (parseInt(minute) / 4.184) :
-                        ((parseInt(age) * 0.074) + (parseInt(hrm) * 0.4472) - (((user.weight) / 2.2046) * 0.05741) - 20.4022) * (parseInt(minute) / 4.184)
+                        ((parseInt(age) * 0.2017) + (parseInt(localAverageHeartRate) * 0.6309) - (((user.weight) / 2.2046) * 0.09036) - 55.0969) * (parseInt(minute) / 4.184) :
+                        ((parseInt(age) * 0.074) + (parseInt(localAverageHeartRate) * 0.4472) - (((user.weight) / 2.2046) * 0.05741) - 20.4022) * (parseInt(minute) / 4.184)
                 )
                 if (calorie < 0) {
                     setCalories(.5)
@@ -154,7 +164,7 @@ const Homescreen = (props) => {
                 // console.log(calories)
             }
 
-            if (parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) >= 61) {
+            if (parseInt((parseInt(newHrm) / parseInt(heartrate)) * 100) >= 61) {
                 if (localFatBurningSeconds < 59) {
                     localFatBurningSeconds = localFatBurningSeconds + 1;
                     setFatBurningSeconds(localFatBurningSeconds)
@@ -166,7 +176,7 @@ const Homescreen = (props) => {
                     setFatBurningSeconds(localFatBurningSeconds)
                 }
             }
-            else if (parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) >= 76) {
+            else if (parseInt((parseInt(newHrm) / parseInt(heartrate)) * 100) >= 76) {
                 if (localProAthleteSeconds < 59) {
                     localProAthleteSeconds = localProAthleteSeconds + 1;
                     setProAthleteSeconds(localProAthleteSeconds)
@@ -179,7 +189,7 @@ const Homescreen = (props) => {
                     setProAthleteSeconds(localProAthleteSeconds)
                 }
             }
-            else if (hrm && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) <= 100 && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) >= 91) {
+            else if (hrm && parseInt((parseInt(newHrm) / parseInt(heartrate)) * 100) <= 100 && parseInt((parseInt(newHrm) / parseInt(heartrate)) * 100) >= 91) {
                 if (localBeastSeconds < 59) {
                     localBeastSeconds = localBeastSeconds + 1;
                     setBeastSeconds(localBeastSeconds)
@@ -204,7 +214,35 @@ const Homescreen = (props) => {
                     setWarmUpSeconds(localWarmUpSeconds)
                 }
             }
+            if (hrm && parseInt((parseInt(newHrm) / parseInt(heartrate)) * 100) <= 94 && parseInt((parseInt(newHrm) / parseInt(heartrate)) * 100) >= 84) {
+                if (localIntensitySeconds < 59) {
+                    localIntensitySeconds = localIntensitySeconds + 1;
+                    setIntensitySeconds(localIntensitySeconds)
 
+                }
+                else {
+                    localIntensityMinutes = localIntensityMinutes + 1;
+                    setIntensityMinutes(localIntensityMinutes)
+                    localIntensity = localIntensity + 2;
+                    setIntensity(localIntensity)
+                    localIntensitySeconds = 0;
+                    setIntensitySeconds(localIntensitySeconds)
+                }
+            }
+            else if (hrm && parseInt((parseInt(newHrm) / parseInt(heartrate)) * 100) <= 100 && parseInt((parseInt(newHrm) / parseInt(heartrate)) * 100) >= 95) {
+                if (localIntensitySeconds2 < 59) {
+                    localIntensitySeconds2 = localIntensitySeconds2 + 1;
+                    setIntensitySeconds2(localIntensitySeconds2)
+                }
+                else {
+                    localIntensityMinutes2 = localIntensityMinutes2 + 1;
+                    setIntensityMinutes2(localIntensityMinutes2)
+                    localIntensity = localIntensity + 2;
+                    setIntensity(localIntensity)
+                    localIntensitySeconds2 = 0;
+                    setIntensitySeconds2(localIntensitySeconds2)
+                }
+            }
             setTimeout(() => {
 
                 recursiveTimer(false)
@@ -255,7 +293,7 @@ const Homescreen = (props) => {
                     <View style={styles.intensitySection}>
                         <Image source={BlownMind} style={styles.muscleImage} />
                         <Text style={styles.timeSubtitle}>
-                            127
+                            {intensity}
                         </Text>
                     </View>
                 </View>
@@ -278,33 +316,38 @@ const Homescreen = (props) => {
 
                 <View style={styles.circleProgressBarSection}>
 
-                <AnimatedCircularProgress
-                    // size={350}
-                    // width={20}
-                    size={parseInt(Dimensions.get('window').width)*0.80}
-                    width={20}
-                    fill={hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) : 50}
-                    segments={4}
-                    beginColor="#55CBFF"
-                    endColor="#63FFC3"
-                    backgroundColor="rgba(255, 255, 255, 0.10)"
-                    linecap="round"
-                    style={styles.circularProgressBar}
-                >
-                    
-                    
-                        
-                        {fill => (
-                            <View style={styles.titleBox}>
-                                <Text style={styles.percentageTitle}>{hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) + '%' : "Connect"} </Text>
-                                <Text style={styles.bpmSubtitle}>{hrm ? hrm : 0} BPM</Text>
-                            </View>)}
+                    <AnimatedCircularProgress
+                        // size={350}
+                        // width={20}
+                        size={parseInt(Dimensions.get('window').width) * 0.80}
+                        width={20}
+                        fill={hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) : 50}
+                        segments={4}
+                        beginColor="#55CBFF"
+                        endColor="#63FFC3"
+                        backgroundColor="rgba(255, 255, 255, 0.10)"
+                        linecap="round"
+                        style={styles.circularProgressBar}
+                    >
+
+
+
+                        {fill => {
+                            newHrm = hrm
+                            return (
+
+                                <View style={styles.titleBox}>
+                                    <Text style={styles.percentageTitle}>{hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) + '%' : "Connect"} </Text>
+                                    <Text style={styles.bpmSubtitle}>{hrm ? hrm : 0} BPM</Text>
+                                </View>)
+                        }}
                         {/* Show when device hasn't paired */}
                         {/* <Image source={LookingForHeart} style={styles.lookingForHeartImage} /> */}
 
 
                     </AnimatedCircularProgress>
                 </View>
+
                 <View style={styles.bigZoneTitleSection}>
                     <Text style={styles.bigZoneTitle}>
                         {
