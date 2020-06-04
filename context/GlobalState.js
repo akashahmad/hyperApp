@@ -22,7 +22,12 @@ const initialState = {
     proAthleteSeconds: 0,
     beastMinutes: 0,
     beastSeconds: 0,
-
+    intensity: 0,
+    intensityMinutes: 0,
+    intensitySeconds: 0,
+    intensityMinutes2: 0,
+    intensitySeconds2: 0,
+    avergaeHeartRate: 0
 }
 
 // Create context
@@ -147,8 +152,42 @@ export const GlobalProvider = ({ children }) => {
             payload: beastSeconds
         });
     }
-
-
+    function setIntensity(intensity) {
+        dispatch({
+            type: 'SET_INTENSITY',
+            payload: intensity
+        });
+    }
+    function setIntensityMinutes(intensityMinutes) {
+        dispatch({
+            type: 'SET_INTENSITY_MINUTES',
+            payload: intensityMinutes
+        });
+    }
+    function setIntensitySeconds(intensitySeconds) {
+        dispatch({
+            type: 'SET_INTENSITY_SECONDS',
+            payload: intensitySeconds
+        });
+    }
+    function setIntensityMinutes2(intensityMinutes2) {
+        dispatch({
+            type: 'SET_INTENSITY_MINUTES2',
+            payload: intensityMinutes2
+        });
+    }
+    function setIntensitySeconds2(intensitySeconds2) {
+        dispatch({
+            type: 'SET_INTENSITY_SECONDS2',
+            payload: intensitySeconds2
+        });
+    }
+    function setAverageHeartRate(avergaeHeartRate) {
+        dispatch({
+            type: 'SET_AVERAGE_HEARTRATE',
+            payload: avergaeHeartRate
+        });
+    }
     function setDeviceId(deviceId) {
         dispatch({
             type: 'SET_DEVICE_ID',
@@ -177,7 +216,19 @@ export const GlobalProvider = ({ children }) => {
         proAthleteSeconds: state.proAthleteSeconds,
         beastMinutes: state.beastMinutes,
         beastSeconds: state.beastSeconds,
+        intensity: state.intensity,
+        intensityMinutes: state.intensityMinutes,
+        intensitySeconds: state.intensitySeconds,
+        intensityMinutes2: state.intensityMinutes2,
+        intensitySeconds2: state.intensitySeconds2,
+        avergaeHeartRate:state.avergaeHeartRate,
+        setAverageHeartRate,
         setCalories,
+        setIntensity,
+        setIntensityMinutes,
+        setIntensitySeconds,
+        setIntensityMinutes2,
+        setIntensitySeconds2,
         setWarmUpMinutes,
         setWarmUpSeconds,
         setFatBurningMinutes,
