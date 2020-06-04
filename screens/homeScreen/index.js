@@ -313,19 +313,27 @@ const Homescreen = (props) => {
                 </View>
 
                 <View style={styles.startButtonSection}>
-                    {pausing ? <View><TouchableOpacity style={styles.startCircle} onPress={startTimer}>
-                        <Image source={Pause} style={styles.pauseImage} />
-                    </TouchableOpacity>
-                    </View> : <View><TouchableOpacity style={styles.startCircle} onPress={startTimer}>
-                        <Text style={styles.startText}>{resume}</Text>
-                    </TouchableOpacity>
-                            {checkResume ? <TouchableOpacity style={styles.endWorkoutContainer} onPress={endWorkoutPopup}>
-                                <Text style={styles.endWorkoutText}>
-                                    END WORKOUT
+                    {pausing ? 
+                    <View>
+                        <TouchableOpacity style={styles.startCircle} onPress={startTimer}>
+                            <Image source={Pause} style={styles.pauseImage} />
+                        </TouchableOpacity>
+                    </View> 
+                    : 
+                    <View>
+                        <TouchableOpacity style={styles.startCircle} onPress={startTimer}>
+                            <Text style={styles.startText}>{resume}</Text>
+                        </TouchableOpacity>
+                    {checkResume ? 
+                        <TouchableOpacity style={styles.endWorkoutContainer} onPress={endWorkoutPopup}>
+                            <Text style={styles.endWorkoutText}>
+                                END WORKOUT
                             </Text>
-                            </TouchableOpacity> : <View></View>}</View>
-
-
+                        </TouchableOpacity> 
+                    : 
+                        <View></View>
+                    }
+                    </View>
                     }
                 </View>
 
@@ -475,7 +483,7 @@ const styles = StyleSheet.create({
     },
 
     circularProgressBar: {
-        marginTop: '15%',
+        marginTop: '10%',
     },
 
     outerCircle: {
@@ -570,7 +578,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         // bottom: 20,
-        bottom: '2.5%',
+        // bottom: '2.5%',
+        bottom: 0,
         position: 'absolute',
         width: '100%'
     },
@@ -621,7 +630,7 @@ const styles = StyleSheet.create({
         // fontSize: 10,
         fontFamily: 'Biryani-Bold',
         fontSize: RFPercentage(1.10),
-        marginTop: '2%',
+        // marginTop: '2%',
         textDecorationLine: 'underline',
         opacity: .55
     }
