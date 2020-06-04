@@ -27,10 +27,18 @@ let minute = 0;
 let pause = false;
 let age = 0;
 let calorie;
-
+let localWarmUpMinutes = 0;
+let localWarmUpSeconds = 0;
+let localFatBurningMinutes = 0;
+let localFatBurningSeconds = 0;
+let localProAthleteMinutes = 0;
+let localProAthleteSeconds = 0;
+let localBeastMinutes = 0;
+let localBeastSeconds = 0;
 const Homescreen = (props) => {
     const { navigation } = props;
-    const { user, hrm, calories, setCalories, setSeconds, setMinutes } = useContext(GlobalContext);
+
+    const { user, hrm, calories, setCalories, setSeconds, setMinutes, setWarmUpMinutes, setWarmUpSeconds, setFatBurningMinutes, setFatBurningSeconds, setProAthleteMinutes, setProAthleteSeconds, setBeastMinutes, setBeastSeconds, beastSeconds, beastMinutes, proAthleteSeconds, proAthleteMinutes, fatBurningSeconds, fatBurningMinutes, warmUpSeconds, warmUpMinutes } = useContext(GlobalContext);
     const [heartrate, setHeartrate] = useState('')
     const [hrmPercentage, setHrmPercentage] = useState('')
     const [resume, setResume] = useState('START')
@@ -39,7 +47,6 @@ const Homescreen = (props) => {
     const [min, setMin] = useState(0)
     const [time, setTime] = useState(0)
     const [pausing, setPausing] = useState(false)
-console.log(Dimensions.get('window').width)
     useEffect(() => {
         // const worker = new Workers(worker);
         let year = new Date().getFullYear()
@@ -70,6 +77,17 @@ console.log(Dimensions.get('window').width)
             recursiveTimer(true)
         }
     }
+    const startZoneTimer = (zone) => {
+
+        let check = pause
+        pause = !pause;
+        setPausing(!pausing)
+        if (!check) {
+            setResume("RESUME")
+            setCheckResume(true)
+            recursiveZoneTimer(zone)
+        }
+    }
     const endWorkoutPopup = () => {
         Alert.alert(
             'Alert',
@@ -87,15 +105,28 @@ console.log(Dimensions.get('window').width)
             ],
         );
     };
+    const recursiveZoneTimer = (zone) => {
+        if (pause) {
+
+            setTimeout(() => {
+
+                recursiveTimer(false)
+            }, 1000);
+        }
+
+    }
     const recursiveTimer = (check) => {
-        console.log("pausing", pausing)
+        
         if (pause || check) {
+
+
             if (second < 59) {
                 second = second + 1
                 setSec(second)
                 setSeconds(second)
 
                 setMinutes(minute)
+
             }
 
             else {
@@ -106,6 +137,7 @@ console.log(Dimensions.get('window').width)
                 setMin(minute)
                 setMinutes(minute)
                 setSeconds(0)
+
                 calorie = (
                     user.gender === "male" ?
                         ((parseInt(age) * 0.2017) + (parseInt(hrm) * 0.6309) - (((user.weight) / 2.2046) * 0.09036) - 55.0969) * (parseInt(minute) / 4.184) :
@@ -117,9 +149,61 @@ console.log(Dimensions.get('window').width)
                 else {
                     setCalories(calorie.toFixed(2))
                 }
-                console.log(minute)
-                console.log(calories)
+                // console.log(minute)
+                // console.log(calories)
             }
+
+            if (parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) >= 61) {
+                if (localFatBurningSeconds < 59) {
+                    localFatBurningSeconds = localFatBurningSeconds + 1;
+                    setFatBurningSeconds(localFatBurningSeconds)
+                }
+                else {
+                    localFatBurningMinutes = localFatBurningMinutes + 1;
+                    setFatBurningMinutes(localFatBurningMinutes)
+                    localFatBurningSeconds = 0;
+                    setFatBurningSeconds(localFatBurningSeconds)
+                }
+            }
+            else if (parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) >= 76) {
+                if (localProAthleteSeconds < 59) {
+                    localProAthleteSeconds = localProAthleteSeconds + 1;
+                    setProAthleteSeconds(localProAthleteSeconds)
+
+                }
+                else {
+                    localProAthleteMinutes = localProAthleteMinutes + 1;
+                    setProAthleteMinutes(localProAthleteMinutes)
+                    localProAthleteSeconds = 0;
+                    setProAthleteSeconds(localProAthleteSeconds)
+                }
+            }
+            else if (hrm && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) <= 100 && parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) >= 91) {
+                if (localBeastSeconds < 59) {
+                    localBeastSeconds = localBeastSeconds + 1;
+                    setBeastSeconds(localBeastSeconds)
+
+                }
+                else {
+                    localBeastMinutes = localBeastMinutes + 1;
+                    setBeastMinutes(localBeastMinutes)
+                    localBeastSeconds = 0;
+                    setBeastSeconds(localBeastSeconds)
+                }
+            }
+            else {
+                if (localWarmUpSeconds < 59) {
+                    localWarmUpSeconds = localWarmUpSeconds + 1;
+                    setWarmUpSeconds(localWarmUpSeconds)
+                }
+                else {
+                    localWarmUpMinutes = localWarmUpMinutes + 1;
+                    setWarmUpMinutes(localWarmUpMinutes)
+                    localWarmUpSeconds = 0;
+                    setWarmUpSeconds(localWarmUpSeconds)
+                }
+            }
+
             setTimeout(() => {
 
                 recursiveTimer(false)
@@ -190,21 +274,21 @@ console.log(Dimensions.get('window').width)
                         {heartrate}
                     </Text>
                 </View> */}
-                
+
                 <View style={styles.circleProgressBarSection}>
-                <AnimatedCircularProgress
-                    // size={350}
-                    // width={20}
-                    size={parseInt(Dimensions.get('window').width)*0.50}
-                    width={15}
-                    fill={hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) : 50}
-                    segments={4}
-                    beginColor="#55CBFF"
-                    endColor="#63FFC3"
-                    backgroundColor="rgba(255, 255, 255, 0.10)"
-                    linecap="round"
-                >
-                    {/* <ProgressCircle
+                    <AnimatedCircularProgress
+                        // size={350}
+                        // width={20}
+                        size={parseInt(Dimensions.get('window').width) * 0.50}
+                        width={15}
+                        fill={hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) : 50}
+                        segments={4}
+                        beginColor="#55CBFF"
+                        endColor="#63FFC3"
+                        backgroundColor="rgba(255, 255, 255, 0.10)"
+                        linecap="round"
+                    >
+                        {/* <ProgressCircle
                         percent={hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) : 0}
                         radius={170}
                         borderWidth={20}
@@ -212,15 +296,15 @@ console.log(Dimensions.get('window').width)
                         shadowColor="#63FFCF"
                         bgColor="black"
                     > */}
-                    {fill => (
-                        <View style={styles.titleBox}>
-                        <Text style={styles.percentageTitle}>{hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) + '%' : "Connect"} </Text>
-                        <Text style={styles.bpmSubtitle}>{hrm ? hrm : 0} BPM</Text>
-                        </View> )}
+                        {fill => (
+                            <View style={styles.titleBox}>
+                                <Text style={styles.percentageTitle}>{hrm ? parseInt((parseInt(hrm) / parseInt(heartrate)) * 100) + '%' : "Connect"} </Text>
+                                <Text style={styles.bpmSubtitle}>{hrm ? hrm : 0} BPM</Text>
+                            </View>)}
                         {/* Show when device hasn't paired */}
                         {/* <Image source={LookingForHeart} style={styles.lookingForHeartImage} /> */}
-                       
-{/* 
+
+                        {/* 
                     </ProgressCircle> */}
                     </AnimatedCircularProgress>
                 </View>
@@ -234,13 +318,9 @@ console.log(Dimensions.get('window').width)
                     {pausing ? <View><TouchableOpacity style={styles.startCircle} onPress={startTimer}>
                         <Image source={Pause} style={styles.pauseImage} />
                     </TouchableOpacity>
-                        <TouchableOpacity style={styles.endWorkoutContainer} onPress={endWorkoutPopup}>
-                            <Text style={styles.endWorkoutText}>
-                                END WORKOUT
-                            </Text>
-                        </TouchableOpacity></View> : <View><TouchableOpacity style={styles.startCircle} onPress={startTimer}>
-                            <Text style={styles.startText}>{resume}</Text>
-                        </TouchableOpacity>
+                    </View> : <View><TouchableOpacity style={styles.startCircle} onPress={startTimer}>
+                        <Text style={styles.startText}>{resume}</Text>
+                    </TouchableOpacity>
                             {checkResume ? <TouchableOpacity style={styles.endWorkoutContainer} onPress={endWorkoutPopup}>
                                 <Text style={styles.endWorkoutText}>
                                     END WORKOUT
@@ -296,20 +376,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#4FC87A',
-      },
-      titleBox: {
+    },
+    titleBox: {
         ...StyleSheet.absoluteFillObject,
         alignItems: 'center',
         justifyContent: 'center',
-      },
-      title: {
+    },
+    title: {
         fontSize: 10,
         color: 'white',
         textAlign: 'center',
-      },
-      box: {
+    },
+    box: {
         margin: 10,
-      },
+    },
     menuImage: {
         width: 22,
         height: 20,

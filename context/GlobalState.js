@@ -14,6 +14,15 @@ const initialState = {
     calories: 0,
     seconds: 0,
     minutes: 0,
+    warmUpMinutes: 0,
+    warmUpSeconds: 0,
+    fatBurningMinutes: 0,
+    fatBurningSeconds: 0,
+    proAthleteMinutes: 0,
+    proAthleteSeconds: 0,
+    beastMinutes: 0,
+    beastSeconds: 0,
+
 }
 
 // Create context
@@ -89,6 +98,57 @@ export const GlobalProvider = ({ children }) => {
             payload: connectDevice
         });
     }
+
+    function setWarmUpMinutes(warmUpMinutes) {
+        dispatch({
+            type: 'SET_WARMUP_MINUTES',
+            payload: warmUpMinutes
+        });
+    }
+    function setWarmUpSeconds(warmUpSeconds) {
+        dispatch({
+            type: 'SET_WARMUP_SECONDS',
+            payload: warmUpSeconds
+        });
+    }
+    function setFatBurningMinutes(fatBurningMinutes) {
+        dispatch({
+            type: 'SET_FATBURNING_MINUTES',
+            payload: fatBurningMinutes
+        });
+    }
+    function setFatBurningSeconds(fatBurningSeconds) {
+        dispatch({
+            type: 'SET_FATBURNING_SECONDS',
+            payload: fatBurningSeconds
+        });
+    }
+    function setProAthleteMinutes(proAthleteMinutes) {
+        dispatch({
+            type: 'SET_PROATHLETE_MINUTES',
+            payload: proAthleteMinutes
+        });
+    }
+    function setProAthleteSeconds(proAthleteSeconds) {
+        dispatch({
+            type: 'SET_PROATHLETE_SECONDS',
+            payload: proAthleteSeconds
+        });
+    }
+    function setBeastMinutes(beastMinutes) {
+        dispatch({
+            type: 'SET_BEAST_MINUTES',
+            payload: beastMinutes
+        });
+    }
+    function setBeastSeconds(beastSeconds) {
+        dispatch({
+            type: 'SET_BEAST_SECONDS',
+            payload: beastSeconds
+        });
+    }
+
+
     function setDeviceId(deviceId) {
         dispatch({
             type: 'SET_DEVICE_ID',
@@ -109,7 +169,23 @@ export const GlobalProvider = ({ children }) => {
         calories: state.calories,
         seconds: state.seconds,
         minutes: state.minutes,
+        warmUpMinutes: state.warmUpMinutes,
+        warmUpSeconds: state.warmUpSeconds,
+        fatBurningMinutes: state.fatBurningMinutes,
+        fatBurningSeconds: state.fatBurningSeconds,
+        proAthleteMinutes: state.proAthleteMinutes,
+        proAthleteSeconds: state.proAthleteSeconds,
+        beastMinutes: state.beastMinutes,
+        beastSeconds: state.beastSeconds,
         setCalories,
+        setWarmUpMinutes,
+        setWarmUpSeconds,
+        setFatBurningMinutes,
+        setFatBurningSeconds,
+        setProAthleteMinutes,
+        setProAthleteSeconds,
+        setBeastMinutes,
+        setBeastSeconds,
         setSeconds,
         setMinutes,
         setDeviceId,
