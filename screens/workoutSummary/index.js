@@ -1,29 +1,30 @@
-import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, TextInput} from 'react-native';
-import React, {useState} from 'react';
+import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, ImageBackground} from 'react-native';
+import React, {useState,useContext} from 'react';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
-import LinearGradient from 'react-native-linear-gradient';
-import Close from '../../assets/images/close.png';
-import Bar from '../../assets/images/bar.png';
-import Clock from '../../assets/images/white-clock.png';
-import Heart from '../../assets/images/white-heart.png';
-import Fire from '../../assets/images/white-fire.png';
-import NewClock from '../../assets/images/stats-clock.png';
-import NewFire from '../../assets/images/new-fire.png';
-import BlownMind from '../../assets/images/blown-mind.png';
+import BackTwo from '../../assets/images/back-two.png';
+import { GlobalContext } from '../../context/GlobalState';
+import StatsClock from '../../assets/images/stats-clock.png';
+import StatsHeart from '../../assets/images/stats-heart.png';
+import One from '../../assets/images/one.png';
+import Two from '../../assets/images/two.png';
+import Three from '../../assets/images/three.png';
+import Four from '../../assets/images/four.png';
+import Fire from '../../assets/images/new-fire.png';
+import Mind from '../../assets/images/blown-mind.png';
 import Share from '../../assets/images/share.png';
 // import FlashMessage  from "react-native-flash-message";
-import {GlobalProvider} from '../../context/GlobalState';
-import AuthHandler from '../authHandler'
+// import {GlobalProvider} from '../../context/GlobalState';
+// import AuthHandler from '../authHandler'
 
-const WorkoutSummary = (props) => {
-    const {navigation} = props; 
+const WorkoutSummary = (props) => { 
+     
     return (
         <View style={ styles.fullScreenView }>
             <StatusBar backgroundColor="black" barStyle="light-content"/>
             <View style={ styles.viewContainer }>
-                <View style={styles.headerSection}>
+                <View style={ styles.backButtonContainer }>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
-                        <Image source={ Close } style={ styles.closeImage }/>
+                        <Image source={ BackTwo } style={ styles.backImage }/>
                     </TouchableOpacity>
                 </View>
                 <View style={ styles.liveStatsTitleSection }>
@@ -31,97 +32,104 @@ const WorkoutSummary = (props) => {
                         WORKOUT SUMMARY
                     </Text>
                 </View>
-                <View style={ styles.zoneSummarySection }>
-                    <Text style={ styles.zoneTextFirst }>
-                        WARM UP ZONE
-                    </Text>
-                    <Image source={ Bar } style={ styles.barImageFirst }/>
-                    <Text style={ styles.timeTextFirst }>
-                        5 MINS
-                    </Text>
-                </View> 
-                <View style={ styles.zoneSummarySectionHigher }>
-                    <Text style={ styles.zoneText }>
-                        FAT BURNING ZONE
-                    </Text>
-                    <Image source={ Bar } style={ styles.barImage }/>
-                    <Text style={ styles.timeText }>
-                        10 MINS
-                    </Text>
-                </View>
-                <View style={ styles.zoneSummarySectionHigher }>
-                    <Text style={ styles.zoneText }>
-                        PRO ATHLETE ZONE
-                    </Text>
-                    <Image source={ Bar } style={ styles.barImage }/>
-                    <Text style={ styles.timeText }>
-                        15 MINS
-                    </Text>
-                </View>
-                <View style={ styles.zoneSummarySectionHigher }>
-                    <Text style={ styles.zoneText }>
-                        BEAST MODE
-                    </Text>
-                    <Image source={ Bar } style={ styles.barImage }/>
-                    <Text style={ styles.timeText }>
-                        2 MINS
-                    </Text>
-                </View> 
                 <View style={ styles.cardContainer }>
                     <View style={ styles.cardContainerRow }>
                         <View style={ styles.card }>
                             <Text style={ styles.cardtitle }>
-                                DURATION
+                                TOTAL TIME
                             </Text>
                             <View style={ styles.statImageContainer }>
                                 <Text style={ styles.liveStat }>
-                                    10:22
+                                    10:52
                                 </Text>
-                                <Image source={ NewClock } style={ styles.clockImage }/>
+                                <Image source={ StatsClock } style={ styles.clockImage }/>
                             </View>
                         </View>
+                        <View style={ styles.card }>
+                            <Text style={ styles.cardtitle }>
+                                AVG. HEART RATE
+                            </Text>
+                            <View style={ styles.statImageContainer }>
+                                <Text style={ styles.liveStat }>
+                                    168
+                                </Text>
+                                <Image source={ StatsHeart } style={ styles.clockImage }/>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={ styles.cardContainerRow }>
+                        <View style={ styles.card }>
+                            <Text style={ styles.cardtitle }>
+                                WARM UP ZONE
+                            </Text>
+                            <View style={ styles.statImageContainer }>
+                                <Text style={ styles.liveStat }>
+                                    5:02
+                                </Text>
+                                <Image source={ One } style={ styles.clockImage } />
+                            </View>
+                        </View>
+                        <View style={ styles.card }>
+                            <Text style={ styles.cardtitle }>
+                                FAT BURNING ZONE
+                            </Text>
+                            <View style={ styles.statImageContainer }>
+                                <Text style={ styles.liveStat }>
+                                    7:15
+                                </Text>
+                                <Image source={ Two } style={ styles.clockImage }/>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={ styles.cardContainerRow }>
+                        <View style={ styles.card }>
+                            <Text style={ styles.cardtitle }>
+                                PRO ATHLETE ZONE
+                            </Text>
+                            <View style={ styles.statImageContainer }>
+                                <Text style={ styles.liveStat }>
+                                    5:25
+                                </Text>
+                                <Image source={ Three } style={ styles.clockImage } />
+                            </View>
+                        </View>
+                        <View style={ styles.card }>
+                            <Text style={ styles.cardtitle }>
+                                BEAST MODE
+                            </Text>
+                            <View style={ styles.statImageContainer }>
+                                <Text style={ styles.liveStat }>
+                                    2:46
+                                </Text>
+                                <Image source={ Four } style={ styles.clockImage }/>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={ styles.cardContainerRow }>
                         <View style={ styles.card }>
                             <Text style={ styles.cardtitle }>
                                 CALORIES BURNED
                             </Text>
                             <View style={ styles.statImageContainer }>
                                 <Text style={ styles.liveStat }>
-                                    53
+                                    89
                                 </Text>
-                                <Image source={ NewFire } style={ styles.clockImage }/>
+                                <Image source={ Fire } style={ styles.clockImage } />
+                            </View>
+                        </View>
+                        <View style={ styles.card }>
+                            <Text style={ styles.cardtitle }>
+                                INTENSITY SCORE
+                            </Text>
+                            <View style={ styles.statImageContainer }>
+                                <Text style={ styles.liveStat }>
+                                    25
+                                </Text>
+                                <Image source={ Mind } style={ styles.clockImage }/>
                             </View>
                         </View>
                     </View>
                 </View>
-                {/* <View style={ styles.statsRowContainer }>
-                    <View style={ styles.individualStatContainer }>
-                        <Image source={ NewClock } style={ styles.clockImage }/>
-                        <Text style={ styles.iconTitle }>
-                            DURATION 
-                        </Text>
-                        <Text style={ styles.iconStat }>
-                            10:22
-                        </Text>
-                    </View>
-                    <View style={ styles.individualStatContainer }>
-                        <Image source={ NewFire } style={ styles.caloriesImage }/>
-                        <Text style={ styles.iconTitle }>
-                            CALORIES
-                        </Text>
-                        <Text style={ styles.iconStat }>
-                            72
-                        </Text>
-                    </View>
-                    <View style={ styles.individualStatContainer }>
-                        <Image source={ BlownMind } style={ styles.muscleImage }/>
-                        <Text style={ styles.iconTitle }>
-                            INTENSITY 
-                        </Text>
-                        <Text style={ styles.iconStat }>
-                            25
-                        </Text>
-                    </View>
-                </View>  */}
                 <View style={ styles.streakShareContainer }>
                     <View style={ styles.streakContainer }>
                         <Text style={ styles.messageText }>
@@ -158,101 +166,27 @@ const styles = StyleSheet.create({
         height: '90%'
     },
 
-    headerSection: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexDirection: 'row',
-        // marginTop: 20,
-        marginTop: '7%',
+    backButtonContainer: {
+        marginTop: '5%'
     },
 
-    closeImage: {
+    backImage: {
         width: 16,
         height: 16,
         resizeMode: 'contain',
-        // marginTop: 20
+        marginBottom: '5%'
     },
 
     liveStatsTitleSection: {
-        // marginTop: 19,
-        marginLeft: 2,
+        marginLeft: 2
     },
 
     liveStatsText: {
         color: 'white',
         // fontSize: 25,
-        fontFamily: 'Biryani-Black',
-        marginTop: '5%',
         fontSize: RFPercentage(3),
-    },
-
-    zoneSummarySection: {
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'row',
-        // marginTop: 25,
-        marginLeft: 4
-    },
-
-    zoneSummarySectionHigher: {
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'row',
-        // marginTop: 15,
-        marginLeft: 4
-    },
-
-    barImageFirst: {
-        width: '60%',
-        height: 40,
-        resizeMode: 'contain',
-        marginLeft: 10,
-        marginTop: '7%',
-    },
-
-    zoneTextFirst: {
-        color: 'white',
-        // fontSize: 10,
-        fontFamily: 'Biryani-Bold',
-        width: '24%',
-        fontSize: RFPercentage(1.2),
-        marginTop: '7%',
-    },
-
-    timeTextFirst: {
-        color: 'white',
-        // fontSize: 9,
-        fontFamily: 'Biryani-Regular',
-        marginLeft: 11,
-        fontSize: RFPercentage(1.1),
-        marginTop: '7%',
-    },
-
-    barImage: {
-        width: '60%',
-        height: 40,
-        resizeMode: 'contain',
-        marginLeft: 10,
-        marginTop: '4%',
-    },
-
-    zoneText: {
-        color: 'white',
-        // fontSize: 10,
-        fontFamily: 'Biryani-Bold',
-        width: '24%',
-        fontSize: RFPercentage(1.2),
-        marginTop: '4%',
-    },
-
-    timeText: {
-        color: 'white',
-        // fontSize: 9,
-        fontFamily: 'Biryani-Regular',
-        marginLeft: 11,
-        marginTop: '4%',
-        fontSize: RFPercentage(1.1),
+        fontFamily: 'Biryani-Black',
+        marginTop: '5%'
     },
 
     cardContainerRow: {
@@ -311,16 +245,112 @@ const styles = StyleSheet.create({
 
 
 
-    streakShareContainer: {
+
+
+
+    statsContainerWidth: {
+        // width: '95%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
+    zoneInfoSection: {
+        // marginTop: 40,
+        // marginTop: '12%',
+        width: '90%',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexDirection: 'row'
+    },
+
+    zoneNamePlusTimeSection: {
+        // marginTop: 6
+        marginTop: '9%',
+    },
+
+    zoneInfoSectionNext: {
+        // marginTop: 20,
+        // marginTop: '1%',
+        width: '90%',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexDirection: 'row'
+    },
+
+    zoneTitle: {
+        color: 'white',
+        // fontSize: 12,
+        fontFamily: 'Biryani-Light',
+        fontSize: RFPercentage(1.5),
+    },
+
+    zoneTime: {
+        color: 'white',
+        // fontSize: 18,
+        fontSize: RFPercentage(2.2),
+        fontFamily: 'Biryani-Bold',
+        marginTop: 1
+    },
+
+    zoneCircleSection: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        position: 'absolute',
-        bottom: 0,
-        width: '100%'
+        marginTop: '7%',
     },
 
-    streakContainer: {
+    circleOneImage: {
+        width: 50,
+        height: 50,
+        resizeMode: 'contain'
+    },
+
+    gradientFireImage: {
+        width: 45,
+        height: 45,
+        resizeMode: 'contain',
+        marginRight: 3
+    },
+
+    zonePercentageTitle: {
+        color: 'white',
+        // fontSize: 10,
+        fontSize: RFPercentage(1.25),
+        fontFamily: 'Biryani-SemiBold',
+        opacity: .49,
+        marginTop: 5,
+        marginLeft: 5
+    },
+
+    timeSubtitle: {
+        color: 'white',
+        fontSize: 16,
+        fontFamily: 'Biryani-Bold',
+        marginTop: 5
+    },
+
+    messageText: {
+        color: 'white',
+        // fontSize: 10,
+        fontSize: RFPercentage(1.5),
+        fontFamily: 'Biryani-SemiBold',
+        textAlign: 'center',
+        marginTop: '12%'
+    },
+
+    streakText: {
+        color: 'white',
+        // fontSize: 10,
+        fontSize: RFPercentage(1.5),
+        fontFamily: 'Biryani-SemiBold',
+        textAlign: 'center',
+        opacity: .8,
+    },
+
+    streakShareContainer: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
@@ -333,29 +363,19 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
 
-    messageText: {
-        color: 'white',
-        fontSize: 14,
-        fontFamily: 'Biryani-ExtraBold',
-    },
-
-    streakText: {
-        color: 'white',
-        fontSize: 14,
-        fontFamily: 'Biryani-Regular',
-        opacity: .53
-    },
-
     shareText: {
         color: 'white',
-        fontSize: 8,
-        fontFamily: 'Biryani-Bold',
+        // fontSize: 10,
+        fontSize: RFPercentage(1.15),
+        fontFamily: 'Biryani-SemiBold',
+        marginTop: '5%'
     },
 
     shareImage: {
-        width: 15,
-        height: 15,
-        resizeMode: 'contain'
+        height: 18,
+        width: 18,
+        resizeMode: 'contain',
+        marginTop: '5%'
     }
 
 });

@@ -4,8 +4,6 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Bluetooth is used to communicate with BLE devices.</string>
 	<key>CFBundleDisplayName</key>
 	<string>hyperApp</string>
 	<key>CFBundleExecutable</key>
@@ -72,6 +70,8 @@
 	</dict>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>Bluetooth Permission</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Bluetooth is used to communicate with BLE devices.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>This app requires access to the camera.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
