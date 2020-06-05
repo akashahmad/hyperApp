@@ -1,5 +1,5 @@
-import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, ImageBackground} from 'react-native';
-import React, {useState,useContext} from 'react';
+import { View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, StatusBar, ImageBackground } from 'react-native';
+import React, { useState, useContext } from 'react';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import BackTwo from '../../assets/images/back-two.png';
 import { GlobalContext } from '../../context/GlobalState';
@@ -16,136 +16,157 @@ import Share from '../../assets/images/share.png';
 // import {GlobalProvider} from '../../context/GlobalState';
 // import AuthHandler from '../authHandler'
 
-const WorkoutSummary = (props) => { 
-     
+const WorkoutSummary = (props) => {
+    const { navigation } = props;
+    const { user, hrm, calories, setCalories, setSeconds, setMinutes, setWarmUpMinutes, setWarmUpSeconds, setFatBurningMinutes, setFatBurningSeconds, setProAthleteMinutes, setProAthleteSeconds, setBeastMinutes, setBeastSeconds, setIntensity, setIntensityMinutes, setIntensitySeconds, setIntensityMinutes2, setIntensitySeconds2, setAverageHeartRate, avergaeHeartRate,intensity, beastSeconds, beastMinutes, proAthleteSeconds, proAthleteMinutes, fatBurningSeconds, fatBurningMinutes, warmUpSeconds, warmUpMinutes ,minutes,seconds} = useContext(GlobalContext);
+const endWorkout=()=>{
+    setCalories(0)
+    setSeconds(0)
+    setMinutes(0)
+    setWarmUpMinutes(0)
+    setWarmUpSeconds(0)
+    setFatBurningMinutes(0)
+    setFatBurningSeconds(0)
+    setProAthleteMinutes(0)
+    setProAthleteSeconds(0)
+    setBeastMinutes(0)
+    setBeastSeconds(0)
+    setIntensity(0)
+    setAverageHeartRate(0)
+    setIntensityMinutes(0)
+    setIntensitySeconds(0)
+    setIntensityMinutes2(0)
+    setIntensitySeconds2(0)
+    navigation.goBack()
+}
     return (
-        <View style={ styles.fullScreenView }>
-            <StatusBar backgroundColor="black" barStyle="light-content"/>
-            <View style={ styles.viewContainer }>
-                <View style={ styles.backButtonContainer }>
-                    <TouchableOpacity onPress={() => navigation.goBack()}>
-                        <Image source={ BackTwo } style={ styles.backImage }/>
+        <View style={styles.fullScreenView}>
+            <StatusBar backgroundColor="black" barStyle="light-content" />
+            <View style={styles.viewContainer}>
+                <View style={styles.backButtonContainer}>
+                    <TouchableOpacity onPress={endWorkout}>
+                        <Image source={BackTwo} style={styles.backImage} />
                     </TouchableOpacity>
                 </View>
-                <View style={ styles.liveStatsTitleSection }>
-                    <Text style={ styles.liveStatsText }>
+                <View style={styles.liveStatsTitleSection}>
+                    <Text style={styles.liveStatsText}>
                         WORKOUT SUMMARY
                     </Text>
                 </View>
-                <View style={ styles.cardContainer }>
-                    <View style={ styles.cardContainerRow }>
-                        <View style={ styles.card }>
-                            <Text style={ styles.cardtitle }>
+                <View style={styles.cardContainer}>
+                    <View style={styles.cardContainerRow}>
+                        <View style={styles.card}>
+                            <Text style={styles.cardtitle}>
                                 TOTAL TIME
                             </Text>
-                            <View style={ styles.statImageContainer }>
-                                <Text style={ styles.liveStat }>
-                                    10:52
+                            <View style={styles.statImageContainer}>
+                                <Text style={styles.liveStat}>
+                                {(minutes) + ':' + ('0' + (seconds)).slice(-2)}
                                 </Text>
-                                <Image source={ StatsClock } style={ styles.clockImage }/>
+                                <Image source={StatsClock} style={styles.clockImage} />
                             </View>
                         </View>
-                        <View style={ styles.card }>
-                            <Text style={ styles.cardtitle }>
+                        <View style={styles.card}>
+                            <Text style={styles.cardtitle}>
                                 AVG. HEART RATE
                             </Text>
-                            <View style={ styles.statImageContainer }>
-                                <Text style={ styles.liveStat }>
-                                    168
+                            <View style={styles.statImageContainer}>
+                                <Text style={styles.liveStat}>
+                                {avergaeHeartRate}
                                 </Text>
-                                <Image source={ StatsHeart } style={ styles.clockImage }/>
+                                <Image source={StatsHeart} style={styles.clockImage} />
                             </View>
                         </View>
                     </View>
-                    <View style={ styles.cardContainerRow }>
-                        <View style={ styles.card }>
-                            <Text style={ styles.cardtitle }>
+                    <View style={styles.cardContainerRow}>
+                        <View style={styles.card}>
+                            <Text style={styles.cardtitle}>
                                 WARM UP ZONE
                             </Text>
-                            <View style={ styles.statImageContainer }>
-                                <Text style={ styles.liveStat }>
-                                    5:02
+                            <View style={styles.statImageContainer}>
+                                <Text style={styles.liveStat}>
+                                {(warmUpMinutes) + ':' + ('0' + (warmUpSeconds)).slice(-2)}
                                 </Text>
-                                <Image source={ One } style={ styles.clockImage } />
+                                <Image source={One} style={styles.clockImage} />
                             </View>
                         </View>
-                        <View style={ styles.card }>
-                            <Text style={ styles.cardtitle }>
+                        <View style={styles.card}>
+                            <Text style={styles.cardtitle}>
                                 FAT BURNING ZONE
                             </Text>
-                            <View style={ styles.statImageContainer }>
-                                <Text style={ styles.liveStat }>
-                                    7:15
+                            <View style={styles.statImageContainer}>
+                                <Text style={styles.liveStat}>
+                                {(fatBurningMinutes) + ':' + ('0' + (fatBurningSeconds)).slice(-2)}
                                 </Text>
-                                <Image source={ Two } style={ styles.clockImage }/>
+                                <Image source={Two} style={styles.clockImage} />
                             </View>
                         </View>
                     </View>
-                    <View style={ styles.cardContainerRow }>
-                        <View style={ styles.card }>
-                            <Text style={ styles.cardtitle }>
+                    <View style={styles.cardContainerRow}>
+                        <View style={styles.card}>
+                            <Text style={styles.cardtitle}>
                                 PRO ATHLETE ZONE
                             </Text>
-                            <View style={ styles.statImageContainer }>
-                                <Text style={ styles.liveStat }>
-                                    5:25
+                            <View style={styles.statImageContainer}>
+                                <Text style={styles.liveStat}>
+                                {(proAthleteMinutes) + ':' + ('0' + (proAthleteSeconds)).slice(-2)}
                                 </Text>
-                                <Image source={ Three } style={ styles.clockImage } />
+                                <Image source={Three} style={styles.clockImage} />
                             </View>
                         </View>
-                        <View style={ styles.card }>
-                            <Text style={ styles.cardtitle }>
+                        <View style={styles.card}>
+                            <Text style={styles.cardtitle}>
                                 BEAST MODE
                             </Text>
-                            <View style={ styles.statImageContainer }>
-                                <Text style={ styles.liveStat }>
-                                    2:46
+                            <View style={styles.statImageContainer}>
+                                <Text style={styles.liveStat}>
+                                {(beastMinutes) + ':' + ('0' + (beastSeconds)).slice(-2)}
                                 </Text>
-                                <Image source={ Four } style={ styles.clockImage }/>
+                                <Image source={Four} style={styles.clockImage} />
                             </View>
                         </View>
                     </View>
-                    <View style={ styles.cardContainerRow }>
-                        <View style={ styles.card }>
-                            <Text style={ styles.cardtitle }>
+                    <View style={styles.cardContainerRow}>
+                        <View style={styles.card}>
+                            <Text style={styles.cardtitle}>
                                 CALORIES BURNED
                             </Text>
-                            <View style={ styles.statImageContainer }>
-                                <Text style={ styles.liveStat }>
-                                    89
+                            <View style={styles.statImageContainer}>
+                                <Text style={styles.liveStat}>
+                                {hrm&&calories?calories:0}
                                 </Text>
-                                <Image source={ Fire } style={ styles.clockImage } />
+                                <Image source={Fire} style={styles.clockImage} />
                             </View>
                         </View>
-                        <View style={ styles.card }>
-                            <Text style={ styles.cardtitle }>
+                        <View style={styles.card}>
+                            <Text style={styles.cardtitle}>
                                 INTENSITY SCORE
                             </Text>
-                            <View style={ styles.statImageContainer }>
-                                <Text style={ styles.liveStat }>
-                                    25
+                            <View style={styles.statImageContainer}>
+                                <Text style={styles.liveStat}>
+                                {intensity}
                                 </Text>
-                                <Image source={ Mind } style={ styles.clockImage }/>
+                                <Image source={Mind} style={styles.clockImage} />
                             </View>
                         </View>
                     </View>
                 </View>
-                <View style={ styles.streakShareContainer }>
-                    <View style={ styles.streakContainer }>
-                        <Text style={ styles.messageText }>
+                <View style={styles.streakShareContainer}>
+                    <View style={styles.streakContainer}>
+                        <Text style={styles.messageText}>
                             YOUR ROCK!
                         </Text>
-                        <Text style={ styles.streakText }>
+                        <Text style={styles.streakText}>
                             WORKOUT STREAK 3
                         </Text>
                     </View>
-                    <View style={ styles.shareContainer }>
-                        <Text style={ styles.shareText }>
+                    <View style={styles.shareContainer}>
+                        <Text style={styles.shareText}>
                             SHARE
                         </Text>
-                        <Image source={ Share } style={ styles.shareImage }/>
+                        <Image source={Share} style={styles.shareImage} />
                     </View>
-                </View> 
+                </View>
             </View>
         </View>
     );

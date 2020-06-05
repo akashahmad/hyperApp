@@ -255,33 +255,34 @@ const Homescreen = (props) => {
         setResume("START")
         pause = false;
         setPausing(false)
-        setMinutes(0)
-        setSeconds(0)
+        // setMinutes(0)
+        // setSeconds(0)
         setSec(0)
         setMin(0)
-        setWarmUpMinutes(0)
-        setWarmUpSeconds(0)
+        // setWarmUpMinutes(0)
+        // setWarmUpSeconds(0)
         localWarmUpMinutes=0;
         localWarmUpSeconds=0
-        setFatBurningMinutes(0)
-        setFatBurningSeconds(0)
+        // setFatBurningMinutes(0)
+        // setFatBurningSeconds(0)
         localFatBurningMinutes=0;
         localFatBurningSeconds=0;
 
-        setProAthleteMinutes(0)
-        setProAthleteSeconds(0)
+        // setProAthleteMinutes(0)
+        // setProAthleteSeconds(0)
         localProAthleteMinutes=0;
         localProAthleteSeconds=0
-        setBeastMinutes(0)
-        setBeastSeconds(0)
+        // setBeastMinutes(0)
+        // setBeastSeconds(0)
         localBeastMinutes=0;
         localBeastSeconds=0;
-        setIntensityMinutes(0)
+        // setIntensityMinutes(0)
+        // setIntensitySeconds(0)
         localIntensityMinutes=0;
         localIntensitySeconds=0;
-        setIntensitySeconds(0)
-        setIntensityMinutes2(0)
-        setIntensitySeconds2(0)
+        
+        // setIntensityMinutes2(0)
+        // setIntensitySeconds2(0)
         localIntensityMinutes2=0;
         localIntensitySeconds2=0
         minute = 0;
